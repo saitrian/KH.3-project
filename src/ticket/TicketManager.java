@@ -14,7 +14,7 @@ public class TicketManager implements Program {
 	private final int REFUND = 2;
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
-	private final int EXIT = 5;
+	private final int EXIT = 555555;
 	
 	private Utility util = Utility.getInstance();
 	private List<Ticket> ticketList = new ArrayList<Ticket>();
