@@ -1,6 +1,0 @@
-*.class
-.classpath
-.project
-.settings/
-
-java_ojy/.gitignore
