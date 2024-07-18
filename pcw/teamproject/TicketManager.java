@@ -55,7 +55,7 @@ public class TicketManager implements Program{
 	 * 	환불 완료 출력	
 	 * 
 	 * 영화표 조회
-	 *  ID 입력하면 본인 것만 출력?
+	 *  ID 입력하면 본인 것만 출력?수정
 	 *  
 	 * */
 	
