@@ -95,7 +95,7 @@ public class TicketManager implements Program {
 				e.printStackTrace();
 			}
 			
-		}while(menu != util.EXIT);
+		}while(menu != EXIT);
 	}
 	
 	public int inputNumber(String menuName) {
