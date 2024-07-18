@@ -13,8 +13,7 @@ public class TicketManager implements Program {
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
-	private final int PRODUCE = 4;
-	private final int EXIT = 5555;
+	private final int EXIT = 4;
 	
 	private Utility util = Utility.getInstance();
 	private List<Ticket> ticketList = new ArrayList<Ticket>();
@@ -47,6 +46,9 @@ public class TicketManager implements Program {
 		case TICKETING :
 			buyTicket();
 			break;
+		case REFUND:
+			break;
+		case CHECK:
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
