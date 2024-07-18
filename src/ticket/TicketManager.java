@@ -9,6 +9,13 @@ import important.Utility;
 import user.User;
 
 public class TicketManager implements Program {
+	
+	private final int TICKETING = 1;
+	private final int REFUND = 2;
+	private final int CHECK = 3;
+	private final int PRODUCE = 4;
+	private final int EXIT = 5;
+	
 	private Utility util = Utility.getInstance();
 	private List<Ticket> ticketList = new ArrayList<Ticket>();
 	private List<User> userList = new ArrayList<User>();
@@ -27,21 +34,21 @@ public class TicketManager implements Program {
 	@Override
 	public void printMenu() {
 		System.out.print(
-				"메뉴\r\n"
-						+"1. 영화 예매(구매)\r\n"
-						+"2. 영화표 환불\r\n"
-						+"3. 영화표 조회\r\n"
-						+"4. 프로그램 종료\r\n");
+					"메뉴\r\n"
+					+"1. 영화 예매(구매)\r\n"
+					+"2. 영화표 환불\r\n"
+					+"3. 영화표 조회\r\n"
+					+"4. 프로그램 종료\r\n");
 	}
 
 	@Override
 	public void runMenu(int menu) throws Exception {
 		switch(menu) {
-		case 1 :
+		case TICKETING :
 			buyTicket();
 			break;
 		default :
-			System.out.println("잘못된 번호 입력입니다");
+			System.err.println("잘못된 번호 입력입니다.");
 		}		
 	}
 
@@ -88,7 +95,7 @@ public class TicketManager implements Program {
 				e.printStackTrace();
 			}
 			
-		}while(menu != util.EXIT);		
+		}while(menu != util.EXIT);
 	}
 	
 	public int inputNumber(String menuName) {
