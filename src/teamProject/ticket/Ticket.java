@@ -1,4 +1,4 @@
-package ticket;
+package teamProject.ticket;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

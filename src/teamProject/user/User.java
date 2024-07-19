@@ -1,4 +1,4 @@
-package user;
+package teamProject.user;
 
 public class User {
 	private String name;

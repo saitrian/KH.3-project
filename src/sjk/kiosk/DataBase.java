@@ -1,4 +1,4 @@
-package sjk;
+package sjk.kiosk;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

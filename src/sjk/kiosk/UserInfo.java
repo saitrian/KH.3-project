@@ -1,4 +1,4 @@
-package sjk;
+package sjk.kiosk;
 
 public class UserInfo {
 

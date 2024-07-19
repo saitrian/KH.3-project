@@ -1,4 +1,4 @@
-package important;
+package teamProject.important;
 
 import java.util.Scanner;
 

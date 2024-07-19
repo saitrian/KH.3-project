@@ -1,7 +1,7 @@
-package main;
+package sjk;
 
-import sjk.DataBase;
-import sjk.MovieKiosk;
+import sjk.kiosk.DataBase;
+import sjk.kiosk.MovieKiosk;
 
 public class Main {
 	public static void main(String[] args) {

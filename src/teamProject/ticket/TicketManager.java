@@ -1,12 +1,12 @@
-package ticket;
+package teamProject.ticket;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-import important.Program;
-import important.Utility;
-import user.User;
+import teamProject.important.Program;
+import teamProject.important.Utility;
+import teamProject.user.User;
 
 public class TicketManager implements Program {
 	
