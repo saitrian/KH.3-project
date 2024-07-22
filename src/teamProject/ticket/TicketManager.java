@@ -1,12 +1,10 @@
 package teamProject.ticket;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 
+import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
-import teamProject.user.User;
 
 public class TicketManager implements Program {
 	
@@ -16,19 +14,10 @@ public class TicketManager implements Program {
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
 	
-	private Utility util = Utility.getInstance();
-	private List<Ticket> ticketList = new ArrayList<Ticket>();
-	private List<User> userList = new ArrayList<User>();
+	private final Utility UTIL = Utility.getInstance();
+	private final Database DB = Database.getInstance();
 	
 	public TicketManager() {
-		ticketList.add(new Ticket("탈주", "1" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("탈주", "2" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("탈주", "3" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("어벤져스", "4" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("어벤져스", "5" , "2024-07-01 12:00"));
-
-		userList.add(new User("aaa", "111"));
-		userList.add(new User("bbb", "222"));
 	}
 
 	@Override
@@ -53,27 +42,23 @@ public class TicketManager implements Program {
 	}
 
 	private void buyTicket() {
-		if(ticketList.size() == 0) {
+		if(DB.getTickListSize() == 0) {
 			System.err.println("현재 상영작이 없습니다.");
 			return;
 		}
 		
 		System.out.println("-----현재 상영작 목록-----");
-		int i = 0;
-		for(Ticket tmp : ticketList) {
-			i++;
-			System.out.println(i + ". 상영관 " + tmp.getTheater() + "관 / "+ tmp.getMovieName() + " / 날짜 : " + tmp.getDate());
-		}
+		System.out.println(DB.getTicketListStr());
 		
-		util.printDottedLine();
+		UTIL.printDottedLine();
 		
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
 
 		try {
-			System.out.println(ticketList.get(movieNum - 1));
-			util.printDottedLine();
+			System.out.println(DB.getTicket(movieNum - 1));
+			UTIL.printDottedLine();
 			System.out.println("예매를 완료 했습니다.");
-			util.printDottedLine();
+			UTIL.printDottedLine();
 		} catch(IndexOutOfBoundsException e) {
 			System.err.println("잘못된 값을 선택하셨습니다.");
 		}
@@ -101,9 +86,9 @@ public class TicketManager implements Program {
 	public int inputNumber(String menuName) {
 		try {
 			System.out.print(menuName);
-			return util.scan.nextInt();
+			return UTIL.scan.nextInt();
 		} catch(InputMismatchException e) {
-			util.scan.nextLine(); // 잘못 입력한 값을 입력 버퍼에서 비워줌.
+			UTIL.scan.nextLine(); // 잘못 입력한 값을 입력 버퍼에서 비워줌.
 			return Integer.MIN_VALUE; // int의 가장 작은 수를 리턴
 		}
 	}

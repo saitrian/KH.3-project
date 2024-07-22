@@ -3,10 +3,21 @@ package teamProject.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import teamProject.important.Utility;
 import teamProject.ticket.Ticket;
 import teamProject.user.User;
 
 public class Database {
+    private static Database instance;
+    
+    public static Database getInstance() {
+        if (instance == null) {
+        	instance = new Database();
+        }
+        
+        return instance;
+    }
+    
 	private List<Ticket> ticketList = new ArrayList<Ticket>();
 	private List<User> userList = new ArrayList<User>();
 	
@@ -27,6 +38,14 @@ public class Database {
 	
 	public User getUser(int index) {
 		return userList.get(index);
+	}
+	
+	public int getTickListSize() {
+		return ticketList.size();
+	}
+	
+	public int getUserListSize() {
+		return userList.size();
 	}
 	
 	public String getTicketListStr() {

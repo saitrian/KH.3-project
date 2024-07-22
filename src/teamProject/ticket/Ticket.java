@@ -12,6 +12,6 @@ public class Ticket {
 	
 	@Override
 	public String toString() {
-		return "제목 : " + movieName + ", 상영관 : " + theater + ", 날짜 : " + date;
+		return "상영관 " + theater + "관 / "+ movieName + " / 날짜 : " + date;
 	}
 }
