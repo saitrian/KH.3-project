@@ -47,6 +47,9 @@ public class TicketManager implements Program {
 		case TICKETING :
 			buyTicket();
 			break;
+		case CHECK :
+			check();
+			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
@@ -77,6 +80,112 @@ public class TicketManager implements Program {
 		} catch(IndexOutOfBoundsException e) {
 			System.err.println("잘못된 값을 선택하셨습니다.");
 		}
+	}
+	
+	/**
+	 * 기능 : 영화표 조회 기능
+	 */
+	private void check() {
+		/*
+		 * TODO 예매 정보를 가지고 있기
+		 *			- 예매 정보 검색
+		 *			- 영화 이름으로 검색 (완)
+		 */
+		
+		printCheckMenu();
+		
+		int checkMenu = inputNumber("번호 선택 : ");
+		
+		runCheckMenu(checkMenu);
+		
+	}
+
+	/**
+	 * 기능 : 받은 checkMenu로 메뉴 선택하는 메소드
+	 * @param checkMenu 받은 메뉴 값
+	 */
+	private void runCheckMenu(int checkMenu) {
+		switch(checkMenu) {
+		case 1 :
+			checkTicketNumInfo();
+			break;
+		case 2 :
+			checkTicketList();
+			break;
+		default :
+			System.err.println("잘못된 번호 입력입니다.");
+		}	
+	}
+
+	/**
+	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
+	 */
+	private void checkTicketNumInfo() {
+		// 영화표 예매 정보를 가지고 있기
+		
+		// 영화표 예매 정보로 내역을 검색하기
+		
+	}
+
+	/**
+	 * 기능 : 조회 기능 메뉴 실행 메소드
+	 */
+	private void printCheckMenu() {
+		System.out.print(
+				 "1. 예매 정보 검색\n"
+				+"2. 영화 이름으로 검색\n");
+	}
+
+	/**
+	 * 기능 : 영화 이름 검색 메소드
+	 */
+	private void checkTicketList() {
+		// 검색할 영화 입력
+		System.out.print("검색할 영화 제목 입력(전체 검색은 엔터) : ");
+		util.scan.nextLine();
+		String search = util.scan.nextLine();
+		
+		// 영화 상영작 목록에서 검색어가 제목에 들어간 게시글 리스트를 가져옴
+		List<Ticket> searchList = getSearchList(search);
+		
+		// ticketList에 영화가 없으면 종료
+		if(ticketList.size() == 0) {
+			util.printDottedLine();
+			System.err.println("검색된 영화가 없습니다.");
+			util.printDottedLine();
+			return;
+		}
+		
+		// 현재 searchList에 저장된 상영작 목록 출력
+		System.out.println("-----현재 상영작 목록-----");
+		for(Ticket post : searchList) {
+			System.out.println(post);
+		}
+		
+		util.printDottedLine();
+
+		// 메뉴로 돌아가려면... 문구 출력
+		System.err.print("메뉴로 돌아가려면 엔터를 치세요.");
+		
+		// 엔터를 입력받도록 처리
+		util.scan.nextLine(); // 입력한 엔터 처리
+	}
+
+	/**
+	 * 기능 : 검색어를 입력시 검색어 검색 기능 메소드
+	 * @param search 
+	 * @return
+	 */
+	private List<Ticket> getSearchList(String search) {
+		List<Ticket> searchList = new ArrayList<Ticket>();
+		// 전체 게시글에서 하나씩 꺼내서 전체 탐색
+		for(Ticket ticket : ticketList) {
+			// 게시글에 제목 또는 내용에 검색어가 포함되어 있으면 검색 리스트에 추가
+			if(ticket.getMovieName().contains(search)) {
+				searchList.add(ticket);
+			}
+		}
+		return searchList;
 	}
 
 	@Override
