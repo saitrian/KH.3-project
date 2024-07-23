@@ -1,4 +1,4 @@
-package teamProject.important;
+package important;
 
 public interface Program {
 
