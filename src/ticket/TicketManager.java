@@ -69,6 +69,16 @@ public class TicketManager implements Program {
 
 		util.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
+		// loginCheck 전에 미리 잘못된 영화 번호 선택했으면 걸러 내기
+		if( !(0 <= (movieNum - 1) && (movieNum -1 )< ticketList.size()) ) {
+			util.printDottedLine();
+			/* Q1. System.out.println 으로 출력하면 점선 사이 인데
+			 * 	   System.err.println 으로 출력하면 빠져나와??
+			 */
+			System.out.println("잘못된 값을 선택하셨습니다.");
+			util.printDottedLine();
+			buyTicket();
+		}
 		// loginCheck() 메소드 리턴 값을 checkNum에 받기
 		int checkNum = loginCheck();
 		// checkNum 값이 0(아이디, 패스워드 불일치)이면...
@@ -81,11 +91,10 @@ public class TicketManager implements Program {
 				menu = inputNumber("메뉴 선택 : ");
 				util.scan.nextLine();
 				switch(menu) {
+				// 로그인 재시도 선택 시 buyTicket() 초기화면으로
 				case 1 :
-					// 로그인 재시도 선택 시 buyTicket() 초기화면으로
 					// Q1. 예매할 영화 번호 선택 다시 안받고, 로그인만 바로 시도할 수 있게 하는 방법???
-					// Q2. 공백처리가 이상한지 처음만 잘 실행됩니다...
-					//	- 중간에 고쳐지긴 하는데??
+					// Q2. 공백처리가 이상한지 처음만 잘 실행되고 나중에 이상해져요...
 					// Q3. 중간에 로그인 하는 부분만 메소드화 하고 싶은데 잘 모르겠어요...
 					util.printDottedLine();
 					buyTicket();
@@ -113,8 +122,8 @@ public class TicketManager implements Program {
 	private void printRepeatMenu() {
 		System.out.println(
 				"메뉴\r\n"
-				+ "1. 로그인 재시도\r\n"
-				+ "2. 메인 메뉴로\r\n");
+						+ "1. 로그인 재시도\r\n"
+						+ "2. 메인 메뉴로\r\n");
 	}
 
 	@Override
@@ -148,11 +157,12 @@ public class TicketManager implements Program {
 		// 아이디 비밀번호 입력받기
 		System.out.print("아이디를 입력하세요 : ");
 		String inputId = util.scan.next();
-		util.scan.nextLine();
-		
+		util.scan.nextLine(); // 공백처리
+
 		System.out.print("비밀번호를 입력하세요 : ");
 		String inputPassword = util.scan.next();
-		util.scan.nextLine();
+		util.scan.nextLine(); // 공백처리
+
 		// 반복문 실행 (입력한 아이디와 비밀번호 일치하는지 확인용)
 		for( int i = 0 ; i < userList.size() ; i ++ ) {
 			// 입력한 아이디와 비밀번호 일치하면 '로그인 성공!' 출력 후 정수 1리턴
