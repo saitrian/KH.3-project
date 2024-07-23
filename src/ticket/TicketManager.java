@@ -86,6 +86,7 @@ public class TicketManager implements Program {
 					// Q1. 예매할 영화 번호 선택 다시 안받고, 로그인만 바로 시도할 수 있게 하는 방법???
 					// Q2. 공백처리가 이상한지 처음만 잘 실행됩니다...
 					//	- 중간에 고쳐지긴 하는데??
+					// Q3. 중간에 로그인 하는 부분만 메소드화 하고 싶은데 잘 모르겠어요...
 					util.printDottedLine();
 					buyTicket();
 					break;
@@ -147,13 +148,15 @@ public class TicketManager implements Program {
 		// 아이디 비밀번호 입력받기
 		System.out.print("아이디를 입력하세요 : ");
 		String inputId = util.scan.next();
+		util.scan.nextLine();
+		
 		System.out.print("비밀번호를 입력하세요 : ");
 		String inputPassword = util.scan.next();
-		
+		util.scan.nextLine();
 		// 반복문 실행 (입력한 아이디와 비밀번호 일치하는지 확인용)
 		for( int i = 0 ; i < userList.size() ; i ++ ) {
 			// 입력한 아이디와 비밀번호 일치하면 '로그인 성공!' 출력 후 정수 1리턴
-			if(inputId.equals(userList.get(i).getName()) &&inputPassword.equals(userList.get(i).getPassword())) {
+			if(inputId.equals(userList.get(i).getName())&&inputPassword.equals(userList.get(i).getPassword())) {
 				util.printDottedLine();
 				System.out.println("로그인 성공!");
 				util.printDottedLine();
