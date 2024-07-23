@@ -3,6 +3,7 @@ package ticket;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 import important.Program;
 import important.Utility;
@@ -69,29 +70,35 @@ public class TicketManager implements Program {
 		util.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
 		// loginCheck() 메소드 리턴 값을 checkNum에 받기
-		// A 지점
 		int checkNum = loginCheck();
-		// checkNum 값이 0(아이디, 패스워드 불일치)이면  새로운(?) 선택 메뉴 출력
+		// checkNum 값이 0(아이디, 패스워드 불일치)이면...
 		if(checkNum == 0) {
-		
-			/* 메뉴
-			 * 1. 로그인 재시도
-			 * 	buyTicket() 실행
-			 * 	- 저 몇 칸위 A지점에서부터 실행시키는게 더 깔끔하긴한데 방법을..
-			 * 2. 비회원 예매
-			 *  함수 나가게 하기(?)
-			 * 3. 메인메뉴로
-			 *	a. run() 실행
-			 * 	b. return;
-			 * 	질문 : 누가 더 좋은 방법일까요?
-			 * 	둘 다 되긴해요
-			 * 메뉴 선택 :
-			 * */
-			
+			// 로그인 실패 시 로그인 재시도 or 메인 메뉴로 돌아갈지 선택하는 메뉴 
+			int menu = 0;
+			do {
+				// 로그인 여부 선택하는 메뉴 출력하는 메소드
+				printRepeatMenu();
+				menu = inputNumber("메뉴 선택 : ");
+				util.scan.nextLine();
+				switch(menu) {
+				case 1 :
+					// 로그인 재시도 선택 시 buyTicket() 초기화면으로
+					// Q1. 예매할 영화 번호 선택 다시 안받고, 로그인만 바로 시도할 수 있게 하는 방법???
+					// Q2. 공백처리가 이상한지 처음만 잘 실행됩니다...
+					//	- 중간에 고쳐지긴 하는데??
+					util.printDottedLine();
+					buyTicket();
+					break;
+				case 2 :
+					// return 입력해서 다시 메인 메뉴로
+					util.printDottedLine();
+					return;
+				default :
+					break;
+				}
+			}while(menu != 2);
 		}
-		
-		
-		
+		// 로그인 성공 ( 아이디, 패스워드 일치) 시 예매 그대로 완료
 		try {
 			System.out.println(ticketList.get(movieNum - 1));
 			util.printDottedLine();
@@ -102,14 +109,20 @@ public class TicketManager implements Program {
 		}
 	}
 
+	private void printRepeatMenu() {
+		System.out.println(
+				"메뉴\r\n"
+				+ "1. 로그인 재시도\r\n"
+				+ "2. 메인 메뉴로\r\n");
+	}
+
 	@Override
 	public void run() {
 		int menu;
-		
 		//load(fileName);
 		do {
 			printMenu();
-			menu = inputNumber("메뉴 : ");
+			menu = inputNumber("메뉴 선택 : ");
 
 			try {
 				runMenu(menu);
@@ -141,13 +154,16 @@ public class TicketManager implements Program {
 		for( int i = 0 ; i < userList.size() ; i ++ ) {
 			// 입력한 아이디와 비밀번호 일치하면 '로그인 성공!' 출력 후 정수 1리턴
 			if(inputId.equals(userList.get(i).getName()) &&inputPassword.equals(userList.get(i).getPassword())) {
+				util.printDottedLine();
 				System.out.println("로그인 성공!");
+				util.printDottedLine();
 				return 1;
 			}
 		}
 		// 입력한 아이디와 비밀번호 일치하지 않으면 '로그인 실패...' 출력 후 0 리턴
+		util.printDottedLine();
 		System.out.println("로그인 실패...");
+		util.printDottedLine();
 		return 0;
 	}
-
 }
