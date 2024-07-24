@@ -19,6 +19,7 @@ public class TicketManager implements Program {
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
 	private int movieNum = 0; // 다른 곳에서도 쓰려고 수정
+	// private List<Integer> movieTicketCheckList = new ArrayList<Integer>();
 
 	public TicketManager() {
 	}
@@ -63,6 +64,7 @@ public class TicketManager implements Program {
 		for(;;) {
 			int checkNum = loginCheck();
 			if(checkNum == 1) {
+				// movieTicketCheckList.add(movieNum);
 				break;
 			}
 			printRepeatMenu();
@@ -145,12 +147,21 @@ public class TicketManager implements Program {
 		
 		// 영화표 예매 정보로 내역을 검색하기
 		// 로그인은 했지만 예매한 값이 없을 경우를 대비한 처리
+		/*
+		if(movieTicketCheckList.size() == 0) {
+			System.err.println("검색된 예매 내역이 없습니다.");
+			return;
+		}
+		*/
 		if(movieNum == 0) {
 			System.err.println("검색된 예매 내역이 없습니다.");
 			return;
 		}
 		
 		for(int i = 0; i < DB.getTicketList().size(); i++) {
+			int num = movieTicketCheckList.get(i);
+			//System.out.println(num);
+			//System.out.println("예매 내역 : " + DB.getTicketList().get(num - 1).toString() + "\n");
 			// System.out.println(movieNum);
 			System.out.println("예매 내역 : " + DB.getTicketList().get(movieNum - 1).toString());
 			movieNum = 0; // 값 초기화
@@ -197,7 +208,7 @@ public class TicketManager implements Program {
 		UTIL.printDottedLine();
 
 		// 메뉴로 돌아가려면... 문구 출력
-		System.err.print("메뉴로 돌아가려면 엔터를 치세요.");
+		System.out.print("메뉴로 돌아가려면 엔터를 치세요.");
 		
 		// 엔터를 입력받도록 처리
 		UTIL.scan.nextLine(); // 입력한 엔터 처리
