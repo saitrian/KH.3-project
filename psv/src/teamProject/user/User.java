@@ -1,10 +1,5 @@
-package user;
+package teamProject.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public class User {
 	private String name;
 	private String password;
@@ -16,5 +11,17 @@ public class User {
 		this.password = pw;
 		
 		this.point = 0;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public int getPoint() {
+		return point;
 	}
 }
