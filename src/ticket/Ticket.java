@@ -5,18 +5,19 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-// 무엇인지
+// TicketManager 에서 사용하기 위한 Ticket 클래스 생성
 public class Ticket {
-	// 무엇인지
+	//Ticket에 포함될 맴버 변수들을 생성
+	// 영화 이름 생성
 	private String movieName;
-	// 얘는 무엇ㅇ니지
+	// 상영관과 상영일 생성
 	private String theater;
 	private String date;	
 	
 	@Override
-	// 무엇ㅇ니지
+	// 객체의 값을 문자열로 나타내기 위한 메서드
 	public String toString() {
-		// 얘가 행위가 
+		// toString 에서 출력되는 값을 바꾸기 
 		return "제목 : " + movieName + ", 상영관 : " + theater + ", 날짜 : " + date;
 	}
 }
