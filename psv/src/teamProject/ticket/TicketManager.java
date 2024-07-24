@@ -7,10 +7,12 @@ import java.util.List;
 import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
+import teamProject.user.User;
 
 public class TicketManager implements Program {	
 	private final Utility UTIL = Utility.getInstance();
 	private final Database DB = Database.getInstance();
+	private List<Integer> checkUserTicketList = new ArrayList<Integer>();
 
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
@@ -61,6 +63,7 @@ public class TicketManager implements Program {
 		for(;;) {
 			int checkNum = loginCheck();
 			if(checkNum == 1) {
+				checkUserTicketList.add(movieNum);
 				break;
 			}
 			printRepeatMenu();
@@ -125,8 +128,29 @@ public class TicketManager implements Program {
 	 */
 	private void checkTicketNumInfo() {
 		// 영화표 예매 정보를 가지고 있기
-		
+		for(;;) {
+			int checkNum = loginCheck();
+			if(checkNum == 1) {
+				break;
+			}
+			printRepeatMenu();
+			int loginMenu = inputNumber("메뉴 선택 : ");
+			if(loginMenu == 2) {
+				return;
+			}
+			else if(loginMenu != 1) {
+				System.out.println("잘못된 번호 입력입니다.");
+				return;
+			}
+		}
 		// 영화표 예매 정보로 내역을 검색하기
+		
+		
+		if(checkUserTicketList.size() == 0) {
+			System.err.println("검색된 예매 내역이 없습니다.");
+			return;
+		}
+		System.out.println(DB.getUserListStr());
 		
 	}
 
