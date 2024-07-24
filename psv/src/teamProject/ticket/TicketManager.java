@@ -12,13 +12,13 @@ import teamProject.user.User;
 public class TicketManager implements Program {	
 	private final Utility UTIL = Utility.getInstance();
 	private final Database DB = Database.getInstance();
-	private List<Integer> checkUserTicketList = new ArrayList<Integer>();
 
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
+	private int movieNum = 0; // 다른 곳에서도 쓰려고 수정
 
 	public TicketManager() {
 	}
@@ -57,13 +57,12 @@ public class TicketManager implements Program {
 		System.out.println(DB.getTicketListStr());
 
 		UTIL.printDottedLine();
-		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
+		movieNum = inputNumber("예매할 영화 번호 선택 : ");
 		// loginCheck() 메소드 리턴 값을 checkNum에 받기
 		// checkNum 값이 0(아이디, 패스워드 불일치)이면...
 		for(;;) {
 			int checkNum = loginCheck();
 			if(checkNum == 1) {
-				checkUserTicketList.add(movieNum);
 				break;
 			}
 			printRepeatMenu();
@@ -127,7 +126,7 @@ public class TicketManager implements Program {
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
 	private void checkTicketNumInfo() {
-		// 영화표 예매 정보를 가지고 있기
+		// 영화표 예매 정보를 가지고 오기
 		for(;;) {
 			int checkNum = loginCheck();
 			if(checkNum == 1) {
@@ -143,17 +142,23 @@ public class TicketManager implements Program {
 				return;
 			}
 		}
+		
 		// 영화표 예매 정보로 내역을 검색하기
-		
-		
-		if(checkUserTicketList.size() == 0) {
+		// 로그인은 했지만 예매한 값이 없을 경우를 대비한 처리
+		if(movieNum == 0) {
 			System.err.println("검색된 예매 내역이 없습니다.");
 			return;
 		}
-		//System.out.println(DB.getUserListStr() == DB.getTicketListStr());
+		
+		for(int i = 0; i < DB.getTicketList().size(); i++) {
+			// System.out.println(movieNum);
+			System.out.println("예매 내역 : " + DB.getTicketList().get(movieNum - 1).toString());
+			movieNum = 0; // 값 초기화
+			return;
+		}
 		
 	}
-
+	
 	/**
 	 * 기능 : 조회 기능 메뉴 실행 메소드
 	 */
