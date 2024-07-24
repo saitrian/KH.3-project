@@ -150,7 +150,7 @@ public class TicketManager implements Program {
 			System.err.println("검색된 예매 내역이 없습니다.");
 			return;
 		}
-		System.out.println(DB.getUserListStr());
+		//System.out.println(DB.getUserListStr() == DB.getTicketListStr());
 		
 	}
 
