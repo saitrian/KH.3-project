@@ -46,7 +46,7 @@ public class Database {
 		String str = "";
 		//i의 크기가 ticketList보다 작다면 i++, ticketList의 i번지에 해당하는 객체를 출력
 		for (int i = 0; i < ticketList.size(); i++) {
-			str += i + "번 // " + ticketList.get(i).toString() + "\n";
+			str += (i + 1) + "번 // " + ticketList.get(i).toString() + "\n";
 		}
 		
 //		for (Ticket ticket : ticketList) {
@@ -60,7 +60,7 @@ public class Database {
 		String str = "";
 		//i의 크기가 userList보다 작다면 i++, userList의 i번지에 해당하는 객체를 출력
 		for (int i = 0; i < userList.size(); i++) {
-			str += i + "번 // " + userList.get(i).toString() + "\n";
+			str += (i + 1) + "번 // " + userList.get(i).toString() + "\n";
 		}
 		
 		return str;
