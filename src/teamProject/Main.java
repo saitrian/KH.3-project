@@ -1,6 +1,6 @@
-package main;
+package teamProject;
 
-import ticket.TicketManager;
+import teamProject.ticket.TicketManager;
 
 public class Main {
 	public static void main(String[] args) {

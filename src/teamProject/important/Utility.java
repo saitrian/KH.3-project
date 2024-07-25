@@ -1,4 +1,4 @@
-package important;
+package teamProject.important;
 
 import java.util.Scanner;
 //좀 더 간결한 사용을 위해 Utility 생성

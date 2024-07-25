@@ -1,5 +1,5 @@
-package important;
-//나중에 편하게 작업하기 위해 생성
+package teamProject.important;
+
 public interface Program {
 
 	void printMenu();
