@@ -12,4 +12,25 @@ public class User {
 		
 		this.point = 0;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void changePoint(int point) {
+		if (point < 0)
+			return;
+		
+		this.point = point;
+	}
+	
+	
 }
