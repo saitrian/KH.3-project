@@ -25,7 +25,10 @@ public class User {
 		return point;
 	}
 
-	public void setPoint(int point) {
+	public void changePoint(int point) {
+		if (point < 0)
+			return;
+		
 		this.point = point;
 	}
 	
