@@ -18,8 +18,10 @@ public class TicketManager implements Program {
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
-	private int movieNum = 0; // 다른 곳에서도 쓰려고 수정
-	// private List<Integer> movieTicketCheckList = new ArrayList<Integer>();
+	// ----- 2024.07.25 박수빈 추가 -----
+	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
+	private String inputId; // id값이 필요해서 원래 지역 변수였지만 전역변수로 설정
+	// ----- 2024.07.25 박수빈 추가 -----
 
 	public TicketManager() {
 	}
@@ -58,13 +60,12 @@ public class TicketManager implements Program {
 		System.out.println(DB.getTicketListStr());
 
 		UTIL.printDottedLine();
-		movieNum = inputNumber("예매할 영화 번호 선택 : ");
+		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
 		// loginCheck() 메소드 리턴 값을 checkNum에 받기
 		// checkNum 값이 0(아이디, 패스워드 불일치)이면...
 		for(;;) {
 			int checkNum = loginCheck();
 			if(checkNum == 1) {
-				// movieTicketCheckList.add(movieNum);
 				break;
 			}
 			printRepeatMenu();
@@ -78,12 +79,16 @@ public class TicketManager implements Program {
 			}
 		}
 		// 로그인 성공 ( 아이디, 패스워드 일치) 시 예매 그대로 완료
-
 		try {
 			System.out.println(DB.getTicketList().get(movieNum - 1));
 			UTIL.printDottedLine();
 			System.out.println("예매를 완료 했습니다.");
+			// ----- 2024.07.25 박수빈 추가 -----
+			UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, movieNum);
+			userTicketCheckList.add(userTicketChecking);
+			// ----- 2024.07.25 박수빈 추가 -----
 			UTIL.printDottedLine();
+			return;
 		} catch(IndexOutOfBoundsException e) {
 			System.err.println("잘못된 값을 선택하셨습니다.");
 		}
@@ -102,6 +107,15 @@ public class TicketManager implements Program {
 		printCheckMenu();
 		
 		int checkMenu = inputNumber("번호 선택 : ");
+		
+		
+		if(checkMenu == 2) {
+			return;
+		}
+		else if(checkMenu != 1) {
+			System.out.println("잘못된 번호 입력입니다.");
+			return;
+		}
 		
 		runCheckMenu(checkMenu);
 		
@@ -128,46 +142,20 @@ public class TicketManager implements Program {
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
 	private void checkTicketNumInfo() {
-		// 영화표 예매 정보를 가지고 오기
-		for(;;) {
-			int checkNum = loginCheck();
-			if(checkNum == 1) {
-				break;
+		// 영화표 예매 정보를 가지고 와서 예매 내역 검색
+		try {
+			int i = 0;
+			System.out.println("-----예매 내역 리스트-----");
+			for(UserTicketCheck tmp : userTicketCheckList) {
+				System.out.println((i + 1) + ". " + "예매자 : " + tmp.getUserId() + ", 예매 내역 : " + DB.getTicketList().get(tmp.getTicketCheckNum() - 1).toString());
+				i++;
 			}
-			printRepeatMenu();
-			int loginMenu = inputNumber("메뉴 선택 : ");
-			if(loginMenu == 2) {
-				return;
-			}
-			else if(loginMenu != 1) {
-				System.out.println("잘못된 번호 입력입니다.");
-				return;
-			}
-		}
-		
-		// 영화표 예매 정보로 내역을 검색하기
-		// 로그인은 했지만 예매한 값이 없을 경우를 대비한 처리
-		/*
-		if(movieTicketCheckList.size() == 0) {
-			System.err.println("검색된 예매 내역이 없습니다.");
+			UTIL.printDottedLine();
+		}catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			System.out.println("예외 발생!");
 			return;
 		}
-		*/
-		if(movieNum == 0) {
-			System.err.println("검색된 예매 내역이 없습니다.");
-			return;
-		}
-		
-		for(int i = 0; i < DB.getTicketList().size(); i++) {
-			int num = movieTicketCheckList.get(i);
-			//System.out.println(num);
-			//System.out.println("예매 내역 : " + DB.getTicketList().get(num - 1).toString() + "\n");
-			// System.out.println(movieNum);
-			System.out.println("예매 내역 : " + DB.getTicketList().get(movieNum - 1).toString());
-			movieNum = 0; // 값 초기화
-			return;
-		}
-		
 	}
 	
 	/**
@@ -268,7 +256,9 @@ public class TicketManager implements Program {
 	public int loginCheck() {
 		// 아이디 비밀번호 입력받기
 		System.out.print("아이디를 입력하세요 : ");
-		String inputId = UTIL.scan.next();
+		// ----- 2024.07.25 박수빈 추가 -----
+		inputId = UTIL.scan.next(); // id값이 필요해서 원래 지역 변수였지만 전역변수로 설정
+		// ----- 2024.07.25 박수빈 추가 -----
 		UTIL.scan.nextLine(); // 공백처리
 
 		System.out.print("비밀번호를 입력하세요 : ");
@@ -276,7 +266,7 @@ public class TicketManager implements Program {
 		UTIL.scan.nextLine(); // 공백처리
 
 		// 반복문 실행 (입력한 아이디와 비밀번호 일치하는지 확인용)
-		for( int i = 0 ; i < DB.getUserList().size() ; i ++ ) {
+		for(int i = 0 ; i < DB.getUserList().size() ; i ++ ) {
 			// 입력한 아이디와 비밀번호 일치하면 '로그인 성공!' 출력 후 정수 1리턴
 			if(inputId.equals(DB.getUserList().get(i).getName())&&inputPassword.equals(DB.getUserList().get(i).getPassword())) {
 				UTIL.printDottedLine();
@@ -291,4 +281,24 @@ public class TicketManager implements Program {
 		UTIL.printDottedLine();
 		return 0;
 	}
+}
+
+
+class UserTicketCheck{
+	String userId;
+	int ticketCheckNum;
+	
+	public UserTicketCheck(String userId, int ticketCheckNum) {
+		this.userId = userId;
+		this.ticketCheckNum = ticketCheckNum;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public int getTicketCheckNum() {
+		return ticketCheckNum;
+	}
+	
 }
