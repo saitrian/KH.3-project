@@ -44,7 +44,7 @@ public class Database {
 		String str = "";
 		
 		for (int i = 0; i < ticketList.size(); i++) {
-			str += i + "번 // " + ticketList.get(i).toString() + "\n";
+			str += (i + 1) + "번 // " + ticketList.get(i).toString() + "\n";
 		}
 		
 //		for (Ticket ticket : ticketList) {
@@ -58,7 +58,7 @@ public class Database {
 		String str = "";
 		
 		for (int i = 0; i < userList.size(); i++) {
-			str += i + "번 // " + userList.get(i).toString() + "\n";
+			str += (i + 1) + "번 // " + userList.get(i).toString() + "\n";
 		}
 		
 		return str;
