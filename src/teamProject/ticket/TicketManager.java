@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
+// 이거 에러 ...?
+//import lombok.launch.PatchFixesHider.Util;
 import sjk.kiosk.UserList;
 import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
+import teamProject.user.User;
 
 public class TicketManager implements Program {	
 	private final Utility UTIL = Utility.getInstance();
@@ -57,18 +60,16 @@ public class TicketManager implements Program {
 
 		UTIL.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
-		// loginCheck() 메소드 리턴 값을 checkNum에 받기
-		// checkNum 값이 0(아이디, 패스워드 불일치)이면...
-		// 밖에도 로그인 정보가 있어야... 포인트를 넣는데..
-		// 아이디 비밀번호 입력받기 << 여기서 받고 메소드에 입력 //
-		System.out.print("아이디를 입력하세요 : ");
-		String inputId = UTIL.scan.next();
-		UTIL.scan.nextLine(); // 공백처리
-
-		System.out.print("비밀번호를 입력하세요 : ");
-		String inputPassword = UTIL.scan.next();
-		UTIL.scan.nextLine(); // 공백처리
+		String inputId;
+		
 		for(;;) {
+			//아이디 비밀번호 입력받기  
+			System.out.print("아이디를 입력하세요 : ");
+			inputId = UTIL.scan.next();
+			
+			System.out.print("비밀번호를 입력하세요 : ");
+			String inputPassword = UTIL.scan.next();
+			// loginCheck()입력받은 매개변수 id, password 입력하고 int checkNum 리턴 받기
 			int checkNum = loginCheck(inputId, inputPassword);
 			if(checkNum == 1) {
 				break;
@@ -84,8 +85,8 @@ public class TicketManager implements Program {
 			}
 		}
 		// 로그인 성공 ( 아이디, 패스워드 일치) 시 예매 그대로 완료
-		upPoint(inputId);
-		
+		// 포인트 사용 여부 선택하는 메서드
+		usePoint(inputId);
 		try {
 			System.out.println(DB.getTicketList().get(movieNum - 1));
 			UTIL.printDottedLine();
@@ -95,19 +96,97 @@ public class TicketManager implements Program {
 			System.err.println("잘못된 값을 선택하셨습니다.");
 		}
 	}
-	
+
+	/**
+	 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 사용 여부 입력받는 메서드
+	 * @param inputId 입력 받은 회원정보(id)
+	 * */
+	private void usePoint(String inputId) {
+		// 잘못된 값 입력 시에 돌아오게 하는 무한루프
+		for(;;) {
+			// 포인트 사용 메뉴 출력
+			System.out.println("포인트 사용 메뉴\r\n"
+					+ "1. 포인트 사용\r\n"
+					+ "2. 포인트 적립");
+			int menu = inputNumber("메뉴 입력 : ");
+			
+			// 포인트 사용 선택 시
+			if(menu == 1) {
+				// 반복문 사용해서 입력받은 아이디와 같은 번지에 있는 포인트 확인
+				for( int i = 0 ; i < DB.getUserList().size() ; i++ ) {
+					if( inputId.equals(DB.getUserList().get(i).getName())) {
+						// 가지고 있는 포인트가 0 이면
+						if(DB.getUserList().get(i).getPoint() == 0 ) {
+							// 포인트 없다고 출력 후 upPoint 실행 후 리턴
+							UTIL.printDottedLine();
+							System.out.println("가지고 있는 포인트가 없습니다.");
+							upPoint(inputId);
+							return;
+						}
+					}
+				}
+				// 가지고 있는 포인트가 0 이 아니면 downPoint 실행 후 리턴 
+				downPoint(inputId);
+				return;
+			}
+			// 포인트 적립 선택 시
+			else if(menu == 2) {
+				// upPoint 실행 후 리턴
+				upPoint(inputId);
+				return;
+			}
+			// 다른 번호 선택 시
+			else {
+				// 잘못된 번호 입력입니다. 출력 후 리턴 없이 다시 위로 보냄
+				UTIL.printDottedLine();
+				System.out.println("잘못된 번호 입력입니다.");
+				UTIL.printDottedLine();
+			}
+		}
+	}
+
 	/** 
 	 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 증가시키기
 	 * @param inputId 입력 받은 회원정보(id)
 	 * */	
 	private void upPoint(String inputId) {
+		int checkPoint = 0;
+		// 반복문 사용해서 입력받은 아이디와 같은 번지에 있는 포인트 확인
 		for( int i = 0 ; i < DB.getUserList().size() ; i++ ) {
 			if( inputId.equals(DB.getUserList().get(i).getName())) {
-//				DB.getUserList().get(i). DB.getUserList().get(i).getPoint()++;
+				// 포인트 증가 시키고
+				DB.getUserList().get(i).setPoint(DB.getUserList().get(i).getPoint() + 1 );
+				// 보유 중인 포인트 확인 시켜주기 위한 checkPoint 값 입력
+				checkPoint = DB.getUserList().get(i).getPoint();
 			}
-			System.out.println(DB.getUserList().get(i).getPoint());
 		}
-		
+		// 포인트 적립 성공했다고 출력 후 아이디와 함께 보유 중인 포인트 출력
+		UTIL.printDottedLine();
+		System.out.println("'1' 포인트 적립하셨습니다.\r\n"
+				+ inputId + "님의 보유 중인 포인트 : " + checkPoint );
+		UTIL.printDottedLine();
+	}
+
+	/** 
+	 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 감소시키기
+	 * @param inputId 입력 받은 회원정보(id)
+	 * */
+	private void downPoint(String inputId) {
+		int checkPoint = 0;
+		// 반복문 사용해서 입력받은 아이디와 같은 번지에 있는 포인트 확인
+		for( int i = 0 ; i < DB.getUserList().size() ; i++ ) {
+			if( inputId.equals(DB.getUserList().get(i).getName())) {
+				// 포인트 감소 시키고
+				DB.getUserList().get(i).setPoint(DB.getUserList().get(i).getPoint() - 1 );
+				// 보유 중인 포인트 확인 시켜주기 위한 checkPoint 값 입력
+				checkPoint = DB.getUserList().get(i).getPoint();
+			}
+		}
+		// 포인트 사용 성공했다고 출력 후 아이디와 함께 보유 중인 포인트 출력
+		UTIL.printDottedLine();
+		System.out.println("'1' 포인트 사용하셨습니다.\r\n"
+				+ inputId + "님의 보유 중인 포인트 : " + checkPoint );
+		UTIL.printDottedLine();
 	}
 
 	/**
