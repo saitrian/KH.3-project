@@ -70,7 +70,7 @@ public class TicketManager implements Program {
 		
 		System.out.println("-----현재 상영작 목록-----");
 		int i = 0;
-		//i가 ticketList의 크기만큼 계속 증가하고 증가할 떄 마다 i와 같은 번지의 객체를 출력
+		//향상된 for문 이용 - i가 ticketList의 크기만큼 계속 증가하고 증가할 떄 마다 i와 같은 번지의 객체를 출력
 		for(Ticket tmp : ticketList) {
 			i++;
 											 //i번지의 객체 중 관을 불러오기 / i번지의 객체 중 영화이름 불러오기 / i번지의 객체 중 날짜 불러오기

@@ -4,7 +4,7 @@ import java.util.Scanner;
 //좀 더 간결한 사용을 위해 Utility 생성
 public class Utility {
     private static Utility instance;
-	//스캐너
+	//콘솔에 값을 입력받기 위한 스캐너 생성
 	public Scanner scan = new Scanner(System.in);
 
     private Utility() {
