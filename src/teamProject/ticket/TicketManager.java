@@ -23,10 +23,32 @@ public class TicketManager implements Program {
 	private final int EXIT = 5;
 	// ----- 2024.07.25 박수빈 추가 -----
 	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
-	private String g_inputId; // id값이 필요해서 원래 지역 변수였지만 전역변수로 설정
 	// ----- 2024.07.25 박수빈 추가 -----
+	private List<Integer> tmp_ticketNumber = new ArrayList<Integer>();
+	private List<String> tmp_nonMember = new ArrayList<String>();
+	
+	private final int TICKETNUMBER_1 = 0001;
+	private final int TICKETNUMBER_2 = 0002;
+	private final int TICKETNUMBER_3 = 0003;
+	private final int TICKETNUMBER_4 = 0004;
+	private final int TICKETNUMBER_5 = 0005;
+	private final String NONMEMBER_1 = "#0001#";
+	private final String NONMEMBER_2 = "#0002#";
+	private final String NONMEMBER_3 = "#0003#";
+	private final String NONMEMBER_4 = "#0004#";
+	private final String NONMEMBER_5 = "#0005#";
 
 	public TicketManager() {
+		tmp_ticketNumber.add(TICKETNUMBER_1);
+		tmp_ticketNumber.add(TICKETNUMBER_2);
+		tmp_ticketNumber.add(TICKETNUMBER_3);
+		tmp_ticketNumber.add(TICKETNUMBER_4);
+		tmp_ticketNumber.add(TICKETNUMBER_5);
+		tmp_nonMember.add(NONMEMBER_1);
+		tmp_nonMember.add(NONMEMBER_2);
+		tmp_nonMember.add(NONMEMBER_3);
+		tmp_nonMember.add(NONMEMBER_4);
+		tmp_nonMember.add(NONMEMBER_5);
 	}
 
 	@Override
@@ -34,8 +56,9 @@ public class TicketManager implements Program {
 		System.out.print(
 				"메뉴\r\n"
 						+"1. 영화 예매(구매)\r\n"
-						+"2. 영화표 환불\r\n"
+						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
+						+"4. 영화 검색\r\n"
 						+"4. 프로그램 종료\r\n");
 	}
 
@@ -370,5 +393,4 @@ class UserTicketCheck{
 	public int getTicketCheckNum() {
 		return ticketCheckNum;
 	}
-	
 }
