@@ -32,12 +32,20 @@ public class Database {
 		userList.add(new User("bbb", "222"));
 	}
 	
-	public List<Ticket> getTicketList() {
-		return ticketList;
+	public Ticket getTicket(int index) {		
+		return ticketList.get(index);
 	}
 	
-	public List<User> getUserList() {
-		return userList;
+	public User getUser(int index) {
+		return userList.get(index);
+	}
+	
+	public int getTickListSize() {
+		return ticketList.size();
+	}
+	
+	public int getUserListSize() {
+		return userList.size();
 	}
 	
 	public String getTicketListStr() {
