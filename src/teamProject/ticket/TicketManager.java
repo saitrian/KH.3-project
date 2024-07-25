@@ -21,6 +21,10 @@ public class TicketManager implements Program {
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
+	// ----- 2024.07.25 박수빈 추가 -----
+	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
+	private String g_inputId; // id값이 필요해서 원래 지역 변수였지만 전역변수로 설정
+	// ----- 2024.07.25 박수빈 추가 -----
 
 	public TicketManager() {
 	}
@@ -91,6 +95,10 @@ public class TicketManager implements Program {
 			System.out.println(DB.getTicketList().get(movieNum - 1));
 			UTIL.printDottedLine();
 			System.out.println("예매를 완료 했습니다.");
+			// ----- 2024.07.25 박수빈 추가 -----
+			UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, movieNum);
+			userTicketCheckList.add(userTicketChecking);
+			// ----- 2024.07.25 박수빈 추가 -----
 			UTIL.printDottedLine();
 		} catch(IndexOutOfBoundsException e) {
 			System.err.println("잘못된 값을 선택하셨습니다.");
@@ -216,10 +224,20 @@ public class TicketManager implements Program {
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
 	private void checkTicketNumInfo() {
-		// 영화표 예매 정보를 가지고 있기
-
-		// 영화표 예매 정보로 내역을 검색하기
-
+		// 영화표 예매 정보를 가지고 와서 예매 내역 검색
+		try {
+			int i = 0;
+			System.out.println("-----예매 내역 리스트-----");
+			for(UserTicketCheck tmp : userTicketCheckList) {
+				System.out.println((i + 1) + ". " + "예매자 : " + tmp.getUserId() + ", 예매 내역 : " + DB.getTicketList().get(tmp.getTicketCheckNum() - 1).toString());
+				i++;
+			}
+			UTIL.printDottedLine();
+		}catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			System.out.println("예외 발생!");
+			return;
+		}
 	}
 
 	/**
@@ -317,7 +335,7 @@ public class TicketManager implements Program {
 		}
 	}
 
-	public int loginCheck(String inputId, String inputPassword) {
+	public int loginCheck(String inputId, String inputPassword) {		
 		// 반복문 실행 (입력한 아이디와 비밀번호 일치하는지 확인용)
 		for( int i = 0 ; i < DB.getUserList().size() ; i ++ ) {
 			// 입력한 아이디와 비밀번호 일치하면 '로그인 성공!' 출력 후 정수 1리턴
@@ -334,4 +352,23 @@ public class TicketManager implements Program {
 		UTIL.printDottedLine();
 		return 0;
 	}
+}
+
+class UserTicketCheck{
+	String userId;
+	int ticketCheckNum;
+	
+	public UserTicketCheck(String userId, int ticketCheckNum) {
+		this.userId = userId;
+		this.ticketCheckNum = ticketCheckNum;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public int getTicketCheckNum() {
+		return ticketCheckNum;
+	}
+	
 }
