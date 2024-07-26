@@ -21,9 +21,7 @@ public class TicketManager implements Program {
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
-	// ----- 2024.07.25 박수빈 추가 -----
 	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
-	// ----- 2024.07.25 박수빈 추가 -----
 	private List<Integer> tmp_ticketNumber = new ArrayList<Integer>();
 	private List<String> tmp_nonMember = new ArrayList<String>();
 	
@@ -54,12 +52,12 @@ public class TicketManager implements Program {
 	@Override
 	public void printMenu() {
 		System.out.print(
-				"메뉴\r\n"
+						 "메뉴\r\n"
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 영화 검색\r\n"
-						+"4. 프로그램 종료\r\n");
+						+"5. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -70,11 +68,14 @@ public class TicketManager implements Program {
 			break;
 		case CHECK :
 			check();
+		case EXIT :
+			EXIT();
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
 	}
+
 
 	private void buyTicket() {
 		if(DB.getTicketList().size() == 0 ) {
@@ -118,10 +119,8 @@ public class TicketManager implements Program {
 			System.out.println(DB.getTicketList().get(movieNum - 1));
 			UTIL.printDottedLine();
 			System.out.println("예매를 완료 했습니다.");
-			// ----- 2024.07.25 박수빈 추가 -----
 			UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, movieNum);
 			userTicketCheckList.add(userTicketChecking);
-			// ----- 2024.07.25 박수빈 추가 -----
 			UTIL.printDottedLine();
 		} catch(IndexOutOfBoundsException e) {
 			System.err.println("잘못된 값을 선택하셨습니다.");
@@ -248,6 +247,12 @@ public class TicketManager implements Program {
 	 */
 	private void checkTicketNumInfo() {
 		// 영화표 예매 정보를 가지고 와서 예매 내역 검색
+		if(userTicketCheckList.size() == 0) {
+			UTIL.printDottedLine();
+			System.out.println("검색된 예매 내역이 없습니다.");
+			UTIL.printDottedLine();
+			return;
+		}
 		try {
 			int i = 0;
 			System.out.println("-----예매 내역 리스트-----");
@@ -268,7 +273,7 @@ public class TicketManager implements Program {
 	 */
 	private void printCheckMenu() {
 		System.out.print(
-				"1. 예매 정보 검색\n"
+						 "1. 예매 정보 검색\n"
 						+"2. 영화 이름으로 검색\n");
 	}
 
@@ -326,7 +331,7 @@ public class TicketManager implements Program {
 
 	private void printRepeatMenu() {
 		System.out.println(
-				"메뉴\r\n"
+						  "메뉴\r\n"
 						+ "1. 로그인 재시도\r\n"
 						+ "2. 메인 메뉴로\r\n");
 	}
@@ -374,6 +379,13 @@ public class TicketManager implements Program {
 		System.out.println("로그인 실패...");
 		UTIL.printDottedLine();
 		return 0;
+	}
+	
+	
+	
+
+	private void EXIT() {
+		System.out.println("프로그램을 종료합니다.");
 	}
 }
 
