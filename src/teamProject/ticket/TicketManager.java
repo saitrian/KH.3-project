@@ -19,7 +19,7 @@ public class TicketManager implements Program {
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
-	private final int PRODUCE = 4;
+	private final int SEARCH = 4;
 	private final int EXIT = 5;
 	// ----- 2024.07.25 박수빈 추가 -----
 	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
@@ -59,7 +59,7 @@ public class TicketManager implements Program {
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 영화 검색\r\n"
-						+"4. 프로그램 종료\r\n");
+						+"5. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -70,10 +70,70 @@ public class TicketManager implements Program {
 			break;
 		case CHECK :
 			check();
+		case SEARCH :
+			searchMovie();
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
+	}
+	//영화 검색 메뉴
+	private void searchMovie() {
+		printSearchMovieMenu();
+		int searchMovieNum = inputNumber("번호 선택 : ");
+		switch(searchMovieNum) {
+		case 1:
+			searchMovieName();
+			break;
+		case 2:
+			searchMovieDate();
+			break;
+		case 3:
+			searchMovieGenre();
+			break;
+		case 4: 
+			prev();
+			break;
+		default :
+			System.err.println("잘못된 번호 입력입니다.");
+		}
+	}
+	
+	private void searchMovieName() {
+		UTIL.printDottedLine();
+		System.out.print("검색하실 영화의 이름을 입력하세요 : ");
+		UTIL.scan.nextLine();
+		String insertSearchMovieName = UTIL.scan.nextLine();
+	}
+
+	private void searchMovieDate() {
+		UTIL.printDottedLine();
+		System.out.print("검색하실 영화의 상영일을 입력하세요 : ");
+		UTIL.scan.nextLine();
+		String insertSearchMovieDate = UTIL.scan.nextLine();
+	}
+
+	private void searchMovieGenre() {
+		UTIL.printDottedLine();
+		System.out.print("검색하실 영화의 장르를 입력하세요 : ");
+		UTIL.scan.nextLine();
+		String insertSearchMovieGenre = UTIL.scan.nextLine();
+	}
+
+	private void prev() {
+		UTIL.printDottedLine();
+		System.out.println("이전 메뉴로 돌아갑니다.");
+		UTIL.printDottedLine();
+	}
+
+	private void printSearchMovieMenu() {
+		System.out.println(
+				"---------영화 검색---------\r\n"
+					+"-----영화 검색 방법 선택-----\r\n"
+					+"1. 영화 이름으로 검색\r\n"
+					+"2. 영화 상영일로 검색\r\n"
+					+"3. 영화 장르로 검색\r\n"
+					+"4. 이전 메뉴로");
 	}
 
 	private void buyTicket() {

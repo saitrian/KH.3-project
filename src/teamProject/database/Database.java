@@ -34,7 +34,7 @@ public class Database {
 		userList.add(new User("bbb", "222"));
 	}
 	
-	public List<Ticket> TicketList() {
+	public List<Ticket> getTicketList() {
 		return ticketList;
 	}
 	
