@@ -1,4 +1,4 @@
-package sjk.kiosk;
+package sjk.sample_1.kiosk;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

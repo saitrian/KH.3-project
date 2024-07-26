@@ -1,11 +1,10 @@
-package teamProject.database;
+package sjk.sample_2.teamProject.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import teamProject.important.Utility;
-import teamProject.ticket.Ticket;
-import teamProject.user.User;
+import sjk.sample_2.teamProject.model.vo.Ticket;
+import sjk.sample_2.teamProject.model.vo.User;
 
 public class Database {
     private static Database instance;

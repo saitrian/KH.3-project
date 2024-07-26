@@ -1,4 +1,4 @@
-package teamProject.user;
+package sjk.sample_2.teamProject.model.vo;
 
 public class User {
 	private String name;

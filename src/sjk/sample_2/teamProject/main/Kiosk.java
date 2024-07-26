@@ -1,16 +1,16 @@
-package teamProject.ticket;
+package sjk.sample_2.teamProject.main;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
 // 이거 에러 ...?
-//import lombok.launch.PatchFixesHider.Util;
-import teamProject.database.Database;
-import teamProject.important.Program;
-import teamProject.important.Utility;
+import sjk.sample_2.teamProject.database.Database;
+import sjk.sample_2.teamProject.important.Program;
+import sjk.sample_2.teamProject.important.Utility;
+import sjk.sample_2.teamProject.model.vo.Ticket;
 
-public class TicketManager implements Program {	
+public class Kiosk implements Program {	
 	private final Utility UTIL = Utility.getInstance();
 	private final Database DB = Database.getInstance();
 
@@ -36,7 +36,7 @@ public class TicketManager implements Program {
 	private final String NONMEMBER_4 = "#0004#";
 	private final String NONMEMBER_5 = "#0005#";
 
-	public TicketManager() {
+	public Kiosk() {
 		tmp_ticketNumber.add(TICKETNUMBER_1);
 		tmp_ticketNumber.add(TICKETNUMBER_2);
 		tmp_ticketNumber.add(TICKETNUMBER_3);

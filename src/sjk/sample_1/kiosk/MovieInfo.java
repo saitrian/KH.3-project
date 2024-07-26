@@ -1,4 +1,4 @@
-package sjk.kiosk;
+package sjk.sample_1.kiosk;
 
 public class MovieInfo {
 	private String name;
