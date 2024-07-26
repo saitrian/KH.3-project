@@ -50,7 +50,13 @@ public class TicketManager implements Program {
 		tmp_nonMember.add(NONMEMBER_4);
 		tmp_nonMember.add(NONMEMBER_5);
 	}
-
+	
+	
+	/* 1. 예매 번호 랜덤 4자리
+	 * 2. 로그인 정보주면 포인트 알려주는 기능
+	 * 3. 예매 정보 저장 로그인 // 예매 번호
+	 * */
+	
 	@Override
 	public void printMenu() {
 		System.out.print(
@@ -269,7 +275,7 @@ public class TicketManager implements Program {
 	private void printCheckMenu() {
 		System.out.print(
 				"1. 예매 정보 검색\n"
-						+"2. 영화 이름으로 검색\n");
+				+"2. 영화 이름으로 검색\n");
 	}
 
 	/**
@@ -299,7 +305,7 @@ public class TicketManager implements Program {
 		}
 
 		UTIL.printDottedLine();
-
+		
 		// 메뉴로 돌아가려면... 문구 출력
 		System.err.print("메뉴로 돌아가려면 엔터를 치세요.");
 
