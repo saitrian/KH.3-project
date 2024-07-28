@@ -99,11 +99,26 @@ public class TicketManager implements Program {
 		}
 	}
 	
+	private void printSearchMovieMenu() {
+		System.out.println(
+				"---------영화 검색---------\r\n"
+						+"-----영화 검색 방법 선택-----\r\n"
+						+"1. 영화 이름으로 검색\r\n"
+						+"2. 영화 상영일로 검색\r\n"
+						+"3. 영화 장르로 검색\r\n"
+						+"4. 이전 메뉴로");
+	}
+	
 	private void searchMovieName() {
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 이름을 입력하세요 : ");
 		UTIL.scan.nextLine();
 		String insertSearchMovieName = UTIL.scan.nextLine();
+		for(Ticket ticket : DB.getTicketList()) {
+			if(ticket.getMovieName().equals(insertSearchMovieName)) {
+				System.out.println(ticket.toString());
+			}
+		}
 	}
 
 	private void searchMovieDate() {
@@ -111,6 +126,11 @@ public class TicketManager implements Program {
 		System.out.print("검색하실 영화의 상영일을 입력하세요 : ");
 		UTIL.scan.nextLine();
 		String insertSearchMovieDate = UTIL.scan.nextLine();
+		for(Ticket ticket : DB.getTicketList()) {
+			if(ticket.getDate().equals(insertSearchMovieDate)) {
+				System.out.println(ticket.toString());
+			}
+		}
 	}
 
 	private void searchMovieGenre() {
@@ -118,6 +138,11 @@ public class TicketManager implements Program {
 		System.out.print("검색하실 영화의 장르를 입력하세요 : ");
 		UTIL.scan.nextLine();
 		String insertSearchMovieGenre = UTIL.scan.nextLine();
+		for(Ticket ticket : DB.getTicketList()) {
+			if(ticket.getGenre().equals(insertSearchMovieGenre)) {
+				System.out.println(ticket.toString());
+			}
+		}
 	}
 
 	private void prev() {
@@ -126,15 +151,6 @@ public class TicketManager implements Program {
 		UTIL.printDottedLine();
 	}
 
-	private void printSearchMovieMenu() {
-		System.out.println(
-				"---------영화 검색---------\r\n"
-					+"-----영화 검색 방법 선택-----\r\n"
-					+"1. 영화 이름으로 검색\r\n"
-					+"2. 영화 상영일로 검색\r\n"
-					+"3. 영화 장르로 검색\r\n"
-					+"4. 이전 메뉴로");
-	}
 
 	private void buyTicket() {
 		if(DB.getTicketList().size() == 0 ) {

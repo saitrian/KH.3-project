@@ -24,11 +24,11 @@ public class Database {
 	private List<User> userList = new ArrayList<User>();
 	//ticketList와 userList에 객체를 생성시키기 위한 메서드
 	public Database() {
-		ticketList.add(new Ticket("탈주", "1" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("탈주", "2" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("탈주", "3" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("어벤져스", "4" , "2024-07-01 12:00"));
-		ticketList.add(new Ticket("어벤져스", "5" , "2024-07-01 12:00"));
+		ticketList.add(new Ticket("탈주","재난" ,"1" , "2024-07-01 12:00"));
+		ticketList.add(new Ticket("탈주","재난" , "2" , "2024-07-01 12:00"));
+		ticketList.add(new Ticket("탈주","재난" , "3" , "2024-07-01 12:00"));
+		ticketList.add(new Ticket("어벤져스","액션" , "4" , "2024-07-01 12:00"));
+		ticketList.add(new Ticket("어벤져스","액션" , "5" , "2024-07-01 12:00"));
 
 		userList.add(new User("aaa", "111"));
 		userList.add(new User("bbb", "222"));
