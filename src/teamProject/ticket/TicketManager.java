@@ -110,38 +110,51 @@ public class TicketManager implements Program {
 	}
 	
 	private void searchMovieName() {
+		boolean found = false;
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 이름을 입력하세요 : ");
 		UTIL.scan.nextLine();
 		String insertSearchMovieName = UTIL.scan.nextLine();
 		for(Ticket ticket : DB.getTicketList()) {
-			if(ticket.getMovieName().equals(insertSearchMovieName)) {
+			if(ticket.getMovieName().contains(insertSearchMovieName)) {
+				found = true;
 				System.out.println(ticket.toString());
 			}
+		}
+		if(!found) {
+			System.out.println("\"" + insertSearchMovieName + "\"의 검색 결과가 존재하지 않습니다.");
 		}
 	}
 
 	private void searchMovieDate() {
+		boolean found = false;
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 상영일을 입력하세요 : ");
 		UTIL.scan.nextLine();
 		String insertSearchMovieDate = UTIL.scan.nextLine();
 		for(Ticket ticket : DB.getTicketList()) {
-			if(ticket.getDate().equals(insertSearchMovieDate)) {
+			if(ticket.getDate().contains(insertSearchMovieDate)) {
 				System.out.println(ticket.toString());
 			}
+		}
+		if(!found) {
+			System.out.println("\"" + insertSearchMovieDate + "\"의 검색 결과가 존재하지 않습니다.");
 		}
 	}
 
 	private void searchMovieGenre() {
+		boolean found = false;
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 장르를 입력하세요 : ");
 		UTIL.scan.nextLine();
 		String insertSearchMovieGenre = UTIL.scan.nextLine();
 		for(Ticket ticket : DB.getTicketList()) {
-			if(ticket.getGenre().equals(insertSearchMovieGenre)) {
+			if(ticket.getGenre().contains(insertSearchMovieGenre)) {
 				System.out.println(ticket.toString());
 			}
+		}
+		if(!found) {
+			System.out.println("\"" + insertSearchMovieGenre + "\"의 검색 결과가 존재하지 않습니다.");
 		}
 	}
 
