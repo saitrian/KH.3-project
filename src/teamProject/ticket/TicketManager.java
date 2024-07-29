@@ -3,10 +3,8 @@ package teamProject.ticket;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Objects;
 
-// 이거 에러 ...?
-//import lombok.launch.PatchFixesHider.Util;
-import sjk.kiosk.UserList;
 import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
@@ -19,7 +17,8 @@ public class TicketManager implements Program {
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
-	private final int PRODUCE = 4;
+	private final int SEARCH = 4;
+	// private final int PRODUCE = 4;
 	private final int EXIT = 5;
 	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
 	private List<Integer> tmp_ticketNumber = new ArrayList<Integer>();
@@ -68,6 +67,10 @@ public class TicketManager implements Program {
 			break;
 		case CHECK :
 			check();
+			break;
+		case SEARCH :
+			search();
+			break;
 		case EXIT :
 			EXIT();
 			break;
@@ -75,7 +78,6 @@ public class TicketManager implements Program {
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
 	}
-
 
 	private void buyTicket() {
 		if(DB.getTicketList().size() == 0 ) {
@@ -119,7 +121,7 @@ public class TicketManager implements Program {
 			System.out.println(DB.getTicketList().get(movieNum - 1));
 			UTIL.printDottedLine();
 			System.out.println("예매를 완료 했습니다.");
-			UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, movieNum);
+			UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, DB.getTicketList().get(movieNum - 1).toString());
 			userTicketCheckList.add(userTicketChecking);
 			UTIL.printDottedLine();
 		} catch(IndexOutOfBoundsException e) {
@@ -211,18 +213,11 @@ public class TicketManager implements Program {
 	 * 기능 : 영화표 조회 기능
 	 */
 	private void check() {
-		/*
-		 * TODO 예매 정보를 가지고 있기
-		 *			- 예매 정보 검색
-		 *			- 영화 이름으로 검색 (완)
-		 */
-
 		printCheckMenu();
 
 		int checkMenu = inputNumber("번호 선택 : ");
 
 		runCheckMenu(checkMenu);
-
 	}
 
 	/**
@@ -232,10 +227,10 @@ public class TicketManager implements Program {
 	private void runCheckMenu(int checkMenu) {
 		switch(checkMenu) {
 		case 1 :
-			checkTicketNumInfo();
+			checTicketId();
 			break;
 		case 2 :
-			checkTicketList();
+			checkTicketNum();
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
@@ -243,9 +238,16 @@ public class TicketManager implements Program {
 	}
 
 	/**
+	 * 기능 : 아이디로 예매 내역을 검색하는 메소드
+	 */
+	private void checkTicketNum() {
+		
+	}
+
+	/**
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
-	private void checkTicketNumInfo() {
+	private void checTicketId() {
 		// 영화표 예매 정보를 가지고 와서 예매 내역 검색
 		if(userTicketCheckList.size() == 0) {
 			UTIL.printDottedLine();
@@ -254,13 +256,23 @@ public class TicketManager implements Program {
 			return;
 		}
 		try {
-			int i = 0;
-			System.out.println("-----예매 내역 리스트-----");
-			for(UserTicketCheck tmp : userTicketCheckList) {
-				System.out.println((i + 1) + ". " + "예매자 : " + tmp.getUserId() + ", 예매 내역 : " + DB.getTicketList().get(tmp.getTicketCheckNum() - 1).toString());
-				i++;
+			System.out.print("아이디 입력 : ");
+			UTIL.scan.nextLine();
+			String checkId = UTIL.scan.nextLine();
+			
+			UserTicketCheck utc = new UserTicketCheck(checkId, "");
+
+			UTIL.printDottedLine();
+//			for() {
+//				
+//			}
+			for(int i = 0; i < userTicketCheckList.size(); i++) {
+				if(utc.equals(userTicketCheckList.get(i))) {
+					System.out.println(userTicketCheckList.get(i));
+				}
 			}
 			UTIL.printDottedLine();
+			
 		}catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			System.out.println("예외 발생!");
@@ -273,14 +285,14 @@ public class TicketManager implements Program {
 	 */
 	private void printCheckMenu() {
 		System.out.print(
-						 "1. 예매 정보 검색\n"
-						+"2. 영화 이름으로 검색\n");
+					 "1. 아이디로 검색\n"
+					+"2. 예매 번호로 검색\n");
 	}
 
 	/**
 	 * 기능 : 영화 이름 검색 메소드
 	 */
-	private void checkTicketList() {
+	private void search() {
 		// 검색할 영화 입력
 		System.out.print("검색할 영화 제목 입력(전체 검색은 엔터) : ");
 		UTIL.scan.nextLine();
@@ -389,20 +401,49 @@ public class TicketManager implements Program {
 	}
 }
 
+/**
+ * 
+ */
 class UserTicketCheck{
 	String userId;
-	int ticketCheckNum;
+	String ticketCheckStr;
 	
-	public UserTicketCheck(String userId, int ticketCheckNum) {
+	public UserTicketCheck(String userId, String ticketCheckStr) {
 		this.userId = userId;
-		this.ticketCheckNum = ticketCheckNum;
+		this.ticketCheckStr = ticketCheckStr;
 	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
-	
-	public int getTicketCheckNum() {
-		return ticketCheckNum;
+
+
+	public String getTicketCheckStr() {
+		return ticketCheckStr;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserTicketCheck other = (UserTicketCheck) obj;
+		return Objects.equals(userId, other.userId);
+	}
+
+	@Override
+	public String toString() {
+		return "아이디 : " + userId + ", 예매 내역 : " + ticketCheckStr;
+	}
+	
+	
+
 }
