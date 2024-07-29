@@ -54,7 +54,7 @@ public class TicketManager implements Program {
 	@Override
 	public void printMenu() {
 		System.out.print(
-				"메뉴\r\n"
+				"🎞메뉴\r\n"
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
@@ -102,7 +102,7 @@ public class TicketManager implements Program {
 	private void printSearchMovieMenu() {
 		System.out.println(
 				"---------영화 검색---------\r\n"
-						+"-----영화 검색 방법 선택-----\r\n"
+						+"----🔍영화 검색 방법 선택----\r\n"
 						+"1. 영화 이름으로 검색\r\n"
 						+"2. 영화 상영일로 검색\r\n"
 						+"3. 영화 장르로 검색\r\n"
