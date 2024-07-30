@@ -105,11 +105,11 @@ public class TicketManager implements Program {
 						+"----영화 검색 방법 선택----\r\n"
 						+"1. 🎦영화 이름으로 검색\r\n"
 						+"2. 📅영화 상영일로 검색\r\n"
-						+"3. 🎦영화 장르로 검색\r\n"
+						+"3. 🎥영화 장르로 검색\r\n"
 						+"4. ◀ 이전 메뉴로");
 	}
-	
 	private void searchMovieName() {
+		int i = 0;
 		boolean found = false;
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 이름을 입력하세요 : ");
@@ -118,7 +118,8 @@ public class TicketManager implements Program {
 		for(Ticket ticket : DB.getTicketList()) {
 			if(ticket.getMovieName().contains(insertSearchMovieName)) {
 				found = true;
-				System.out.println(ticket.toString());
+				++i;
+				System.out.println(i + ". " + ticket.toString());
 			}
 		}
 		if(!found) {
@@ -127,6 +128,7 @@ public class TicketManager implements Program {
 	}
 
 	private void searchMovieDate() {
+		int i = 0;
 		boolean found = false;
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 상영일을 입력하세요 : ");
@@ -135,7 +137,8 @@ public class TicketManager implements Program {
 		for(Ticket ticket : DB.getTicketList()) {
 			if(ticket.getDate().contains(insertSearchMovieDate)) {
 				found = true;
-				System.out.println(ticket.toString());
+				++i;
+				System.out.println(i + ". " + ticket.toString());
 			}
 		}
 		if(!found) {
@@ -144,6 +147,7 @@ public class TicketManager implements Program {
 	}
 
 	private void searchMovieGenre() {
+		int i = 0;
 		boolean found = false;
 		UTIL.printDottedLine();
 		System.out.print("검색하실 영화의 장르를 입력하세요 : ");
@@ -152,7 +156,8 @@ public class TicketManager implements Program {
 		for(Ticket ticket : DB.getTicketList()) {
 			if(ticket.getGenre().contains(insertSearchMovieGenre)) {
 				found = true;
-				System.out.println(ticket.toString());
+				++i;
+				System.out.println(i + ". " + ticket.toString());
 			}
 		}
 		if(!found) {
