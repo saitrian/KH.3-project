@@ -5,10 +5,12 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
-import teamProject.user.User;
+import teamProject.user.NonMember;
 
 public class TicketManager implements Program {	
 	private final Utility UTIL = Utility.getInstance();
@@ -76,8 +78,9 @@ public class TicketManager implements Program {
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
-		}		
+		}
 	}
+
 
 	private void buyTicket() {
 		if(DB.getTicketList().size() == 0 ) {
@@ -128,6 +131,9 @@ public class TicketManager implements Program {
 			System.err.println("잘못된 값을 선택하셨습니다.");
 		}
 	}
+	
+	
+
 
 	/**
 	 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 사용 여부 입력받는 메서드
@@ -240,7 +246,37 @@ public class TicketManager implements Program {
 	/**
 	 * 기능 : 아이디로 예매 내역을 검색하는 메소드
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	private void checkTicketNum() {
+		System.out.println(tmp_nonMember);
+		try {
+			System.out.print("예매 번호 입력 : ");
+			UTIL.scan.nextLine();
+			String checkNonMember = UTIL.scan.nextLine();
+			
+			NonMember nm = new NonMember(checkNonMember, "");
+			
+			if(nm.equals(checkNonMember)) {
+				System.out.println(nm);
+				System.out.println("있다");
+			}else {
+				System.out.println(nm);
+				System.out.println("없다");
+			}
+			
+			UTIL.printDottedLine();
+			for(int i = 0; i < tmp_nonMember.size(); i++) {
+				if(nm.equals(tmp_nonMember.get(i))) {
+					System.out.println(tmp_nonMember.get(i));
+				}
+			}
+			UTIL.printDottedLine();
+			
+		}catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			System.out.println("예외 발생!");
+			return;
+		}
 		
 	}
 
@@ -263,9 +299,6 @@ public class TicketManager implements Program {
 			UserTicketCheck utc = new UserTicketCheck(checkId, "");
 
 			UTIL.printDottedLine();
-//			for() {
-//				
-//			}
 			for(int i = 0; i < userTicketCheckList.size(); i++) {
 				if(utc.equals(userTicketCheckList.get(i))) {
 					System.out.println(userTicketCheckList.get(i));
@@ -405,8 +438,8 @@ public class TicketManager implements Program {
  * 
  */
 class UserTicketCheck{
-	String userId;
-	String ticketCheckStr;
+	String userId; // 아이디
+	String ticketCheckStr; // 예매한 티켓 내용
 	
 	public UserTicketCheck(String userId, String ticketCheckStr) {
 		this.userId = userId;
@@ -416,7 +449,6 @@ class UserTicketCheck{
 	public String getUserId() {
 		return userId;
 	}
-
 
 	public String getTicketCheckStr() {
 		return ticketCheckStr;
@@ -444,6 +476,4 @@ class UserTicketCheck{
 		return "아이디 : " + userId + ", 예매 내역 : " + ticketCheckStr;
 	}
 	
-	
-
 }
