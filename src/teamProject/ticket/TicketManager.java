@@ -134,6 +134,7 @@ public class TicketManager implements Program {
 		String insertSearchMovieDate = UTIL.scan.nextLine();
 		for(Ticket ticket : DB.getTicketList()) {
 			if(ticket.getDate().contains(insertSearchMovieDate)) {
+				found = true;
 				System.out.println(ticket.toString());
 			}
 		}
@@ -150,6 +151,7 @@ public class TicketManager implements Program {
 		String insertSearchMovieGenre = UTIL.scan.nextLine();
 		for(Ticket ticket : DB.getTicketList()) {
 			if(ticket.getGenre().contains(insertSearchMovieGenre)) {
+				found = true;
 				System.out.println(ticket.toString());
 			}
 		}
