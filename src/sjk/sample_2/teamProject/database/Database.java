@@ -2,7 +2,9 @@ package sjk.sample_2.teamProject.database;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
+import sjk.sample_2.teamProject.controller.MovieController;
 import sjk.sample_2.teamProject.model.vo.Ticket;
 import sjk.sample_2.teamProject.model.vo.User;
 
@@ -16,11 +18,16 @@ public class Database {
         
         return instance;
     }
+	private Scanner scan = new Scanner(System.in);
+    
+    private MovieController movieController = new MovieController(scan);
     
 	private List<Ticket> ticketList = new ArrayList<Ticket>();
 	private List<User> userList = new ArrayList<User>();
 	
 	public Database() {
+		movieController.insert();
+		
 		ticketList.add(new Ticket("탈주", "1" , "2024-07-01 12:00"));
 		ticketList.add(new Ticket("탈주", "2" , "2024-07-01 12:00"));
 		ticketList.add(new Ticket("탈주", "3" , "2024-07-01 12:00"));

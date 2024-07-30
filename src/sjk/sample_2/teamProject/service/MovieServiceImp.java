@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import sjk.sample_2.teamProject.dao.MovieDAO;
+import sjk.sample_2.teamProject.model.vo.MovieVO;
 
 public class MovieServiceImp implements MovieService {
 
@@ -26,5 +27,15 @@ public class MovieServiceImp implements MovieService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean insert(MovieVO vo) {
+		if (vo == null)
+			return false;
+		
+		movieDao.select(vo);
+		
+		return true;
 	}
 }

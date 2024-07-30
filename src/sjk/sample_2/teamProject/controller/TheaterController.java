@@ -9,26 +9,26 @@ public class TheaterController extends BaseController {
 	}
 
 	@Override
-	public void insert() {
+	public boolean insert() {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
-	public void update() {
+	public boolean update() {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
-	public void delete() {
+	public boolean delete() {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
-	public void select() {
+	public boolean select() {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 }

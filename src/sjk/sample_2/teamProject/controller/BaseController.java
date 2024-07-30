@@ -2,18 +2,18 @@ package sjk.sample_2.teamProject.controller;
 
 import java.util.Scanner;
 
-public abstract  class BaseController {
+public abstract class BaseController {
 	protected Scanner scan;
 	
 	public BaseController(Scanner scan) {
 		this.scan = scan;
 	}
 	
-	public abstract void insert();
+	public abstract boolean insert();
 	
-	public abstract void update();
+	public abstract boolean update();
 	
-	public abstract void delete();
+	public abstract boolean delete();
 	
-	public abstract void select();
+	public abstract boolean select();
 }
