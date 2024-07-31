@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import sjk.sample_2.teamProject.dao.MemberDAO;
+import sjk.sample_2.teamProject.model.vo.MemberVO;
 
 public class MemberServiceImp implements MemberService {
 
@@ -26,5 +27,10 @@ public class MemberServiceImp implements MemberService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean insertMember(String id, String pw, String authority, int point) {
+		return memberDao.insertMember(id, pw, authority, point);
 	}
 }
