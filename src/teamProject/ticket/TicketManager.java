@@ -73,6 +73,9 @@ public class TicketManager implements Program {
 		case SEARCH :
 			searchMovie();
 			break;
+		case EXIT :
+			System.out.println("프로그램을 종료합니다.");
+			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
@@ -123,7 +126,9 @@ public class TicketManager implements Program {
 			}
 		}
 		if(!found) {
+			UTIL.printDottedLine();
 			System.out.println("\"" + insertSearchMovieName + "\"의 검색 결과가 존재하지 않습니다.");
+			UTIL.printDottedLine();
 		}
 	}
 
@@ -142,7 +147,9 @@ public class TicketManager implements Program {
 			}
 		}
 		if(!found) {
+			UTIL.printDottedLine();
 			System.out.println("\"" + insertSearchMovieDate + "\"의 검색 결과가 존재하지 않습니다.");
+			UTIL.printDottedLine();
 		}
 	}
 
@@ -161,7 +168,9 @@ public class TicketManager implements Program {
 			}
 		}
 		if(!found) {
+			UTIL.printDottedLine();
 			System.out.println("\"" + insertSearchMovieGenre + "\"의 검색 결과가 존재하지 않습니다.");
+			UTIL.printDottedLine();
 		}
 	}
 
