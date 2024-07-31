@@ -6,7 +6,6 @@ public class NonMember {
 	String checkNonMember;
 	String ticketCheckStr; // 예매한 티켓 내용
 	
-
 	public NonMember(String checkNonMember, String ticketCheckStr) {
 		this.checkNonMember = checkNonMember;
 		this.ticketCheckStr = ticketCheckStr;
@@ -24,6 +23,7 @@ public class NonMember {
 	public int hashCode() {
 		return Objects.hash(checkNonMember);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -33,9 +33,8 @@ public class NonMember {
 		if (getClass() != obj.getClass())
 			return false;
 		NonMember other = (NonMember) obj;
-		return checkNonMember == other.checkNonMember;
+		return Objects.equals(checkNonMember, other.checkNonMember);
 	}
-	
 
 	@Override
 	public String toString() {

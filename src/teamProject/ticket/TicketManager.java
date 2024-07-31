@@ -5,8 +5,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
@@ -23,6 +21,7 @@ public class TicketManager implements Program {
 	// private final int PRODUCE = 4;
 	private final int EXIT = 5;
 	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
+	private List<NonMember> nonMemberList = new ArrayList<NonMember>();
 	private List<Integer> tmp_ticketNumber = new ArrayList<Integer>();
 	private List<String> tmp_nonMember = new ArrayList<String>();
 	
@@ -244,10 +243,11 @@ public class TicketManager implements Program {
 	}
 
 	/**
-	 * 기능 : 아이디로 예매 내역을 검색하는 메소드
+	 * 기능 : 예매 번호로 예매 내역을 검색하는 메소드
 	 */
 	@SuppressWarnings("unlikely-arg-type")
 	private void checkTicketNum() {
+		// TODO 예매 번호로 예매 내역을 검색하는 메소드 구현 중
 		System.out.println(tmp_nonMember);
 		try {
 			System.out.print("예매 번호 입력 : ");
@@ -255,20 +255,16 @@ public class TicketManager implements Program {
 			String checkNonMember = UTIL.scan.nextLine();
 			
 			NonMember nm = new NonMember(checkNonMember, "");
-			
-			if(nm.equals(checkNonMember)) {
-				System.out.println(nm);
-				System.out.println("있다");
-			}else {
-				System.out.println(nm);
-				System.out.println("없다");
-			}
-			
+			nonMemberList.add(nm);
+
 			UTIL.printDottedLine();
-			for(int i = 0; i < tmp_nonMember.size(); i++) {
+			int i = 0;
+			for(NonMember nmList : nonMemberList) {
+				System.out.println(nmList);
 				if(nm.equals(tmp_nonMember.get(i))) {
 					System.out.println(tmp_nonMember.get(i));
 				}
+				i++;
 			}
 			UTIL.printDottedLine();
 			
