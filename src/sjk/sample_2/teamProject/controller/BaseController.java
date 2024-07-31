@@ -8,12 +8,4 @@ public abstract class BaseController {
 	public BaseController(Scanner scan) {
 		this.scan = scan;
 	}
-	
-	public abstract boolean insert();
-	
-	public abstract boolean update();
-	
-	public abstract boolean delete();
-	
-	public abstract boolean select();
 }

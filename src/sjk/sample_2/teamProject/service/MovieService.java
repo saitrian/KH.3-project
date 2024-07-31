@@ -4,6 +4,6 @@ import sjk.sample_2.teamProject.model.vo.MovieVO;
 
 public interface MovieService {
 
-	boolean insert(MovieVO vo);
+	boolean insertMovie(MovieVO movie);
 
 }

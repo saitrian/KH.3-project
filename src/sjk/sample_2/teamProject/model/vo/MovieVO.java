@@ -1,5 +1,10 @@
 package sjk.sample_2.teamProject.model.vo;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class MovieVO {
 	private int mo_num;
 	private String mo_title;

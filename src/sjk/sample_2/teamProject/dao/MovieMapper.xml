@@ -3,21 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sjk.sample_2.teamProject.dao.MovieDAO">
-	<select id="select" resultType="MovieVO">
+	<select id="selectMovie" resultType="MovieVO">
 		select *
 		from movie
-		where mo_title = #{obj.mo_title}
-			and mo_content = #{obj.mo_content}
-			and mo_time = #{obj.mo_time}
-			and mo_age = #{obj.mo_age}
-			and mo_date = #{obj.mo_date}
+		where mo_title = #{mo.mo_title}
+			and mo_content = #{mo.mo_content}
+			and mo_time = #{mo.mo_time}
+			and mo_age = #{mo.mo_age}
+			and mo_date = #{mo.mo_date}
 	</select>
-	<insert id="insert">
+	
+	<insert id="insertMovie">
 		insert into movie(mo_title, mo_content, mo_time, mo_age, mo_date)
-		values(#{obj.mo_title}, #{obj.mo_content}, #{obj.mo_time}, #{obj.mo_age}, #{obj.mo_date})
-	</insert>
-	<update id="update">
-	</update>
+		values(#{mo.mo_title}, #{mo.mo_content}, #{mo.mo_time}, #{mo.mo_age}, #{mo.mo_date})
+	</insert>	
 </mapper>
 
 

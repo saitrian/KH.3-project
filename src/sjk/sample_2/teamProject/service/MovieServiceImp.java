@@ -30,12 +30,15 @@ public class MovieServiceImp implements MovieService {
 	}
 
 	@Override
-	public boolean insert(MovieVO vo) {
-		if (vo == null)
+	public boolean insertMovie(MovieVO movie) {
+		if (movie == null) // 예외 처리 추가 요망
 			return false;
 		
-		movieDao.select(vo);
+		MovieVO target = movieDao.selectMovie(movie);
 		
-		return true;
+		if (target != null)
+			return false;
+		
+		return movieDao.insertMovie(movie);
 	}
 }

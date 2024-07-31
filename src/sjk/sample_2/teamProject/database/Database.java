@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import sjk.sample_2.teamProject.controller.MemberController;
 import sjk.sample_2.teamProject.controller.MovieController;
+import sjk.sample_2.teamProject.controller.ScheduleController;
 import sjk.sample_2.teamProject.model.vo.Ticket;
 import sjk.sample_2.teamProject.model.vo.User;
 
@@ -21,12 +23,14 @@ public class Database {
 	private Scanner scan = new Scanner(System.in);
     
     private MovieController movieController = new MovieController(scan);
+    private MemberController memberController = new MemberController(scan);
     
 	private List<Ticket> ticketList = new ArrayList<Ticket>();
 	private List<User> userList = new ArrayList<User>();
 	
 	public Database() {
-		movieController.insert();
+		movieController.createSampleData();		
+		memberController.createSampleData();
 		
 		ticketList.add(new Ticket("탈주", "1" , "2024-07-01 12:00"));
 		ticketList.add(new Ticket("탈주", "2" , "2024-07-01 12:00"));

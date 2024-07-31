@@ -2,33 +2,19 @@ package sjk.sample_2.teamProject.controller;
 
 import java.util.Scanner;
 
+import sjk.sample_2.teamProject.model.vo.TheaterVO;
+import sjk.sample_2.teamProject.service.TheaterService;
+import sjk.sample_2.teamProject.service.TheaterServiceImp;
+
 public class TheaterController extends BaseController {
 
+	private TheaterService theaterService = new TheaterServiceImp();
+	
 	public TheaterController(Scanner scan) {
 		super(scan);
 	}
 
-	@Override
-	public boolean insert() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean update() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean select() {
-		// TODO Auto-generated method stub
-		return false;
+	public void createSampleData() {
+		theaterService.insertTheater(new TheaterVO("CGV", 5, 5, "강남1", "강남2"));
 	}
 }
