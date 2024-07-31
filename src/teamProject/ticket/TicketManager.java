@@ -20,13 +20,18 @@ public class TicketManager implements Program {
 	private final int REFUND = 2;
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
-	private final int EXIT = 5;
+	private final int POINT = 5;
+	private final int EXIT = 6;
 	// ----- 2024.07.25 박수빈 추가 -----
 	private List<UserTicketCheck> userTicketCheckList = new ArrayList<UserTicketCheck>();
 	// ----- 2024.07.25 박수빈 추가 -----
+	private String inputId;
+	private String inputPassword;
+	
+	// 음..,
 	private List<Integer> tmp_ticketNumber = new ArrayList<Integer>();
 	private List<String> tmp_nonMember = new ArrayList<String>();
-	
+
 	private final int TICKETNUMBER_1 = 0001;
 	private final int TICKETNUMBER_2 = 0002;
 	private final int TICKETNUMBER_3 = 0003;
@@ -50,13 +55,13 @@ public class TicketManager implements Program {
 		tmp_nonMember.add(NONMEMBER_4);
 		tmp_nonMember.add(NONMEMBER_5);
 	}
-	
-	
-	/* 1. 예매 번호 랜덤 4자리
-	 * 2. 로그인 정보주면 포인트 알려주는 기능
+
+
+	/* 1. 예매 번호 랜덤 4자리 (끝)
+	 * 2. 로그인 정보주면 포인트 알려주는 기능 (끝)
 	 * 3. 예매 정보 저장 로그인 // 예매 번호
 	 * */
-	
+
 	@Override
 	public void printMenu() {
 		System.out.print(
@@ -65,7 +70,8 @@ public class TicketManager implements Program {
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 영화 검색\r\n"
-						+"4. 프로그램 종료\r\n");
+						+"5. 포인트 조회\r\n"
+						+"6. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -74,13 +80,48 @@ public class TicketManager implements Program {
 		case TICKETING :
 			buyTicket();
 			break;
+			/*	
+		case REFUND:
+			break;
+		미구현	
+			 */
 		case CHECK :
 			check();
+			break;
+		case POINT :
+			point();
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
 	}
+	/** 기능 : 아이디 비밀번호 입력 받고 입력받은 아이디와 같은 번지에 있는 포인트 출력해주는 메서드
+	 * */
+	private void point() {
+		UTIL.printDottedLine();
+		//아이디 비밀번호 입력받기  
+		System.out.print("아이디를 입력하세요 : ");
+		inputId = UTIL.scan.next();
+		System.out.print("비밀번호를 입력하세요 : ");
+		inputPassword = UTIL.scan.next();
+		// 로그인 성공하면 입력받은 아이디와 같은 번지에 있는 포인트 출력 후 리턴
+		// 로그인 실패 시 메인 화면으로
+		if(loginCheck(inputId, inputPassword) == 1) {
+			int checkPoint = 0;
+			// 반복문 사용해서 입력받은 아이디와 같은 번지에 있는 포인트 확인
+			for( int i = 0 ; i < DB.getUserList().size() ; i++ ) {
+				if( inputId.equals(DB.getUserList().get(i).getName())) {
+					// 보유 중인 포인트 확인 시켜주기 위한 checkPoint 값 입력
+					checkPoint = DB.getUserList().get(i).getPoint();
+				}
+			}
+			System.out.println(inputId + "님의 보유 포인트 : " + checkPoint);
+			UTIL.printDottedLine();
+		}
+		
+	}
+
+
 
 	private void buyTicket() {
 		if(DB.getTicketList().size() == 0 ) {
@@ -93,7 +134,6 @@ public class TicketManager implements Program {
 
 		UTIL.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
-		String inputId;
 		
 		for(;;) {
 			//아이디 비밀번호 입력받기  
@@ -101,7 +141,7 @@ public class TicketManager implements Program {
 			inputId = UTIL.scan.next();
 			System.out.print("비밀번호를 입력하세요 : ");
 			String inputPassword = UTIL.scan.next();
-			
+
 			// loginCheck()입력받은 매개변수 id, password 입력하고 checkNum 리턴 받기
 			int checkNum = loginCheck(inputId, inputPassword);
 			if(checkNum == 1) {
@@ -146,7 +186,7 @@ public class TicketManager implements Program {
 					+ "1. 포인트 사용\r\n"
 					+ "2. 포인트 적립");
 			int menu = inputNumber("메뉴 입력 : ");
-			
+
 			// 포인트 사용 선택 시
 			if(menu == 1) {
 				// 반복문 사용해서 입력받은 아이디와 같은 번지에 있는 포인트 확인
@@ -203,7 +243,7 @@ public class TicketManager implements Program {
 				+ inputId + "님의 보유 중인 포인트 : " + checkPoint );
 		UTIL.printDottedLine();
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void changePoint(String inputId, boolean isInc) {
 		if (isInc == true) {
@@ -275,7 +315,7 @@ public class TicketManager implements Program {
 	private void printCheckMenu() {
 		System.out.print(
 				"1. 예매 정보 검색\n"
-				+"2. 영화 이름으로 검색\n");
+						+"2. 영화 이름으로 검색\n");
 	}
 
 	/**
@@ -305,7 +345,7 @@ public class TicketManager implements Program {
 		}
 
 		UTIL.printDottedLine();
-		
+
 		// 메뉴로 돌아가려면... 문구 출력
 		System.err.print("메뉴로 돌아가려면 엔터를 치세요.");
 
@@ -386,17 +426,21 @@ public class TicketManager implements Program {
 class UserTicketCheck{
 	String userId;
 	int ticketCheckNum;
-	
+
 	public UserTicketCheck(String userId, int ticketCheckNum) {
 		this.userId = userId;
 		this.ticketCheckNum = ticketCheckNum;
 	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
-	
+
 	public int getTicketCheckNum() {
 		return ticketCheckNum;
 	}
+}
+
+class NonMemberTicketList{
+	
 }
