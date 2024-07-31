@@ -8,12 +8,4 @@ public abstract  class BaseController {
 	public BaseController(Scanner scan) {
 		this.scan = scan;
 	}
-	
-	public abstract void insert();
-	
-	public abstract void update();
-	
-	public abstract void delete();
-	
-	public abstract void select();
 }
