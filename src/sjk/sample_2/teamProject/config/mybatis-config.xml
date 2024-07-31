@@ -25,8 +25,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="db/student/dao/StudentMapper.xml"/>
-		<mapper resource="db/student/dao/SubjectMapper.xml"/>
-		<mapper resource="db/student/dao/ScoreMapper.xml"/>
+		<mapper resource="sjk/sample_2/teamProject/dao/MovieMapper.xml"/>
+		<mapper resource="sjk/sample_2/teamProject/dao/ScheduleMapper.xml"/>
 	</mappers>
 </configuration>
