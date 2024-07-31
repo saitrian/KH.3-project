@@ -233,7 +233,7 @@ public class TicketManager implements Program {
 	private void runCheckMenu(int checkMenu) {
 		switch(checkMenu) {
 		case 1 :
-			checTicketId();
+			checkTicketId();
 			break;
 		case 2 :
 			checkTicketNum();
@@ -283,7 +283,7 @@ public class TicketManager implements Program {
 	/**
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
-	private void checTicketId() {
+	private void checkTicketId() {
 		// 영화표 예매 정보를 가지고 와서 예매 내역 검색
 		if(userTicketCheckList.size() == 0) {
 			UTIL.printDottedLine();
