@@ -70,6 +70,7 @@ public class TicketManager implements Program {
 			break;
 		case CHECK :
 			check();
+			break;
 		case SEARCH :
 			searchMovie();
 			break;
@@ -106,10 +107,10 @@ public class TicketManager implements Program {
 		System.out.println(
 				"-------🔍영화 검색--------\r\n"
 						+"----영화 검색 방법 선택----\r\n"
-						+"1. 🎦영화 이름으로 검색\r\n"
-						+"2. 📅영화 상영일로 검색\r\n"
-						+"3. 🎥영화 장르로 검색\r\n"
-						+"4. ◀ 이전 메뉴로");
+						+"1. 영화 이름으로 검색\r\n"
+						+"2. 영화 상영일로 검색\r\n"
+						+"3. 영화 장르로 검색\r\n"
+						+"4. 이전 메뉴로");
 	}
 	private void searchMovieName() {
 		int i = 0;
