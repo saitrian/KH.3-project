@@ -245,7 +245,6 @@ public class TicketManager implements Program {
 	/**
 	 * 기능 : 예매 번호로 예매 내역을 검색하는 메소드
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	private void checkTicketNum() {
 		// TODO 예매 번호로 예매 내역을 검색하는 메소드 구현 중
 		System.out.println(tmp_nonMember);
@@ -255,18 +254,31 @@ public class TicketManager implements Program {
 			String checkNonMember = UTIL.scan.nextLine();
 			
 			NonMember nm = new NonMember(checkNonMember, "");
-			nonMemberList.add(nm);
-
-			UTIL.printDottedLine();
-			int i = 0;
-			for(NonMember nmList : nonMemberList) {
-				System.out.println(nmList);
-				if(nm.equals(tmp_nonMember.get(i))) {
-					System.out.println(tmp_nonMember.get(i));
-				}
-				i++;
+//			NonMember nm1 = new NonMember(NONMEMBER_1, "");
+//			NonMember nm2 = new NonMember(NONMEMBER_2, "");
+//			NonMember nm3 = new NonMember(NONMEMBER_3, "");
+//			NonMember nm4 = new NonMember(NONMEMBER_4, "");
+//			NonMember nm5 = new NonMember(NONMEMBER_5, "");
+//			nonMemberList.add(nm1);
+//			nonMemberList.add(nm2);
+//			nonMemberList.add(nm3);
+//			nonMemberList.add(nm4);
+//			nonMemberList.add(nm5);
+			
+			if(nonMemberList.size() == 0) {
+				UTIL.printDottedLine();
+				System.out.println(checkNonMember + "(으)로 조회된 예매 내역이 없습니다.");
+				UTIL.printDottedLine();
+				return;
 			}
-			UTIL.printDottedLine();
+			for(int i = 0; i < nonMemberList.size(); i++) {
+				if(nm.equals(nonMemberList.get(i))) {
+					UTIL.printDottedLine();
+					System.out.println(nonMemberList.get(i));
+					UTIL.printDottedLine();
+				}
+			}
+			System.out.println("없다");
 			
 		}catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
