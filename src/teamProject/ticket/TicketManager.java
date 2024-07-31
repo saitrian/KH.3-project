@@ -254,16 +254,16 @@ public class TicketManager implements Program {
 			String checkNonMember = UTIL.scan.nextLine();
 			
 			NonMember nm = new NonMember(checkNonMember, "");
-//			NonMember nm1 = new NonMember(NONMEMBER_1, "");
-//			NonMember nm2 = new NonMember(NONMEMBER_2, "");
-//			NonMember nm3 = new NonMember(NONMEMBER_3, "");
-//			NonMember nm4 = new NonMember(NONMEMBER_4, "");
-//			NonMember nm5 = new NonMember(NONMEMBER_5, "");
-//			nonMemberList.add(nm1);
-//			nonMemberList.add(nm2);
-//			nonMemberList.add(nm3);
-//			nonMemberList.add(nm4);
-//			nonMemberList.add(nm5);
+			NonMember nm1 = new NonMember(NONMEMBER_1, "");
+			NonMember nm2 = new NonMember(NONMEMBER_2, "");
+			NonMember nm3 = new NonMember(NONMEMBER_3, "");
+			NonMember nm4 = new NonMember(NONMEMBER_4, "");
+			NonMember nm5 = new NonMember(NONMEMBER_5, "");
+			nonMemberList.add(nm1);
+			nonMemberList.add(nm2);
+			nonMemberList.add(nm3);
+			nonMemberList.add(nm4);
+			nonMemberList.add(nm5);
 			
 			if(nonMemberList.size() == 0) {
 				UTIL.printDottedLine();
