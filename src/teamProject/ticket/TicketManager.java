@@ -28,6 +28,9 @@ public class TicketManager implements Program {
 	private String inputId;
 	private String inputPassword;
 	
+	// 하나 추가 했음
+	private List<NonMemberTicketList> nonMemberTicketList = new ArrayList<NonMemberTicketList>();
+	
 	// 음..,
 	private List<Integer> tmp_ticketNumber = new ArrayList<Integer>();
 	private List<String> tmp_nonMember = new ArrayList<String>();
@@ -134,44 +137,61 @@ public class TicketManager implements Program {
 
 		UTIL.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
-		
-		for(;;) {
-			//아이디 비밀번호 입력받기  
-			System.out.print("아이디를 입력하세요 : ");
-			inputId = UTIL.scan.next();
-			System.out.print("비밀번호를 입력하세요 : ");
-			String inputPassword = UTIL.scan.next();
+		// 예매할 영화 고르고 나면, 로그인 여부 선택 후 회원 / 비회원 결제 결정
+		UTIL.printDottedLine();
+		System.out.println("로그인 여부 선택\r\n"
+				+ "1. 회원 결제\r\n"
+				+ "2. 비회원 결제\r\n");
+		int choiceLogin = inputNumber("메뉴 선택 : ");
+		if(choiceLogin == 1) {
+			for(;;) {
+				//아이디 비밀번호 입력받기  
+				System.out.print("아이디를 입력하세요 : ");
+				inputId = UTIL.scan.next();
+				System.out.print("비밀번호를 입력하세요 : ");
+				String inputPassword = UTIL.scan.next();
 
-			// loginCheck()입력받은 매개변수 id, password 입력하고 checkNum 리턴 받기
-			int checkNum = loginCheck(inputId, inputPassword);
-			if(checkNum == 1) {
-				break;
+				// loginCheck()입력받은 매개변수 id, password 입력하고 checkNum 리턴 받기
+				int checkNum = loginCheck(inputId, inputPassword);
+				if(checkNum == 1) {
+					break;
+				}
+				printRepeatMenu();
+				int loginMenu = inputNumber("메뉴 선택 : ");
+				if(loginMenu == 2) {
+					return;
+				}
+				else if(loginMenu != 1) {
+					System.out.println("잘못된 번호 입력입니다.");
+					return;
+				}
 			}
-			printRepeatMenu();
-			int loginMenu = inputNumber("메뉴 선택 : ");
-			if(loginMenu == 2) {
-				return;
-			}
-			else if(loginMenu != 1) {
-				System.out.println("잘못된 번호 입력입니다.");
-				return;
+			// 로그인 성공 ( 아이디, 패스워드 일치) 시 예매 그대로 완료
+			// 포인트 사용 여부 선택하는 메서드
+			usePoint(inputId);
+			try {
+				System.out.println(DB.getTicketList().get(movieNum - 1));
+				UTIL.printDottedLine();
+				System.out.println("예매를 완료 했습니다.");
+				// ----- 2024.07.25 박수빈 추가 -----
+				UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, movieNum);
+				userTicketCheckList.add(userTicketChecking);
+				// ----- 2024.07.25 박수빈 추가 -----
+				UTIL.printDottedLine();
+			} catch(IndexOutOfBoundsException e) {
+				System.err.println("잘못된 값을 선택하셨습니다.");
 			}
 		}
-		// 로그인 성공 ( 아이디, 패스워드 일치) 시 예매 그대로 완료
-		// 포인트 사용 여부 선택하는 메서드
-		usePoint(inputId);
-		try {
+		else {
+			//랜덤 4자리 뽑아서 예매 번호 및 영화표 출력
+			String random = UTIL.getRandomNumber();
+			System.out.println("예매 번호 : " + random);
 			System.out.println(DB.getTicketList().get(movieNum - 1));
-			UTIL.printDottedLine();
-			System.out.println("예매를 완료 했습니다.");
-			// ----- 2024.07.25 박수빈 추가 -----
-			UserTicketCheck userTicketChecking = new UserTicketCheck(inputId, movieNum);
-			userTicketCheckList.add(userTicketChecking);
-			// ----- 2024.07.25 박수빈 추가 -----
-			UTIL.printDottedLine();
-		} catch(IndexOutOfBoundsException e) {
-			System.err.println("잘못된 값을 선택하셨습니다.");
+			//예매 정보 저장
+			NonMemberTicketList nonMemberTicketChecking = new NonMemberTicketList(random, movieNum);
+			
 		}
+		
 	}
 
 	/**
@@ -442,5 +462,19 @@ class UserTicketCheck{
 }
 
 class NonMemberTicketList{
+	String nonMemberNum;
+	int ticketCheckNum;
 	
+	public NonMemberTicketList(String nonMemberNum, int ticketCheckNum) {
+		this.nonMemberNum = nonMemberNum;
+		this.ticketCheckNum = ticketCheckNum;
+	}
+	
+	public String getNonMemberNum() {
+		return nonMemberNum;
+	}
+	
+	public int getTicketCheckNum() {
+		return ticketCheckNum;
+	}
 }
