@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import sjk.sample_2.teamProject.dao.ScreenDAO;
+import sjk.sample_2.teamProject.model.vo.ScreenVO;
 
 public class ScreenServiceImp implements ScreenService {
 
@@ -26,5 +27,10 @@ public class ScreenServiceImp implements ScreenService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean inputScreen(ScreenVO screen) {
+		return screenDAO.insertScreen(screen);
 	}
 }

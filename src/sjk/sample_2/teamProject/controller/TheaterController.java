@@ -25,11 +25,12 @@ public class TheaterController extends BaseController {
 	}
 
 	private TheaterVO inputTheater() {
-		String th_name = "cgv강남";
+		String th_name = "cgv영등포";
 		int th_screen = 4;
 		int th_seat = 10;
 		String th_address = "서울";
-		String th_region = "강남";
+		String th_region = "영등포";
+		
 		return new TheaterVO(th_name, th_screen, th_seat, th_address, th_region);
 	}
 }

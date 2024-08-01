@@ -26,5 +26,6 @@
 	
 	<mappers>
 		<mapper resource="sjk/sample_2/teamProject/dao/TheaterMapper.xml"/>
+		<mapper resource="sjk/sample_2/teamProject/dao/ScreenMapper.xml"/>
 	</mappers>
 </configuration>
