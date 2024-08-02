@@ -33,11 +33,22 @@ public class ScreenController extends BaseController {
 			for(int j = 1; j <= 5; j++) {
 				sc_name = j + "관";
 				sc_seat = 10;
-				sc_th_num = i;
+				sc_th_num = selectScreent(i);
 				ScreenVO sv = new ScreenVO(sc_name, sc_seat, sc_th_num);
 				list.add(sv);
 			}
 		}
 		return list;
+	}
+	
+	private int selectScreent(int i) {
+		
+		//i = sc_th_num
+		
+		//i에 해당하는 theaterVO 의 th_name을 불러오기
+		
+		//만약 해당하는 th_name이 없으면 존재하지 않는 상영관입니다 출력
+		
+		return i;
 	}
 }

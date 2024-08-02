@@ -8,11 +8,11 @@ public class TheaterVO {
 	private int th_seat;
 	private String th_address;
 	private String th_region;
-	public TheaterVO(String th_name2, int th_screen2, int th_seat2, String th_address2, String th_region2) {
-		this.th_name = th_name2;
-		this.th_screen = th_screen2;
-		this.th_seat = th_seat2;
-		this.th_address = th_address2;
-		this.th_region = th_region2;
+	public TheaterVO(String name, int screen, int seat, String address, String region) {
+		this.th_name = name;
+		this.th_screen = screen;
+		this.th_seat = seat;
+		this.th_address = address;
+		this.th_region = region;
 	}
 }
