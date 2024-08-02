@@ -7,9 +7,12 @@ import java.util.Scanner;
 import sjk.sample_2.teamProject.model.vo.ScreenVO;
 import sjk.sample_2.teamProject.service.ScreenService;
 import sjk.sample_2.teamProject.service.ScreenServiceImp;
+import sjk.sample_2.teamProject.service.TheaterService;
+import sjk.sample_2.teamProject.service.TheaterServiceImp;
 
 public class ScreenController extends BaseController {
 	private ScreenService screenservice = new ScreenServiceImp();
+	private TheaterService theaterservice = new TheaterServiceImp();
 
 	public ScreenController(Scanner scan) {
 		super(scan);
@@ -33,18 +36,20 @@ public class ScreenController extends BaseController {
 			for(int j = 1; j <= 5; j++) {
 				sc_name = j + "관";
 				sc_seat = 10;
-				sc_th_num = selectScreent(i);
+				//sc_th_num = selectScreent(i);
 				ScreenVO sv = new ScreenVO(sc_name, sc_seat, sc_th_num);
 				list.add(sv);
 			}
 		}
 		return list;
+		ScreenVO sv = new ScreenVO("1관", 10, 2);
 	}
+	
 	
 	private int selectScreent(int i) {
 		
 		//i = sc_th_num
-		
+		theaterservice.
 		//i에 해당하는 theaterVO 의 th_name을 불러오기
 		
 		//만약 해당하는 th_name이 없으면 존재하지 않는 상영관입니다 출력
