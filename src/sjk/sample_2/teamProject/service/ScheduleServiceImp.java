@@ -35,14 +35,16 @@ public class ScheduleServiceImp implements ScheduleService {
 	
 	@Override
 	public boolean insertSchedule(ScheduleVO schedule) {
-		if(schedule == null) {
-			return false;
-		}
-		try {			
-			return scheduleDao.insertSchedule(schedule);
-		}catch(Exception e) {
-			return false;
-		}
+//		if(schedule == null) {
+//			return false;
+//		}
+//		try {			
+//			return scheduleDao.insertSchedule(schedule);
+//		}catch(Exception e) {
+//			return false;
+//		}
+		System.out.println(scheduleDao.selectMovieInfo("aaa"));
+		return false;
 	}
 
 

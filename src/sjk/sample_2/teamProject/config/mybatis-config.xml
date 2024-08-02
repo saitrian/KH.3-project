@@ -10,6 +10,7 @@
 	
 	<typeAliases>
 		<package name="sjk.sample_2.teamProject.model.vo"/>
+		<package name="sjk.sample_2.teamProject.model.tp"/>
 	</typeAliases>
 	
 	<environments default="development">
