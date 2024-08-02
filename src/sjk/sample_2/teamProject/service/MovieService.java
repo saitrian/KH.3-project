@@ -9,9 +9,7 @@ public interface MovieService {
 	
 	boolean insertMovie(MovieVO movie);
 
-	List<MovieVO> getMovieList(MovieVO movie);
+	List<MovieVO> getMovieList();
 
-	List<MovieVO> getNum(MovieVO movie);
-
-
+	MovieVO selectMovie(String movieTitle);
 }

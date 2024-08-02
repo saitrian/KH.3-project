@@ -35,12 +35,10 @@ public class MovieController extends BaseController {
 		
 	}
 
-	public void getMovieList() {
-		movieService.getMovieList(movie);
-		
+	public void getMovieList() {		
 		List<MovieVO> movieList = null;
 		try {
-			movieList = movieService.getMovieList(movie);
+			movieList = movieService.getMovieList();
 		}
 		// 예외 발생 시 등록되지 않은 게시글이거나 삭제된 게시글 입니다. 라고 출력
 		catch(Exception e) {
