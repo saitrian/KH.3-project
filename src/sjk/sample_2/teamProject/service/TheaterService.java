@@ -6,4 +6,8 @@ public interface TheaterService {
 
 	boolean insertTheater(TheaterVO theater);
 
+	TheaterVO selectThNum(int th_num);
+
+
+
 }

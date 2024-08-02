@@ -7,4 +7,7 @@
 		insert into theater(th_name, th_screen, th_seat, th_address, th_region)
 		values(#{theater.th_name}, #{theater.th_screen}, #{theater.th_seat}, #{theater.th_address}, #{theater.th_region})
 	</insert>
+	<select id="selectThNum" resultType="TheaterVO">
+		select * from theater where th_num = #{thNum}
+	</select>
 </mapper>

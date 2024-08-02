@@ -13,7 +13,10 @@ public class Main {
 //		tc.insertSampleTheater();
 		
 		//상영관 실행
+//		ScreenController sc = new ScreenController(new Scanner(System.in));
+//		sc.insertScreen();
+		
 		ScreenController sc = new ScreenController(new Scanner(System.in));
-		sc.insertScreen();
+		sc.search();
 	}
 }

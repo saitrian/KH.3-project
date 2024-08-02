@@ -37,4 +37,10 @@ public class TheaterServiceImp implements TheaterService {
 		}
 		return theaterDAO.inputTheater(theater);
 	}
+
+	@Override
+	public TheaterVO selectThNum(int th_num) {
+		return theaterDAO.selectThNum(th_num);
+	}
+	
 }

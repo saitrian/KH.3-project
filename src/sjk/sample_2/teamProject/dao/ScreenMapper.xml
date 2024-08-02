@@ -7,7 +7,4 @@
 		insert into screen(sc_name, sc_seat, sc_th_num)
 		values (#{screen.sc_name}, #{screen.sc_seat}, #{screen.sc_th_num})
 	</insert>
-	<select id="" resultType="">
-		
-	</select>
 </mapper>

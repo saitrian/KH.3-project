@@ -6,4 +6,5 @@ public interface ScreenService {
 
 	boolean insertScreen(ScreenVO screen);
 
+
 }

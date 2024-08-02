@@ -8,4 +8,6 @@ public interface TheaterDAO {
 
 	boolean inputTheater(@Param("theater")TheaterVO theater);
 
+	TheaterVO selectThNum(@Param("thNum")int th_num);
+
 }
