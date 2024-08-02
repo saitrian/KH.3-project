@@ -42,10 +42,10 @@ public class ScreenController extends BaseController {
 			}
 		}
 		return list;
-		ScreenVO sv = new ScreenVO("1관", 10, 2);
 	}
+	ScreenVO sc = new ScreenVO("1관", 10, 2);
 	
-	
+		
 	private int selectScreent(int i) {
 		
 		//i = sc_th_num
