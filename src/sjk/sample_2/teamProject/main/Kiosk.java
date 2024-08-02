@@ -14,6 +14,7 @@ import sjk.sample_2.teamProject.important.Program;
 import sjk.sample_2.teamProject.important.Utility;
 import sjk.sample_2.teamProject.model.vo.MovieVO;
 import sjk.sample_2.teamProject.model.vo.Ticket;
+import sjk.sample_2.teamProject.model.vo.TicketVO;
 
 public class Kiosk implements Program {	
 	private final Utility UTIL = Utility.getInstance();	
@@ -21,7 +22,7 @@ public class Kiosk implements Program {
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
-	private final int PRODUCE = 4;
+	private final int SEARCH = 4;
 	private final int EXIT = 5;
 
 	private Scanner scan = new Scanner(System.in);
@@ -50,9 +51,13 @@ public class Kiosk implements Program {
 		case TICKETING :
 			buyTicket();
 			break;
+//		case REFUND :
+//			break;
 		case CHECK :
 			check();
 			break;
+//		case SEARCH :
+//			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}		
@@ -138,11 +143,10 @@ public class Kiosk implements Program {
 		private void runCheckMenu(int checkMenu) {
 			switch(checkMenu) {
 			case 1 :
-				checkTicketNumInfo();
+				checkTicketInfo();
 				break;
 			case 2 :
-				checkTicketList();
-				break;
+				return;
 			default :
 				System.err.println("잘못된 번호 입력입니다.");
 			}	
@@ -151,7 +155,11 @@ public class Kiosk implements Program {
 		/**
 		 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 		 */
-		private void checkTicketNumInfo() {
+		private void checkTicketInfo() {
+			String id = memberController.login();
+			TicketVO ticket =ticketController.selectTicket(id);
+			System.out.println(id + "님의 예매 내역");
+			System.out.println(ticket);
 		}
 
 		/**
@@ -159,8 +167,8 @@ public class Kiosk implements Program {
 		 */
 		private void printCheckMenu() {
 			System.out.print(
-					"1. 예매 정보 검색\n"
-							+"2. 영화 이름으로 검색\n");
+					"1. 로그인\n"
+							+"2. 뒤로가기\n");
 		}
 
 		/**

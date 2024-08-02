@@ -36,4 +36,10 @@ public class TicketServiceImp implements TicketService {
 		return ticketDao.insertTicket(id, num);
 	}
 
+	@Override
+	public TicketVO selectTicket(String id) {
+		
+		return ticketDao.selectTicket(id);
+	}
+
 }

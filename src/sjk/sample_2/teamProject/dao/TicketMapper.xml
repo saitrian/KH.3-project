@@ -9,6 +9,9 @@
 	<select id="selectMember" resultType="MemberVO">
 		select * from member where me_pw = #{pw}
 	</select>
+	<select id="selectTicket" resultType="TicketVO">
+		select * from member where me_id = #{id}
+	</select>
 </mapper>
 
 

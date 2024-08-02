@@ -11,4 +11,10 @@ public class TicketVO {
 	private int ti_sd_num;
 	
 	
+	@Override
+	public String toString() {
+		return "번호 : " + ti_num + " / " + ti_me_id + " / " + ti_sd_num;
+	}
+	
+	
 }

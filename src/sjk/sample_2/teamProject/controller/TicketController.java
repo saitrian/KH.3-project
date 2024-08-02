@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import sjk.sample_2.teamProject.important.Utility;
+import sjk.sample_2.teamProject.model.vo.TicketVO;
 import sjk.sample_2.teamProject.service.TicketService;
 import sjk.sample_2.teamProject.service.TicketServiceImp;
 
@@ -24,6 +25,11 @@ public class TicketController extends BaseController {
 		}
 	}
 	
+
+	public TicketVO selectTicket(String id) {
+		return ticketService.selectTicket(id);
+	}
+	
 	public int inputNumber(String menuName) {
 		try {
 			System.out.print(menuName);
@@ -33,5 +39,4 @@ public class TicketController extends BaseController {
 			return Integer.MIN_VALUE; // int의 가장 작은 수를 리턴
 		}
 	}
-
 }
