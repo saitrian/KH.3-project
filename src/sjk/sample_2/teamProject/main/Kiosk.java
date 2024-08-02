@@ -238,8 +238,7 @@ public class Kiosk implements Program {
 		System.out.print("메뉴\r\n"
 						+"1. 영화 제목으로 검색\r\n"
 						+"2. 영화 시간으로 검색\r\n"
-						+"3. 아이디로 검색\r\n"
-						+"4. 뒤로가기\r\n");
+						+"3. 뒤로가기\r\n");
 	}
 	
 	private void runSearch(int menu) {
