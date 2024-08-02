@@ -36,15 +36,4 @@ public class TicketServiceImp implements TicketService {
 		return ticketDao.insertTicket(id, num);
 	}
 
-	@Override
-	public boolean insertTicket2(String pw) {
-		// 받아온 비번을 다오에게 넘겨주고 비번과 일치하는 멤버 정보 가져오게 시킴
-		MemberVO member = ticketDao.selectMember(pw);
-		if(member == null) {
-			return false;
-		}
-		// 비번과 일치하는 멤버 정보 받아왔으니까 id(key값) 다오에게 주고 예매하게 시킴
-		return ticketDao.insertTicket(member.getMe_id());
-	}
-
 }

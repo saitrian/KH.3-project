@@ -3,7 +3,9 @@ package sjk.sample_2.teamProject.main;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
+import sjk.sample_2.teamProject.controller.MemberController;
 import sjk.sample_2.teamProject.controller.MovieController;
 import sjk.sample_2.teamProject.controller.TicketController;
 // 이거 에러 ...?
@@ -22,8 +24,13 @@ public class Kiosk implements Program {
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
-	private MovieController movieController = new MovieController(null);
-	private TicketController ticketController = new TicketController(null);
+	
+	private Scanner scan = new Scanner(System.in);
+	
+	private MovieController movieController = new MovieController(scan);
+	private TicketController ticketController = new TicketController(scan);
+	private MemberController memberController = new MemberController(scan);
+	
 	public Kiosk() {
 	}
 
@@ -57,11 +64,16 @@ public class Kiosk implements Program {
 		System.out.println("-----현재 상영작 목록-----");
 		movieController.getMovieList();
 		
-		// 로그인 하고 로그인 성공 시 예매 성공 
+		// 로그인 하고 로그인 성공 시 예매 성공
+		String id = memberController.login();
+		if (id == null) {
+			return;
+		}
 		// 상영 영화 번호 입력 추가 << 
-		ticketController.insertTicket();
+		UTIL.printDottedLine();
+		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
 		
-		
+		ticketController.insertTicket(id, movieNum);		
 	}
 
 	/**

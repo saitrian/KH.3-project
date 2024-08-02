@@ -38,6 +38,17 @@ public class MemberController extends BaseController {
 	}
 	
 	public String login() {
+		String id = checkLogin();
+		
+		if(id == null) {
+			System.out.println("로그인 실패");
+			return null;
+		}
+		
+		return id;
+	}
+	
+	private String checkLogin() {		
 		System.out.print("아이디 입력 : ");
 		String id = scan.next();
 		
@@ -46,7 +57,7 @@ public class MemberController extends BaseController {
 		
 		if(!memberService.login(id, pw)) {
 			System.err.println("회원 정보가 일치하지 않습니다.");
-			return "xxx";
+			return null;
 		}
 		return id;
 	}
