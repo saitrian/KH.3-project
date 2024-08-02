@@ -31,9 +31,9 @@ public class TicketServiceImp implements TicketService {
 	}
 
 	@Override
-	public boolean insertTicket(String id) {
+	public boolean insertTicket(String id, int num) {
 
-		return ticketDao.insertTicket(id);
+		return ticketDao.insertTicket(id, num);
 	}
 
 	@Override

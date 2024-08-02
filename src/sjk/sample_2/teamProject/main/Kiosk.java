@@ -4,21 +4,26 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
+import sjk.sample_2.teamProject.controller.MovieController;
+import sjk.sample_2.teamProject.controller.TicketController;
 // 이거 에러 ...?
 import sjk.sample_2.teamProject.database.Database;
 import sjk.sample_2.teamProject.important.Program;
 import sjk.sample_2.teamProject.important.Utility;
+import sjk.sample_2.teamProject.model.vo.MovieVO;
 import sjk.sample_2.teamProject.model.vo.Ticket;
 
 public class Kiosk implements Program {	
 	private final Utility UTIL = Utility.getInstance();
+	
 
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
 	private final int PRODUCE = 4;
 	private final int EXIT = 5;
-
+	private MovieController movieController = new MovieController(null);
+	private TicketController ticketController = new TicketController(null);
 	public Kiosk() {
 	}
 
@@ -48,6 +53,15 @@ public class Kiosk implements Program {
 	}
 
 	private void buyTicket() {
+		// 현재 상영 목록 출력
+		System.out.println("-----현재 상영작 목록-----");
+		movieController.getMovieList();
+		
+		// 로그인 하고 로그인 성공 시 예매 성공 
+		// 상영 영화 번호 입력 추가 << 
+		ticketController.insertTicket();
+		
+		
 	}
 
 	/**
@@ -55,6 +69,9 @@ public class Kiosk implements Program {
 	 * @param inputId 입력 받은 회원정보(id)
 	 * */
 	private void usePoint(String inputId) {
+		
+		
+		
 	}
 
 	/** 
@@ -72,6 +89,10 @@ public class Kiosk implements Program {
 	 * 기능 : 영화표 조회 기능
 	 */
 	private void check() {
+		
+		printCheckMenu();
+		int checkMenu = inputNumber("번호 선택 : ");
+		runCheckMenu(checkMenu);
 	}
 
 	/**
@@ -132,7 +153,6 @@ public class Kiosk implements Program {
 	@Override
 	public void run() {
 		int menu;
-		//load(fileName);
 		do {
 			printMenu();
 			menu = inputNumber("메뉴 선택 : ");
@@ -147,7 +167,13 @@ public class Kiosk implements Program {
 	}
 
 	public int inputNumber(String menuName) {
-		return 0;
+		try {
+			System.out.print(menuName);
+			return UTIL.scan.nextInt();
+		} catch(InputMismatchException e) {
+			UTIL.scan.nextLine(); // 잘못 입력한 값을 입력 버퍼에서 비워줌.
+			return Integer.MIN_VALUE; // int의 가장 작은 수를 리턴
+		}
 	}
 
 	public int loginCheck(String inputId, String inputPassword) {

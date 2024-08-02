@@ -49,8 +49,8 @@ public class MovieController extends BaseController {
 			return;
 		}
 		
-		for(MovieVO movieSelectList : movieList) {
-			System.out.println(movieSelectList.getMo_num());
+		for(int i = 0; i < movieList.size() ; i++) {
+			System.out.println(movieList.get(i));
 			//movieNumList.add(movieSelectList.getMo_num());
 		}
 		//System.out.println(movieNumList);
