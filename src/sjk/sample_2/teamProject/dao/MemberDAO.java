@@ -11,5 +11,9 @@ public interface MemberDAO {
 
 	MemberVO selectMember(@Param("id")String id);
 
+	void updateUpPoint(@Param("id")String id);
+
+	void updateUsePoint(@Param("id")String id);
+
 	
 }

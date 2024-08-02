@@ -61,4 +61,14 @@ public class MemberController extends BaseController {
 		}
 		return id;
 	}
+
+	public void upPoint(String id) {
+		memberService.updateUpPoint(id);
+	}
+
+	public void usePoint(String id) {
+		memberService.updateUsePoint(id);
+	}
+
+
 }

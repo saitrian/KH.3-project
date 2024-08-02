@@ -7,5 +7,10 @@ public interface MemberService {
 	boolean insertMember(String id, String pw, String authority, int point);
 
 	boolean login(String id, String pw);
+
+	void updateUpPoint(String id);
+
+	void updateUsePoint(String id);
+
 		
 }

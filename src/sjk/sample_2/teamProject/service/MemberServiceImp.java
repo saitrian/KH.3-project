@@ -58,4 +58,22 @@ public class MemberServiceImp implements MemberService {
 		}
 		return false;
 	}
+
+	@Override
+	public void updateUpPoint(String id) {
+		memberDao.updateUpPoint(id);
+		System.out.println("'1' 포인트 적립되었습니다.");
+	}
+
+	@Override
+	public void updateUsePoint(String id) {
+		MemberVO user = memberDao.selectMember(id);
+		if(user.getMe_point() == 0) {
+			memberDao.updateUpPoint(id);
+			System.out.println("보유하신 포인트가 없어 자동으로 적립합니다.");
+			System.out.println("'1' 포인트 적립되었습니다.");
+		}else {
+		memberDao.updateUsePoint(id);
+		}
+	}
 }
