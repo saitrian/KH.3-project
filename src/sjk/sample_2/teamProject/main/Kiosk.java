@@ -16,8 +16,7 @@ import sjk.sample_2.teamProject.model.vo.MovieVO;
 import sjk.sample_2.teamProject.model.vo.Ticket;
 
 public class Kiosk implements Program {	
-	private final Utility UTIL = Utility.getInstance();
-	
+	private final Utility UTIL = Utility.getInstance();	
 
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
@@ -190,23 +189,5 @@ public class Kiosk implements Program {
 
 	public int loginCheck(String inputId, String inputPassword) {
 		return 0;
-	}
-}
-
-class UserTicketCheck{
-	String userId;
-	int ticketCheckNum;
-	
-	public UserTicketCheck(String userId, int ticketCheckNum) {
-		this.userId = userId;
-		this.ticketCheckNum = ticketCheckNum;
-	}
-	
-	public String getUserId() {
-		return userId;
-	}
-	
-	public int getTicketCheckNum() {
-		return ticketCheckNum;
 	}
 }
