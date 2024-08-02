@@ -4,6 +4,6 @@ import sjk.sample_2.teamProject.model.vo.TheaterVO;
 
 public interface TheaterService {
 
-	boolean inputTheater(TheaterVO theater);
+	boolean insertTheater(TheaterVO theater);
 
 }

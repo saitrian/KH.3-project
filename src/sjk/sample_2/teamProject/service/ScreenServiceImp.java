@@ -30,7 +30,10 @@ public class ScreenServiceImp implements ScreenService {
 	}
 
 	@Override
-	public boolean inputScreen(ScreenVO screen) {
+	public boolean insertScreen(ScreenVO screen) {
+		if(screen == null) {
+			return false;
+		}
 		return screenDAO.insertScreen(screen);
 	}
 }

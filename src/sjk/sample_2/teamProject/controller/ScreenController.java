@@ -1,5 +1,7 @@
 package sjk.sample_2.teamProject.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import sjk.sample_2.teamProject.model.vo.ScreenVO;
@@ -14,22 +16,27 @@ public class ScreenController extends BaseController {
 	}
 	
 	public void insertScreen() {
-		ScreenVO screen = inputScreen();
+		List<ScreenVO> list = inputScreen();
 		
-		if(screenservice.inputScreen(screen)) {
-			System.out.println("좌석 등록 완료");
-		}
-		else {
-			System.out.println("좌석 등록 실패");
+		for(ScreenVO sv : list) {
+			screenservice.insertScreen(sv);
 		}
 	}
 
-	private ScreenVO inputScreen() {
-		String sc_name = "4관";//이름(1관, 2관 ...)
-		int sc_seat = 10; //총 좌석 수
-		int sc_th_num = 5;//극장 번호
-		
-		
-		return new ScreenVO(sc_name, sc_seat, sc_th_num);
+	private List<ScreenVO> inputScreen() {
+		String sc_name = "";//이름(1관, 2관 ...)
+		int sc_seat = 10;	//총 좌석 수
+		int sc_th_num = 1;	//극장 번호
+		List<ScreenVO> list = new ArrayList<ScreenVO>();
+		for(int i = 1; i <= 5; i++) {
+			for(int j = 1; j <= 5; j++) {
+				sc_name = i + "관";
+				sc_seat = 10;
+				sc_th_num = j;
+				ScreenVO sv = new ScreenVO(sc_name, sc_seat, sc_th_num);
+				list.add(sv);
+			}
+		}
+		return list;
 	}
 }

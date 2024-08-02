@@ -30,12 +30,11 @@ public class TheaterServiceImp implements TheaterService {
 	}
 
 	@Override
-	public boolean inputTheater(TheaterVO theater) {
+	public boolean insertTheater(TheaterVO theater) {
 		//극장명 null 체크, 빈 문자열 체크
 		if(theater == null) {
 			return false;
 		}
-		;
 		return theaterDAO.inputTheater(theater);
 	}
 }

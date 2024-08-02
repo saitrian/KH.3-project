@@ -4,6 +4,6 @@ import sjk.sample_2.teamProject.model.vo.ScreenVO;
 
 public interface ScreenService {
 
-	boolean inputScreen(ScreenVO screen);
+	boolean insertScreen(ScreenVO screen);
 
 }

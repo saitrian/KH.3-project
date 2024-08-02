@@ -8,8 +8,11 @@ public class Main {
 	public static void main(String[] args) {
 //		Kiosk tm = new Kiosk();
 //		tm.run();
+		//극장 실행
 //		TheaterController tc = new TheaterController(new Scanner(System.in));
-//		tc.insertTheater();
+//		tc.insertSampleTheater();
+		
+		//상영관 실행
 		ScreenController sc = new ScreenController(new Scanner(System.in));
 		sc.insertScreen();
 	}
