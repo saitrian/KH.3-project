@@ -1,5 +1,6 @@
 package sjk.sample_2.teamProject.controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import sjk.sample_2.teamProject.model.vo.MovieVO;
@@ -9,6 +10,7 @@ import sjk.sample_2.teamProject.service.MovieServiceImp;
 public class MovieController extends BaseController {
 	
 	private MovieService movieService = new MovieServiceImp();
+	private MovieVO movie;
 
 	public MovieController(Scanner scan) {
 		super(scan);
@@ -30,5 +32,25 @@ public class MovieController extends BaseController {
 		}else {
 			System.err.println("영화 등록 실패...");
 		}
+		
 	}
+
+	public void getMovieList() {
+		movieService.getMovieList(movie);
+		
+		List<MovieVO> movieList = null;
+		try {
+			movieList = movieService.getMovieList(movie);
+		}
+		// 예외 발생 시 등록되지 않은 게시글이거나 삭제된 게시글 입니다. 라고 출력
+		catch(Exception e) {
+			System.err.println("없음");
+			return;
+		}
+		for(MovieVO movieSelectList : movieList) {
+			System.out.println(movieSelectList);
+		}
+	}
+
+	
 }

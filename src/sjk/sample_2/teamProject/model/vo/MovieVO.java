@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MovieVO {
 	
-	private int mo_num;
-	private String mo_title;
-	private String mo_content;
-	private int mo_time;
-	private String mo_age;
-	private String mo_date;
+	private int mo_num; // 영화 번호
+	private String mo_title; // 제목
+	private String mo_content; // 내용
+	private int mo_time; // 시간
+	private String mo_age; // 연령
+	private String mo_date; // 개봉일
 	
 	public MovieVO(String moTitle, String moContent, int moTime, String moAge, String moDate) {
 		this.mo_title = moTitle;
@@ -21,4 +21,16 @@ public class MovieVO {
 		this.mo_age = moAge;
 		this.mo_date = moDate;
 	}
+
+	public MovieVO(int mo_num) {
+		this.mo_num = mo_num;
+	}
+	
+	@Override
+	public String toString() {
+		return "번호 : "+ mo_num + " / 영화 제목 : " + mo_title + " / 영화 내용 : " + mo_content
+				+  " / 영화 상영 시간 : " + mo_date + " / 연령 : " + mo_age +  " / 상영 총 시간 : " + mo_time + "시간";
+	}
+	
+	
 }

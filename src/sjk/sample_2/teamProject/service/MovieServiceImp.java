@@ -2,6 +2,7 @@ package sjk.sample_2.teamProject.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -38,9 +39,17 @@ public class MovieServiceImp implements MovieService {
 		MovieVO movieVo = movieDao.selectMovie(movie);
 		
 		if(movieVo != null) {
+			System.err.println("이미 등록된 영화 이름 입니다.");
 			return false;
 		}
 		
 		return movieDao.insertMovie(movie);
+	}
+
+	
+	
+	@Override
+	public List<MovieVO> getMovieList(MovieVO movie) {
+		return movieDao.selectMovieList(movie);
 	}
 }
