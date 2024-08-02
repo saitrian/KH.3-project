@@ -11,14 +11,15 @@ public class Main {
 		/*
 		Kiosk tm = new Kiosk();
 		tm.run();
-		*/
+		*/		
 		MovieVO movie = null;
 		MovieController mc = new MovieController(new Scanner(System.in));
 		mc.insertMovie();
 		mc.getMovieList();
 		
-		
+		/*
 		ScheduleController sc = new ScheduleController(new Scanner(System.in));
-		sc.insertSchedule(movie);
+		sc.insertSchedule();
+		*/
 	}
 }

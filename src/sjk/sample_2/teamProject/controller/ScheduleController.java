@@ -1,5 +1,6 @@
 package sjk.sample_2.teamProject.controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import sjk.sample_2.teamProject.model.vo.MovieVO;
@@ -21,7 +22,7 @@ public class ScheduleController extends BaseController {
 		super(scan);
 	}
 	
-	public void insertSchedule(MovieVO movie) {
+	public void insertSchedule() {
 		
 		// 영화 시간, 영화 날짜, 영화 번호(무슨 영화인지 선택), 상영관 번호(상영관 선택)
 		/*
@@ -31,7 +32,8 @@ public class ScheduleController extends BaseController {
 		ScheduleVO schedule4 = new ScheduleVO("18:00", "2024-07-30", 1, 1);
 		ScheduleVO schedule5 = new ScheduleVO("20:00", "2024-07-30", 1, 1);
 		*/
-		System.out.println(movie);
+		
+		System.out.println(movie); // ? 왜 null 값임?
 		ScheduleVO schedule1 = new ScheduleVO("10:00", "2024-07-30", movie.getMo_num(), 1);
 		ScheduleVO schedule2 = new ScheduleVO("12:00", "2024-07-30", movie.getMo_num(), 1);
 		ScheduleVO schedule3 = new ScheduleVO("15:00", "2024-07-30", movie.getMo_num(), 1);
@@ -55,5 +57,10 @@ public class ScheduleController extends BaseController {
 		}else {
 			System.err.println("영화 상영 시간 등록 실패...");
 		}
+	}
+
+	public void getMovieList() {
+		// TODO Auto-generated method stub
+		
 	}
 }

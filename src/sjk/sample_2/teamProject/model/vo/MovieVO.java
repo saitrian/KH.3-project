@@ -21,10 +21,6 @@ public class MovieVO {
 		this.mo_age = moAge;
 		this.mo_date = moDate;
 	}
-
-	public MovieVO(int mo_num) {
-		this.mo_num = mo_num;
-	}
 	
 	@Override
 	public String toString() {
