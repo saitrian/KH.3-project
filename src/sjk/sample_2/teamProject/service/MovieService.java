@@ -3,7 +3,6 @@ package sjk.sample_2.teamProject.service;
 import java.util.List;
 
 import sjk.sample_2.teamProject.model.vo.MovieVO;
-import sjk.sample_2.teamProject.model.vo.ScheduleVO;
 
 public interface MovieService {
 	
@@ -11,5 +10,5 @@ public interface MovieService {
 
 	List<MovieVO> getMovieList();
 
-	MovieVO selectMovie(String movieTitle);
+	MovieVO selectMovie(String mo_title);
 }

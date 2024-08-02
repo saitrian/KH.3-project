@@ -7,10 +7,6 @@
 		select * from movie where mo_title = #{mo.mo_title}
 	</select>
 	
-	<select id="selectMovie_useTitle" resultType="int">
-		select mo_num from movie where mo_title = #{movieTitle}
-	</select>
-	
 	<insert id="insertMovie" useGeneratedKeys="true" keyProperty="mo.mo_num">
 		insert into movie(mo_title, mo_content, mo_time, mo_age, mo_date)
 		values(#{mo.mo_title}, #{mo.mo_content}, #{mo.mo_time}, #{mo.mo_age}, #{mo.mo_date});
@@ -18,6 +14,10 @@
 	
 	<select id="selectMovieList" resultType="movieVO">
 		select * from movie
+	</select>
+	
+	<select id="selectMovie_useTitle" resultType="movieVO">
+		select * from movie where mo_title = #{mo_title}
 	</select>
 </mapper>
 

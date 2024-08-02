@@ -28,9 +28,8 @@ public class MovieVO {
 				+  " / 영화 상영 시간 : " + mo_date + " / 연령 : " + mo_age +  " / 상영 총 시간 : " + mo_time + "시간";
 	}
 
-	public MovieVO(String movieTitle) {
-		this.mo_title = movieTitle;
+	public MovieVO(String mo_title) {
+		this.mo_title = mo_title;
 	}
-	
 	
 }

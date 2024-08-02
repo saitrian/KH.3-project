@@ -13,11 +13,12 @@ public class Main {
 		tm.run();
 		*/
 		
+		/*
 		MovieVO movie = null;
 		MovieController mc = new MovieController(new Scanner(System.in));
 		mc.insertMovie();
-		mc.getMovieList();
-		
+		// mc.getMovieList();
+		*/
 		
 		ScheduleController sc = new ScheduleController(new Scanner(System.in));
 		sc.insertSchedule();
