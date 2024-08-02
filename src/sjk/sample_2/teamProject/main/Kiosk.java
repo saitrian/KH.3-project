@@ -36,8 +36,7 @@ public class Kiosk implements Program {
 
 	@Override
 	public void printMenu() {
-		System.out.print(
-				"메뉴\r\n"
+		System.out.print("메뉴\r\n"
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
@@ -51,16 +50,17 @@ public class Kiosk implements Program {
 		case TICKETING :
 			buyTicket();
 			break;
-//		case REFUND :
-//			break;
+			//		case REFUND :
+			//			break;
 		case CHECK :
 			check();
 			break;
-//		case SEARCH :
-//			break;
+		case SEARCH :
+			search();
+			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
-		}		
+		}
 	}
 
 	private void buyTicket() {
@@ -87,140 +87,189 @@ public class Kiosk implements Program {
 			}
 		}
 	}
-		/**
-		 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 사용 여부 입력받는 메서드
-		 * @param inputId 입력 받은 회원정보(id)
-		 * */
-		private void usePoint(String id) {
+	/**
+	 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 사용 여부 입력받는 메서드
+	 * @param inputId 입력 받은 회원정보(id)
+	 * */
+	private void usePoint(String id) {
 
-			// 잘못된 값 입력 시에 돌아오게 하는 무한루프
-			for(;;) {
-				// 포인트 사용 메뉴 출력
-				System.out.println("포인트 사용 메뉴\r\n"
-						+ "1. 포인트 사용\r\n"
-						+ "2. 포인트 적립");
-				int menu = inputNumber("메뉴 입력 : ");
+		// 잘못된 값 입력 시에 돌아오게 하는 무한루프
+		for(;;) {
+			// 포인트 사용 메뉴 출력
+			System.out.println("포인트 사용 메뉴\r\n"
+					+ "1. 포인트 사용\r\n"
+					+ "2. 포인트 적립");
+			int menu = inputNumber("메뉴 입력 : ");
 
-				// 포인트 사용 선택 시
-				if(menu == 1) {
-					memberController.usePoint(id);
-					return;
-				}
-				// 포인트 적립 선택 시
-				else if(menu == 2) {
-					memberController.upPoint(id);
-					return;
-				}
-				// 다른 번호 선택 시
-				else {
-					// 잘못된 번호 입력입니다. 출력 후 리턴 없이 다시 위로 보냄
-					UTIL.printDottedLine();
-					System.out.println("잘못된 번호 입력입니다.");
-					UTIL.printDottedLine();
-				}
-			}
-
-		}
-
-
-
-
-
-		/**
-		 * 기능 : 영화표 조회 기능
-		 */
-		private void check() {
-
-			printCheckMenu();
-			int checkMenu = inputNumber("번호 선택 : ");
-			runCheckMenu(checkMenu);
-		}
-
-		/**
-		 * 기능 : 받은 checkMenu로 메뉴 선택하는 메소드
-		 * @param checkMenu 받은 메뉴 값
-		 */
-		private void runCheckMenu(int checkMenu) {
-			switch(checkMenu) {
-			case 1 :
-				checkTicketInfo();
-				break;
-			case 2 :
+			// 포인트 사용 선택 시
+			if(menu == 1) {
+				memberController.usePoint(id);
 				return;
-			default :
-				System.err.println("잘못된 번호 입력입니다.");
-			}	
-		}
-
-		/**
-		 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
-		 */
-		private void checkTicketInfo() {
-			String id = memberController.login();
-			TicketVO ticket =ticketController.selectTicket(id);
-			System.out.println(id + "님의 예매 내역");
-			System.out.println(ticket);
-		}
-
-		/**
-		 * 기능 : 조회 기능 메뉴 실행 메소드
-		 */
-		private void printCheckMenu() {
-			System.out.print(
-					"1. 로그인\n"
-							+"2. 뒤로가기\n");
-		}
-
-		/**
-		 * 기능 : 영화 이름 검색 메소드
-		 */
-		private void checkTicketList() {
-		}
-
-		/**
-		 * 기능 : 검색어를 입력시 검색어 검색 기능 메소드
-		 * @param search 
-		 * @return
-		 */
-		private List<Ticket> getSearchList(String search) {
-			List<Ticket> searchList = new ArrayList<Ticket>();
-			return searchList;
-		}
-
-		private void printRepeatMenu() {
-			System.out.println(
-					"메뉴\r\n"
-							+ "1. 로그인 재시도\r\n"
-							+ "2. 메인 메뉴로\r\n");
-		}
-
-		@Override
-		public void run() {
-			int menu;
-			do {
-				printMenu();
-				menu = inputNumber("메뉴 선택 : ");
-
-				try {
-					runMenu(menu);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}while(menu != EXIT);
-		}
-
-		public int inputNumber(String menuName) {
-			try {
-				System.out.print(menuName);
-				return UTIL.scan.nextInt();
-			} catch(InputMismatchException e) {
-				UTIL.scan.nextLine(); // 잘못 입력한 값을 입력 버퍼에서 비워줌.
-				return Integer.MIN_VALUE; // int의 가장 작은 수를 리턴
+			}
+			// 포인트 적립 선택 시
+			else if(menu == 2) {
+				memberController.upPoint(id);
+				return;
+			}
+			// 다른 번호 선택 시
+			else {
+				// 잘못된 번호 입력입니다. 출력 후 리턴 없이 다시 위로 보냄
+				UTIL.printDottedLine();
+				System.out.println("잘못된 번호 입력입니다.");
+				UTIL.printDottedLine();
 			}
 		}
 
-		public int loginCheck(String inputId, String inputPassword) {
-			return 0;
+	}
+	/**
+	 * 기능 : 영화표 조회 기능
+	 */
+	private void check() {
+
+		printCheckMenu();
+		int checkMenu = inputNumber("번호 선택 : ");
+		runCheckMenu(checkMenu);
+	}
+
+	/**
+	 * 기능 : 받은 checkMenu로 메뉴 선택하는 메소드
+	 * @param checkMenu 받은 메뉴 값
+	 */
+	private void runCheckMenu(int checkMenu) {
+		switch(checkMenu) {
+		case 1 :
+			checkTicketInfo();
+			break;
+		case 2 :
+			return;
+		default :
+			System.err.println("잘못된 번호 입력입니다.");
+		}	
+	}
+
+	/**
+	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
+	 */
+	private void checkTicketInfo() {
+		String id = memberController.login();
+		TicketVO ticket =ticketController.selectTicket(id);
+		System.out.println(id + "님의 예매 내역");
+		System.out.println(ticket);
+	}
+
+	/**
+	 * 기능 : 조회 기능 메뉴 실행 메소드
+	 */
+	private void printCheckMenu() {
+		System.out.print(
+				"1. 로그인\n"
+						+"2. 뒤로가기\n");
+	}
+
+	/**
+	 * 기능 : 영화 이름 검색 메소드
+	 */
+	private void checkTicketList() {
+	}
+
+	/**
+	 * 기능 : 검색어를 입력시 검색어 검색 기능 메소드
+	 * @param search 
+	 * @return
+	 */
+	private List<Ticket> getSearchList(String search) {
+		List<Ticket> searchList = new ArrayList<Ticket>();
+		return searchList;
+	}
+
+	private void printRepeatMenu() {
+		System.out.println(
+				"메뉴\r\n"
+						+ "1. 로그인 재시도\r\n"
+						+ "2. 메인 메뉴로\r\n");
+	}
+
+	@Override
+	public void run() {
+		int menu;
+		do {
+			printMenu();
+			menu = inputNumber("메뉴 선택 : ");
+
+			try {
+				runMenu(menu);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}while(menu != EXIT);
+	}
+
+	public int inputNumber(String menuName) {
+		try {
+			System.out.print(menuName);
+			return UTIL.scan.nextInt();
+		} catch(InputMismatchException e) {
+			UTIL.scan.nextLine(); // 잘못 입력한 값을 입력 버퍼에서 비워줌.
+			return Integer.MIN_VALUE; // int의 가장 작은 수를 리턴
 		}
 	}
+
+	public int loginCheck(String inputId, String inputPassword) {
+		return 0;
+	}
+
+	private void search() {
+		int menu;
+		do {
+			printMenu();
+			menu = inputNumber("메뉴 선택 : ");
+
+			try {
+				runSearch(menu);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}while(menu != EXIT);
+	}
+
+	private void printSearchMenu() {
+		System.out.print("메뉴\r\n"
+						+"1. 영화 제목으로 검색\r\n"
+						+"2. 영화 시간으로 검색\r\n"
+						+"3. 아이디로 검색\r\n"
+						+"4. 뒤로가기\r\n");
+	}
+	
+	private void runSearch(int menu) {
+		switch(menu) {
+		case 1 :
+			PSV();
+			break;
+		case 2 :
+			OJY();
+			break;
+		case 3 :
+			PCW();
+			break;
+		default :
+			System.err.println("잘못된 번호 입력입니다.");
+		}
+	}
+
+	private void PCW() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void OJY() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void PSV() {
+		// TODO Auto-generated method stub
+		
+	}
+}

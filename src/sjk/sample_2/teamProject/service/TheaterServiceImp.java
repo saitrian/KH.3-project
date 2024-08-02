@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import sjk.sample_2.teamProject.dao.TheaterDAO;
+import sjk.sample_2.teamProject.model.vo.TheaterVO;
 
 public class TheaterServiceImp implements TheaterService {
 
@@ -26,5 +27,14 @@ public class TheaterServiceImp implements TheaterService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean insertTheater(TheaterVO theater) {
+		//극장명 null 체크, 빈 문자열 체크
+		if(theater == null) {
+			return false;
+		}
+		return theaterDAO.inputTheater(theater);
 	}
 }

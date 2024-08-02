@@ -27,6 +27,9 @@ public class MovieVO {
 		return "번호 : "+ mo_num + " / 영화 제목 : " + mo_title + " / 영화 내용 : " + mo_content
 				+  " / 영화 상영 시간 : " + mo_date + " / 연령 : " + mo_age +  " / 상영 총 시간 : " + mo_time + "시간";
 	}
-	
+
+	public MovieVO(String mo_title) {
+		this.mo_title = mo_title;
+	}
 	
 }

@@ -11,7 +11,9 @@ public interface MovieDAO {
 	boolean insertMovie(@Param("mo")MovieVO movie);
 	
 	MovieVO selectMovie(@Param("mo")MovieVO movie);
-
-	List<MovieVO> selectMovieList(@Param("mo")MovieVO movie);
 	
+	List<MovieVO> selectMovieList();
+
+	MovieVO selectMovie_useTitle(@Param("mo_title")String mo_title);
+
 }

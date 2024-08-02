@@ -31,17 +31,13 @@ public class MovieController extends BaseController {
 			System.out.println("영화 등록 성공!");
 		}else {
 			System.err.println("영화 등록 실패...");
-		}
-		
+		}		
 	}
 
-	public void getMovieList() {
-		movieService.getMovieList(movie);
-		
+	public void getMovieList() {		
 		List<MovieVO> movieList = null;
-		List<Integer> movieNumList = null;
 		try {
-			movieList = movieService.getMovieList(movie);
+			movieList = movieService.getMovieList();
 		}
 		// 예외 발생 시 등록되지 않은 게시글이거나 삭제된 게시글 입니다. 라고 출력
 		catch(Exception e) {
@@ -49,12 +45,12 @@ public class MovieController extends BaseController {
 			return;
 		}
 		
-		for(int i = 0; i < movieList.size() ; i++) {
-			System.out.println(movieList.get(i));
-			//movieNumList.add(movieSelectList.getMo_num());
+		for(MovieVO movieSelectList : movieList) {
+			System.out.println(movieSelectList);
 		}
-		//System.out.println(movieNumList);
+		
 	}
+	
 
 	
 }

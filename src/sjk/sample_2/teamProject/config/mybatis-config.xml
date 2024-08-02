@@ -29,5 +29,7 @@
 		<mapper resource="sjk/sample_2/teamProject/dao/TicketMapper.xml"/>
 		<mapper resource="sjk/sample_2/teamProject/dao/MovieMapper.xml"/>
 		<mapper resource="sjk/sample_2/teamProject/dao/ScheduleMapper.xml"/>
+		<mapper resource="sjk/sample_2/teamProject/dao/TheaterMapper.xml"/>
+		<mapper resource="sjk/sample_2/teamProject/dao/ScreenMapper.xml"/>
 	</mappers>
 </configuration>

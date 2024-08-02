@@ -46,10 +46,25 @@ public class MovieServiceImp implements MovieService {
 		return movieDao.insertMovie(movie);
 	}
 
-	
-	
 	@Override
-	public List<MovieVO> getMovieList(MovieVO movie) {
-		return movieDao.selectMovieList(movie);
+	public List<MovieVO> getMovieList() {
+		return movieDao.selectMovieList();
 	}
+
+	@Override
+	public MovieVO selectMovie(String mo_title) {
+		return movieDao.selectMovie_useTitle(mo_title);
+	}
+
+	/*
+	@Override
+	public MovieVO selectMovie(String movieName) {
+		MovieVO movieVo = new MovieVO(movieName);
+		
+		return movieDao.selectMovie(movieVo);
+		
+		return movieDao.selectMovie_useTitle(movieName);
+	}
+	*/
+
 }

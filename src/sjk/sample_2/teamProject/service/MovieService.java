@@ -8,6 +8,7 @@ public interface MovieService {
 	
 	boolean insertMovie(MovieVO movie);
 
-	List<MovieVO> getMovieList(MovieVO movie);
+	List<MovieVO> getMovieList();
 
+	MovieVO selectMovie(String mo_title);
 }
