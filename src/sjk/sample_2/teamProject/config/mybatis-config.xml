@@ -26,5 +26,6 @@
 	
 	<mappers>
 		<mapper resource="sjk/sample_2/teamProject/dao/MemberMapper.xml"/>
+		<mapper resource="sjk/sample_2/teamProject/dao/TicketMapper.xml"/>
 	</mappers>
 </configuration>

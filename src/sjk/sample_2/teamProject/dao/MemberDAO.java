@@ -9,4 +9,7 @@ public interface MemberDAO {
 	boolean insertMember(@Param("id")String id, @Param("pw")String pw, 
 			@Param("authority")String authority, @Param("point")int point);
 
+	MemberVO selectMember(@Param("id")String id);
+
+	
 }

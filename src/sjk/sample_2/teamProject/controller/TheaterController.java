@@ -7,4 +7,6 @@ public class TheaterController extends BaseController {
 	public TheaterController(Scanner scan) {
 		super(scan);
 	}
+	
+	
 }

@@ -14,7 +14,7 @@ import sjk.sample_2.teamProject.model.vo.MemberVO;
 public class MemberServiceImp implements MemberService {
 
 	private MemberDAO memberDao;
-	
+
 	public MemberServiceImp() {
 		String resource = "sjk/sample_2/teamProject/config/mybatis-config.xml";
 		InputStream inputStream;
@@ -32,5 +32,30 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public boolean insertMember(String id, String pw, String authority, int point) {
 		return memberDao.insertMember(id, pw, authority, point);
+	}
+
+	@Override
+	public boolean login(String id, String pw) {
+		// null체크, 빈 문자열 체크
+		if(id == null || id.trim().length() == 0 || pw == null || pw.trim().length() == 0) {
+			return false;
+		}
+		id = id.trim();
+		// 아이디 확인
+		MemberVO memberVo = memberDao.selectMember(id);
+		if(memberVo == null) {
+			return false;
+		}
+
+		MemberVO user = memberDao.selectMember(id);
+
+		if(user == null) {
+			return false;
+		}
+		// 회원 정보가 있으면 회원의 비번과 입력받은 비번을 확인
+		if(user.getMe_pw().equals(pw)) {
+			return true;
+		}
+		return false;
 	}
 }

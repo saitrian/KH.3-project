@@ -2,10 +2,12 @@ package sjk.sample_2.teamProject.controller;
 
 import java.util.Scanner;
 
+import lombok.Data;
 import sjk.sample_2.teamProject.model.vo.MemberVO;
 import sjk.sample_2.teamProject.service.MemberService;
 import sjk.sample_2.teamProject.service.MemberServiceImp;
 
+@Data
 public class MemberController extends BaseController {
 
 	private MemberService memberService = new MemberServiceImp();
@@ -33,5 +35,19 @@ public class MemberController extends BaseController {
 		id = "eee";
 		pw = "555";
 		return memberService.insertMember(id, pw, authority, point);
+	}
+	
+	public String login() {
+		System.out.print("아이디 입력 : ");
+		String id = scan.next();
+		
+		System.out.print("비번 입력 : ");
+		String pw = scan.next();
+		
+		if(!memberService.login(id, pw)) {
+			System.err.println("회원 정보가 일치하지 않습니다.");
+			return "xxx";
+		}
+		return id;
 	}
 }
