@@ -21,6 +21,25 @@ public class ScheduleController extends BaseController {
 	public ScheduleController(Scanner scan) {
 		super(scan);
 	}
+
+	public void selectMovieNum() {
+		movieService.getMovieList(movie);
+		List<MovieVO> movieNum = null;
+		
+		try {
+			movieNum = movieService.getNum(movie);
+		}
+		// 예외 발생 시 등록되지 않은 게시글이거나 삭제된 게시글 입니다. 라고 출력
+		catch(Exception e) {
+			System.err.println("없음");
+			return;
+		}
+		
+		for(MovieVO movieSelectList : movieNum) {
+			System.out.println(movieSelectList.getMo_num());
+		}
+
+	}
 	
 	public void insertSchedule() {
 		
@@ -59,8 +78,6 @@ public class ScheduleController extends BaseController {
 		}
 	}
 
-	public void getMovieList() {
-		// TODO Auto-generated method stub
-		
-	}
+
+
 }

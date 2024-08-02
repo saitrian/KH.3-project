@@ -13,5 +13,9 @@ public interface MovieDAO {
 	MovieVO selectMovie(@Param("mo")MovieVO movie);
 
 	List<MovieVO> selectMovieList(@Param("mo")MovieVO movie);
+
+	List<MovieVO> selectNum(@Param("mo")MovieVO movie);
+
+	
 	
 }

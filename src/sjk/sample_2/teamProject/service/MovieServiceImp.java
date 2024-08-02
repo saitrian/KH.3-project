@@ -46,10 +46,14 @@ public class MovieServiceImp implements MovieService {
 		return movieDao.insertMovie(movie);
 	}
 
-	
-	
 	@Override
 	public List<MovieVO> getMovieList(MovieVO movie) {
 		return movieDao.selectMovieList(movie);
 	}
+
+	@Override
+	public List<MovieVO> getNum(MovieVO movie) {
+		return  movieDao.selectNum(movie);
+	}
+
 }

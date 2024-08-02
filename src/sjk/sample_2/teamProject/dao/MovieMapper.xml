@@ -13,6 +13,10 @@
 	<select id="selectMovieList" resultType="movieVO">
 		select * from movie
 	</select>
+	
+	<select id="selectNum">
+		select mo_num from movie
+	</select>
 </mapper>
 
 

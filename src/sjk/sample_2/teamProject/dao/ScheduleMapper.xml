@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sjk.sample_2.teamProject.dao.ScheduleDAO">
+
 	<insert id="insertSchedule" useGeneratedKeys="true" keyProperty="sd.sd_num">
 		
 		insert into schedule(sd_time, sd_date, sd_mo_num, sd_sc_num)

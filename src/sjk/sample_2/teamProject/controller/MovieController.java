@@ -39,7 +39,6 @@ public class MovieController extends BaseController {
 		movieService.getMovieList(movie);
 		
 		List<MovieVO> movieList = null;
-		List<Integer> movieNumList = null;
 		try {
 			movieList = movieService.getMovieList(movie);
 		}
@@ -50,11 +49,11 @@ public class MovieController extends BaseController {
 		}
 		
 		for(MovieVO movieSelectList : movieList) {
-			System.out.println(movieSelectList.getMo_num());
-			movieNumList.add(movieSelectList.getMo_num());
+			System.out.println(movieSelectList);
 		}
-		System.out.println(movieNumList);
+		
 	}
+	
 
 	
 }
