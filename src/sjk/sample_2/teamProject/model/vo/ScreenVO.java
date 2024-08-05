@@ -4,11 +4,12 @@ public class ScreenVO {
 	private int sc_num;
 	private String sc_name;
 	private int sc_seat; 
-	private int sc_th_num;
+	private String sc_th_name;
 	
-	public ScreenVO(String name, int seat, int th_num) {
+	
+	public ScreenVO(String name, int seat, String th_name) {
 		this.sc_name = name;
 		this.sc_seat = seat;
-		this.sc_th_num = th_num;
+		this.sc_th_name = th_name;
 	}
 }

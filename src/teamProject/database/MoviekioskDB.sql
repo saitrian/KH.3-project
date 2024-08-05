@@ -18,8 +18,7 @@ CREATE TABLE `movie` (
 DROP TABLE IF EXISTS `theater`;
 
 CREATE TABLE `theater` (
-	`th_num`	int primary key auto_increment	NOT NULL,
-	`th_name`	varchar(30)	NULL,
+	`th_name`	varchar(30)	primary key not NULL,
 	`th_screen`	int	NULL,
 	`th_seat`	int	NULL,
 	`th_address`	varchar(255)	NULL,
@@ -42,7 +41,7 @@ CREATE TABLE `screen` (
 	`sc_num`	int primary key auto_increment	NOT NULL,
 	`sc_name`	varchar(30)	NULL,
 	`sc_seat`	int	NULL,
-	`sc_th_num`	int	NOT NULL
+	`sc_th_name`varchar(30)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `seat`;
@@ -85,10 +84,10 @@ REFERENCES `screen` (
 );
 
 ALTER TABLE `screen` ADD CONSTRAINT `FK_theater_TO_screen_1` FOREIGN KEY (
-	`sc_th_num`
+	`sc_th_name`
 )
 REFERENCES `theater` (
-	`th_num`
+	`th_name`
 );
 
 ALTER TABLE `seat` ADD CONSTRAINT `FK_screen_TO_seat_1` FOREIGN KEY (
