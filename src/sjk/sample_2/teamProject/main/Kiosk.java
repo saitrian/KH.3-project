@@ -126,31 +126,17 @@ public class Kiosk implements Program {
 	 */
 	private void check() {
 
-		printCheckMenu();
+		printSearchMenu();
 		int checkMenu = inputNumber("번호 선택 : ");
-		runCheckMenu(checkMenu);
+		runSearch(checkMenu);
 	}
 
-	/**
-	 * 기능 : 받은 checkMenu로 메뉴 선택하는 메소드
-	 * @param checkMenu 받은 메뉴 값
-	 */
-	private void runCheckMenu(int checkMenu) {
-		switch(checkMenu) {
-		case 1 :
-			checkTicketInfo();
-			break;
-		case 2 :
-			return;
-		default :
-			System.err.println("잘못된 번호 입력입니다.");
-		}	
-	}
+
 
 	/**
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
-	private void checkTicketInfo() {
+	private void checkIdTicketInfo() {
 		String id = memberController.login();
 		TicketVO ticket =ticketController.selectTicket(id);
 		System.out.println(id + "님의 예매 내역");
@@ -253,13 +239,15 @@ public class Kiosk implements Program {
 		case 3 :
 			PCW();
 			break;
+		case 4 :
+			return;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
 		}
 	}
 
 	private void PCW() {
-		// TODO Auto-generated method stub
+		checkIdTicketInfo();
 		
 	}
 

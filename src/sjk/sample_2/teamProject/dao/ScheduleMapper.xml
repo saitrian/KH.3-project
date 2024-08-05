@@ -22,12 +22,13 @@
 	</insert>
 	
 	<select id="selectMovieInfo" resultType="NewClass">
-		select mo_title, sc_num
+		select mo_title, sc_num, mo_date, mo_time, th_name
 		from schedule 
 			join movie on sd_mo_num = mo_num
 			join screen on sd_sc_num = sc_num
             join ticket on sd_num = ti_sd_num
             join member on ti_me_id = me_id
+            join theater on th_num = sc_th_num
 		where
 			me_id = #{id};
 	</select>
