@@ -63,7 +63,7 @@ public class ScreenController extends BaseController {
 		ScreenVO sv10 = new ScreenVO("2관", 10, "CGV광교");
 		list.add(sv10);
 		ScreenVO sv11 = new ScreenVO("3관", 10, "CGV광교");
-		list.add(sv3);
+		list.add(sv11);
 		ScreenVO sv12 = new ScreenVO("4관", 10, "CGV광교");
 		list.add(sv12);
 		
