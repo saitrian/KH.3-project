@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="teamProject.dao.MemberDAO">
+	<insert id="insertMember">
+		INSERT INTO MEMBER(ME_ID, ME_PW, ME_AUTHORITY,
+		ME_POINT)
+		VALUES(#{id}, #{pw}, #{authority}, #{point});
+	</insert>
+	<select id="selectMember" resultType="memberVO">
+		select * from member where
+		me_id = #{id}
+	</select>
+	<update id="updateUpPoint">
+		update member set me_point = me_point + 1 where me_id = #{id}
+	</update>
+	<update id="updateUsePoint">
+		update member set me_point = me_point - 1 where me_id = #{id}
+	</update>
+</mapper>
+
+

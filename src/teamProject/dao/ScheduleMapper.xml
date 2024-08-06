@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="teamProject.dao.ScheduleDAO">
+
+	<insert id="insertSchedule" useGeneratedKeys="true" keyProperty="sd.sd_num">
+		
+		insert into schedule(sd_time, sd_date, sd_mo_num, sd_sc_num)
+		values(#{sd.sd_time}, #{sd.sd_date}, #{sd.sd_mo_num}, #{sd.sd_sc_num})
+		
+		<!-- 
+		insert into moviekiosk.schedule(sd_time, sd_date, sd_mo_num, sd_sc_num)
+		select
+			#{sd.sd_time}, #{sd.sd_date}, #{sd.sd_mo_num}, #{sd.sd_sc_num}
+		from
+				moviekiosk.schedule
+			join
+				movie
+		    where mo_num = sd_mo_num;
+	     -->
+	</insert>
+	
+	<select id="selectScheduleList" resultType="scheduleVO">
+		SELECT DISTINCT
+			*
+		FROM
+			moviekiosk.schedule
+		JOIN
+			movie on mo_num = sd_mo_num
+		JOIN
+			screen on sc_num = sd_sc_num
+		LEFT JOIN 
+			theater ON th_num = sc_th_num;
+	</select>
+	
+	<select id="selectMovieInfo" resultType="NewClass">
+		select mo_title, sc_num, sd_date, sd_time, th_name, ti_num
+		from schedule 
+			join movie on sd_mo_num = mo_num
+			join screen on sd_sc_num = sc_num
+            join ticket on sd_num = ti_sd_num
+            join member on ti_me_id = me_id
+            join theater on th_num = sc_th_num
+		where
+			me_id = #{id};
+	</select>
+
+	<delete id="deleteMovieInfo">
+		DELETE FROM TICKET WHERE TI_NUM = #{ti_num}
+	</delete>
+</mapper>
+
+

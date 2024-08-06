@@ -1,11 +1,9 @@
 package teamProject.important;
 
-import java.util.Scanner;
-
 public class Utility {
     private static Utility instance;
-	
-	public Scanner scan = new Scanner(System.in);
+    
+	private String address = "teamProject/config/mybatis-config.xml";
 
     private Utility() {
     }
@@ -20,5 +18,9 @@ public class Utility {
     
 	public void printDottedLine() {
 		System.out.println("--------------------");
+	}
+
+	public String getAddress() {
+		return address;
 	}
 }
