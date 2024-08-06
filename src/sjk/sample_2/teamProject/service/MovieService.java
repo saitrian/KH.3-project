@@ -11,4 +11,6 @@ public interface MovieService {
 	List<MovieVO> getMovieList();
 
 	MovieVO selectMovie(String mo_title);
+
+	List<MovieVO> getSearchMovieList(String search);
 }

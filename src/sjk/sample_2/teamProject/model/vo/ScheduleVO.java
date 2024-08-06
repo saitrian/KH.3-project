@@ -33,7 +33,7 @@ public class ScheduleVO {
 	
 	@Override
 	public String toString() {
-		return "상영 시간 : " + sd_time + " / 상영 날짜 : " + sd_date
+		return "상영 날짜 : " + sd_date + " " + sd_time
 				+ " / 상영관 : " + sd_sc_num;
 	}
 	
