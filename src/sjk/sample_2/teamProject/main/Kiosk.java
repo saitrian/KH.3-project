@@ -57,7 +57,7 @@ public class Kiosk implements Program {
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 영화 검색\r\n"
-						+"4. 프로그램 종료\r\n");
+						+"5. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -244,6 +244,7 @@ public class Kiosk implements Program {
 	/**
 	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
 	 */
+<<<<<<< Updated upstream
 	private void checkTicketNumInfo() {
 		// 영화표 예매 정보를 가지고 와서 예매 내역 검색
 		try {
@@ -259,6 +260,13 @@ public class Kiosk implements Program {
 			System.out.println("예외 발생!");
 			return;
 		}
+=======
+	private void checkTicketInfo() {
+		String id = memberController.login();
+		TicketVO ticket = ticketController.selectTicket(id);
+		System.out.println(id + "님의 예매 내역");
+		System.out.println(ticket);
+>>>>>>> Stashed changes
 	}
 
 	/**
@@ -278,6 +286,7 @@ public class Kiosk implements Program {
 		System.out.print("검색할 영화 제목 입력(전체 검색은 엔터) : ");
 		UTIL.scan.nextLine();
 		String search = UTIL.scan.nextLine();
+<<<<<<< Updated upstream
 
 		// 영화 상영작 목록에서 검색어가 제목에 들어간 게시글 리스트를 가져옴
 		List<Ticket> searchList = getSearchList(search);
@@ -303,6 +312,11 @@ public class Kiosk implements Program {
 
 		// 엔터를 입력받도록 처리
 		UTIL.scan.nextLine(); // 입력한 엔터 처리
+=======
+		
+		MovieVO moive = movieController.selectMovie(search);
+		//System.out.println(moive);
+>>>>>>> Stashed changes
 	}
 
 	/**
@@ -375,6 +389,7 @@ public class Kiosk implements Program {
 	}
 }
 
+<<<<<<< Updated upstream
 class UserTicketCheck{
 	String userId;
 	int ticketCheckNum;
@@ -390,5 +405,55 @@ class UserTicketCheck{
 	
 	public int getTicketCheckNum() {
 		return ticketCheckNum;
+=======
+	private void search() {
+		int menu = 0;
+		do {
+			printSearchMenu();
+			menu = inputNumber("메뉴 선택 : ");
+			
+			try {
+				runSearch(menu);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}while(menu != EXIT);
+	}
+
+	private void printSearchMenu() {
+		System.out.print("메뉴\r\n"
+						+"1. 영화 제목으로 검색\r\n"
+						+"2. 영화 시간으로 검색\r\n"
+						+"3. 뒤로가기\r\n");
+	}
+	
+	private void runSearch(int menu) {
+		switch(menu) {
+		case 1 :
+			PSV();
+			break;
+		case 2 :
+			OJY();
+			break;
+		case 3 :
+			System.out.println("이전 메뉴로");
+			break;
+		default :
+			System.err.println("잘못된 번호 입력입니다.");
+		}
+	}
+
+	private void OJY() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void PSV() {
+		// TODO 로그인부터 한 후??? 영화 제목 검색
+		// 로그인 안받아도 되면 빼면 됨.
+		String id = memberController.login();
+		checkTicketList();
+>>>>>>> Stashed changes
 	}
 }
