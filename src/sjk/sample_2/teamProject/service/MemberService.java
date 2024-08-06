@@ -14,5 +14,4 @@ public interface MemberService {
 
 	void searchPoint(String id);
 
-		
 }

@@ -39,12 +39,13 @@ public class Kiosk implements Program {
 
 	@Override
 	public void printMenu() {
-		System.out.print("메뉴\r\n"
+		System.out.print("  << 메뉴 >>\r\n"
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 포인트 조회\r\n"
 						+"5. 프로그램 종료\r\n");
+		UTIL.printDottedLine();
 	}
 
 	@Override
@@ -100,6 +101,7 @@ public class Kiosk implements Program {
 			id = memberController.login();
 			if (!(id == null)) {
 				ticketController.insertTicket(id, movieNum);
+				UTIL.printDottedLine();
 				usePoint(id);
 				UTIL.printDottedLine();
 				System.out.println("예매를 완료 했습니다.");
@@ -126,11 +128,15 @@ public class Kiosk implements Program {
 			// 포인트 사용 선택 시
 			if(menu == 1) {
 				memberController.usePoint(id);
+				System.out.println("포인트 사용 완료!");
+				UTIL.printDottedLine();
 				return;
 			}
 			// 포인트 적립 선택 시
 			else if(menu == 2) {
 				memberController.upPoint(id);
+				System.out.println("포인트 적립 완료!");
+				UTIL.printDottedLine();
 				return;
 			}
 			// 다른 번호 선택 시
