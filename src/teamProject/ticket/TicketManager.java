@@ -6,9 +6,11 @@ import java.util.List;
 
 // 이거 에러 ...?
 //import lombok.launch.PatchFixesHider.Util;
+import sjk.kiosk.UserList;
 import teamProject.database.Database;
 import teamProject.important.Program;
 import teamProject.important.Utility;
+import teamProject.user.User;
 
 public class TicketManager implements Program {	
 	private final Utility UTIL = Utility.getInstance();
