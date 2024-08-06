@@ -32,17 +32,17 @@
 		WHERE
 			mo_title LIKE CONCAT('%', #{search}, '%');
 		-->
-		SELECT
+		SELECT DISTINCT
 			*
 		FROM
-			moviekiosk.movie
-		join
-			schedule
-		join
-			screen
-		join
-			theater
+		    moviekiosk.movie
+		        left JOIN
+		    moviekiosk.schedule on mo_num = sd_mo_num
+		        left JOIN
+		    moviekiosk.screen on sd_sc_num = sd_num
+		        left JOIN
+		    moviekiosk.theater on sc_th_num = sc_num
 		WHERE
-			mo_title LIKE CONCAT('%', #{search}, '%');
+		    mo_title LIKE CONCAT('%', #{search}, '%');
 	</select>
 </mapper>

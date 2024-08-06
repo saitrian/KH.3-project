@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import sjk.sample_2.teamProject.model.vo.MovieVO;
-import sjk.sample_2.teamProject.model.vo.Ticket;
+import sjk.sample_2.teamProject.model.vo.ScheduleVO;
+import sjk.sample_2.teamProject.model.vo.ScreenVO;
+import sjk.sample_2.teamProject.model.vo.TheaterVO;
 import sjk.sample_2.teamProject.service.MovieService;
 import sjk.sample_2.teamProject.service.MovieServiceImp;
 
@@ -76,6 +78,7 @@ public class MovieController extends BaseController {
 		System.out.println("-----검색된 상영작 목록-----");
 		for(MovieVO movieList : searchMovieList) {
 			System.out.println(movieList);
+		
 		}
 		System.out.println("-------------------");
 
@@ -85,7 +88,7 @@ public class MovieController extends BaseController {
 		// 엔터를 입력받도록 처리
 		//scan.nextLine(); // 입력한 엔터 처리
 		
-		return movieService.selectMovie(search);
+		return movieService.selectMovie(search); // 검색된 영화 제목 반환
 	}
 
 	

@@ -41,7 +41,7 @@ public class Kiosk implements Program {
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 영화 검색\r\n"
-						+"4. 프로그램 종료\r\n");
+						+"5. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -57,6 +57,9 @@ public class Kiosk implements Program {
 			break;
 		case SEARCH :
 			search();
+			break;
+		case EXIT :
+			System.out.println("프로그램 종료");
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
@@ -175,7 +178,7 @@ public class Kiosk implements Program {
 		UTIL.scan.nextLine();
 		String search = UTIL.scan.nextLine();
 		
-
+		// 입력 받은 search의 값을 movieController에 넘김
 		MovieVO movie = movieController.selectMovie(search);
 	}
 
@@ -207,6 +210,7 @@ public class Kiosk implements Program {
 				runMenu(menu);
 			} catch (Exception e) {
 				e.printStackTrace();
+				return;
 			}
 
 		}while(menu != EXIT);
@@ -236,9 +240,10 @@ public class Kiosk implements Program {
 				runSearch(menu);
 			} catch (Exception e) {
 				e.printStackTrace();
+				return;
 			}
 
-		}while(menu != EXIT);
+		}while(menu != 3);
 	}
 
 	private void printSearchMenu() {
@@ -257,7 +262,7 @@ public class Kiosk implements Program {
 			OJY();
 			break;
 		case 3 :
-			PCW();
+			System.out.println("이전 메뉴로 돌아갑니다.");
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
