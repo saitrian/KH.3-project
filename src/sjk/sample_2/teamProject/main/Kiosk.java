@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.mysql.cj.util.Util;
+
 import sjk.sample_2.teamProject.controller.MemberController;
 import sjk.sample_2.teamProject.controller.MovieController;
 import sjk.sample_2.teamProject.controller.TicketController;
@@ -39,7 +41,8 @@ public class Kiosk implements Program {
 
 	@Override
 	public void printMenu() {
-		System.out.print("  << 메뉴 >>\r\n"
+		UTIL.printDottedLine();
+		System.out.print("      << 메뉴 >>    \r\n"
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불\r\n"
 						+"3. 영화표 조회\r\n"
@@ -64,7 +67,10 @@ public class Kiosk implements Program {
 			search();
 			break;
 		case EXIT :
-			System.out.println("프로그램을 종료합니다.");
+			UTIL.printDottedLine();
+			System.out.println("프로그램을 종료합니다.\r\n"
+					+ "이용해주셔서 감사합니다. (～￣▽￣)～");
+			UTIL.printDottedLine();
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
@@ -72,6 +78,7 @@ public class Kiosk implements Program {
 	}
 
 	private void refund() {
+		UTIL.printDottedLine();
 		String id = memberController.login();
 		if( id == null) {
 			return;
@@ -179,9 +186,11 @@ public class Kiosk implements Program {
 	 * 기능 : 조회 기능 메뉴 실행 메소드
 	 */
 	private void printCheckMenu() {
+		UTIL.printDottedLine();
 		System.out.print(
 				"1. 로그인\n"
 						+"2. 뒤로가기\n");
+		UTIL.printDottedLine();
 	}
 
 	/**
@@ -257,11 +266,13 @@ public class Kiosk implements Program {
 	}
 
 	private void printSearchMenu() {
+		UTIL.printDottedLine();
 		System.out.print("메뉴\r\n"
 						+"1. 영화 제목으로 검색\r\n"
 						+"2. 영화 시간으로 검색\r\n"
 						+"3. 아이디로 검색\r\n"
 						+"4. 뒤로가기\r\n");
+		UTIL.printDottedLine();
 	}
 	
 	private void runSearch(int menu) {

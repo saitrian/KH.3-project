@@ -4,6 +4,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.mysql.cj.util.Util;
+
 import sjk.sample_2.teamProject.dao.ScheduleDAO;
 import sjk.sample_2.teamProject.important.Utility;
 import sjk.sample_2.teamProject.model.tp.NewClass;
