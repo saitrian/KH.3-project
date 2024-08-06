@@ -36,4 +36,9 @@ public class ScreenServiceImp implements ScreenService {
 		}
 		return screenDAO.insertScreen(screen);
 	}
+
+	@Override
+	public ScreenVO selectScreen(String screenName) {
+		return screenDAO.selectScreen(screenName);
+	}
 }

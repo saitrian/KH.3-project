@@ -6,4 +6,6 @@ public interface ScreenService {
 
 	boolean insertScreen(ScreenVO screen);
 
+	ScreenVO selectScreen(String screenName);
+
 }

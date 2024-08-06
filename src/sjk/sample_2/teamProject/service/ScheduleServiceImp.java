@@ -62,7 +62,6 @@ public class ScheduleServiceImp implements ScheduleService {
 		}
 	}
 
-
 	public boolean deleteMovieInfo(String id) {
 		List<NewClass> nc = scheduleDao.selectMovieInfo(id); 
 		int Tnum = 0;

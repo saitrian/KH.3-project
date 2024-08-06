@@ -19,6 +19,8 @@ public class ScheduleController extends BaseController {
 	// private ScreenService screenService = new ScreenServiceImp();
 	private ScheduleService scheduleService = new ScheduleServiceImp();
 	
+	private ScreenController screenController = new ScreenController(scan);
+	
 	
 	public ScheduleController(Scanner scan) {
 		super(scan);
@@ -41,29 +43,29 @@ public class ScheduleController extends BaseController {
 		insertSchedule("18:00", "2024-07-30", "탈주", "4");
 		insertSchedule("20:00", "2024-07-30", "탈주", "5");
 		
-		insertSchedule("10:00", "2024-07-30", "인사이드 아웃2", "1");
-		insertSchedule("12:00", "2024-07-30", "인사이드 아웃2", "2");
-		insertSchedule("15:00", "2024-07-30", "인사이드 아웃2", "3");
-		insertSchedule("18:00", "2024-07-30", "인사이드 아웃2", "4");
-		insertSchedule("20:00", "2024-07-30", "인사이드 아웃2", "5");
+		insertSchedule("10:00", "2024-07-30", "인사이드 아웃2", "6");
+		insertSchedule("12:00", "2024-07-30", "인사이드 아웃2", "7");
+		insertSchedule("15:00", "2024-07-30", "인사이드 아웃2", "8");
+		insertSchedule("18:00", "2024-07-30", "인사이드 아웃2", "9");
+		insertSchedule("20:00", "2024-07-30", "인사이드 아웃2", "10");
 
-		insertSchedule("10:00", "2024-07-30", "데드풀과 울버린", "1");
-		insertSchedule("12:00", "2024-07-30", "데드풀과 울버린", "2");
-		insertSchedule("15:00", "2024-07-30", "데드풀과 울버린", "3");
-		insertSchedule("18:00", "2024-07-30", "데드풀과 울버린", "4");
-		insertSchedule("20:00", "2024-07-30", "데드풀과 울버린", "5");
+		insertSchedule("10:00", "2024-07-30", "데드풀과 울버린", "11");
+		insertSchedule("12:00", "2024-07-30", "데드풀과 울버린", "12");
+		insertSchedule("15:00", "2024-07-30", "데드풀과 울버린", "13");
+		insertSchedule("18:00", "2024-07-30", "데드풀과 울버린", "14");
+		insertSchedule("20:00", "2024-07-30", "데드풀과 울버린", "15");
 
-		insertSchedule("10:00", "2024-07-30", "어벤져스: 엔드게임", "1");
-		insertSchedule("12:00", "2024-07-30", "어벤져스: 엔드게임", "2");
-		insertSchedule("15:00", "2024-07-30", "어벤져스: 엔드게임", "3");
-		insertSchedule("18:00", "2024-07-30", "어벤져스: 엔드게임", "4");
-		insertSchedule("20:00", "2024-07-30", "어벤져스: 엔드게임", "5");
+		insertSchedule("10:00", "2024-07-30", "어벤져스: 엔드게임", "16");
+		insertSchedule("12:00", "2024-07-30", "어벤져스: 엔드게임", "17");
+		insertSchedule("15:00", "2024-07-30", "어벤져스: 엔드게임", "18");
+		insertSchedule("18:00", "2024-07-30", "어벤져스: 엔드게임", "19");
+		insertSchedule("20:00", "2024-07-30", "어벤져스: 엔드게임", "20");
 
-		insertSchedule("10:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "1");
-		insertSchedule("12:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "2");
-		insertSchedule("15:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "3");
-		insertSchedule("18:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "4");
-		insertSchedule("20:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "5");
+		insertSchedule("10:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "21");
+		insertSchedule("12:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "22");
+		insertSchedule("15:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "23");
+		insertSchedule("18:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "24");
+		insertSchedule("20:00", "2024-07-30", "퓨리오사: 매드맥스 사가", "25");
 		
 		/*
 		ScheduleVO schedule1 = new ScheduleVO("10:00", "2024-07-30", movie.getMo_num(), screen.getSc_num());
@@ -74,14 +76,14 @@ public class ScheduleController extends BaseController {
 		*/
 	}
 
-	private void insertSchedule(String time, String date, String mo_title, String sceenName) {
+	private void insertSchedule(String time, String date, String mo_title, String screenName) {
 		MovieVO movieVo;
 		//ScreenVO screenVo;
 		ScheduleVO schedule;
 		
 		movieVo = movieService.selectMovie(mo_title);
 		// screenVo = screenService.selectScreen(sceenName);
-		schedule = new ScheduleVO(time, date, movieVo.getMo_num(), 1);
+		schedule = new ScheduleVO(time, date, movieVo.getMo_num(), Integer.parseInt(screenName));
 
 		if(scheduleService.insertSchedule(schedule)) {
 			System.out.println("영화 상영 시간 등록 성공!");

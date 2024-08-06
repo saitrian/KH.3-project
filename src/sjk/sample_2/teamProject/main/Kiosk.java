@@ -27,8 +27,9 @@ public class Kiosk implements Program {
 	private final int TICKETING = 1;
 	private final int REFUND = 2;
 	private final int CHECK = 3;
-	private final int SEARCH = 4;
-	private final int EXIT = 5;
+	private final int POINT = 4;
+	private final int SEARCH = 5;
+	private final int EXIT = 6;
 
 	private Scanner scan = new Scanner(System.in);
 
@@ -48,11 +49,9 @@ public class Kiosk implements Program {
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불\r\n"
 						+"3. 영화표 조회\r\n"
-						+"4. 영화 검색\r\n"
-						+"5. 프로그램 종료\r\n"
 						+"4. 포인트 조회\r\n"
-						+"5. 프로그램 종료\r\n");
->>>>>>> main
+						+"5. 검색\r\n"
+						+"6. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -67,6 +66,9 @@ public class Kiosk implements Program {
 		case CHECK :
 			check();
 			break;
+		case POINT :
+			point();
+			break;
 		case SEARCH :
 			search();
 			break;
@@ -80,28 +82,19 @@ public class Kiosk implements Program {
 			System.err.println("잘못된 번호 입력입니다.");
 		}
 	}
-
-	private void refund() {
+	
+	private void point() {
 		UTIL.printDottedLine();
-		String id = memberController.login();
-		if( id == null) {
-			return;
-		}
-		if(scheduleServiceImp.deleteMovieInfo(id)) {
-			downPoint(id);
-			System.out.println("환불 성공");
-			return;
-		}
-		System.out.println("환불 실패");
-		return;
+		memberController.searchPoint();
+		UTIL.printDottedLine();
 	}
-
 
 	private void buyTicket() {
 		// 현재 상영 목록 출력
 		System.out.println("-----현재 상영작 목록-----");
 		// movieController.getMovieList();
 		scheduleController.getScheduleList();
+
 		// 상영 영화 번호 입력 추가 << 
 		UTIL.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
@@ -123,6 +116,7 @@ public class Kiosk implements Program {
 			}
 		}
 	}
+	
 	/**
 	 * 기능 : 입력 받은 회원정보(id)와 같은 번지에 있는 포인트 사용 여부 입력받는 메서드
 	 * @param inputId 입력 받은 회원정보(id)
@@ -133,8 +127,8 @@ public class Kiosk implements Program {
 		for(;;) {
 			// 포인트 사용 메뉴 출력
 			System.out.println("포인트 사용 메뉴\r\n"
-					+ "1. 포인트 사용\r\n"
-					+ "2. 포인트 적립");
+							 + "1. 포인트 사용\r\n"
+							 + "2. 포인트 적립");
 			int menu = inputNumber("메뉴 입력 : ");
 
 			// 포인트 사용 선택 시
@@ -159,42 +153,37 @@ public class Kiosk implements Program {
 				UTIL.printDottedLine();
 			}
 		}
+	}
 
+	private void refund() {
+		UTIL.printDottedLine();
+		String id = memberController.login();
+		if( id == null) {
+			return;
+		}
+		if(scheduleServiceImp.deleteMovieInfo(id)) {
+			downPoint(id);
+			System.out.println("환불 성공");
+			return;
+		}
+		System.out.println("환불 실패");
+		return;
 	}
 	
 	private void downPoint(String id) {
 		memberController.usePoint(id);
 	}
+	
 	/**
 	 * 기능 : 영화표 조회 기능
 	 */
 	private void check() {
 		UTIL.printDottedLine();
-		printSearchMenu();
-		int checkMenu = inputNumber("번호 선택 : ");
-		runSearch(checkMenu);
-	}
-
-
-
-	/**
-	 * 기능 : 예매한 정보로 예매 내역을 검색하는 메소드
-	 */
-	private void checkIdTicketInfo() {
 		String id = memberController.login();
-		TicketVO ticket = ticketController.selectTicket(id);
-		System.out.println(id + "님의 예매 내역");
-		System.out.println(ticket);
-	}
-
-	/**
-	 * 기능 : 조회 기능 메뉴 실행 메소드
-	 */
-	private void printCheckMenu() {
-		UTIL.printDottedLine();
-		System.out.print(
-				"1. 로그인\n"
-						+"2. 뒤로가기\n");
+		if( id == null) {
+			return;
+		}
+		scheduleServiceImp.selectMovieInfo(id);
 		UTIL.printDottedLine();
 	}
 
@@ -205,27 +194,9 @@ public class Kiosk implements Program {
 		// 검색할 영화 입력
 		System.out.print("검색할 영화 제목 입력(전체 검색은 엔터) : ");
 		UTIL.scan.nextLine();
-		String search = UTIL.scan.nextLine();
-		
+		String search = UTIL.scan.nextLine();		
 
 		MovieVO movie = movieController.selectMovie(search);
-	}
-
-	/**
-	 * 기능 : 검색어를 입력시 검색어 검색 기능 메소드
-	 * @param search 
-	 * @return
-	 */
-	private List<Ticket> getSearchList(String search) {
-		List<Ticket> searchList = new ArrayList<Ticket>();
-		return searchList;
-	}
-
-	private void printRepeatMenu() {
-		System.out.println(
-				"메뉴\r\n"
-						+ "1. 로그인 재시도\r\n"
-						+ "2. 메인 메뉴로\r\n");
 	}
 
 	@Override
@@ -261,13 +232,12 @@ public class Kiosk implements Program {
 	private void search() {
 		int menu;
 		do {
-			printSearchMenu(); // 주석
-			printCheckMenu();
+			printSearchMenu();
 			menu = inputNumber("메뉴 선택 : ");
 			switch(menu) {
 			case 1:
-				memberController.searchPoint();
-				return;
+				checkTicketList();
+				break;
 			case 2:
 				break;
 			default:
@@ -281,46 +251,7 @@ public class Kiosk implements Program {
 		UTIL.printDottedLine();
 		System.out.print("메뉴\r\n"
 						+"1. 영화 제목으로 검색\r\n"
-						+"2. 영화 시간으로 검색\r\n"
-						+"3. 뒤로가기\r\n"
-						+"3. 아이디로 검색\r\n"
-						+"4. 뒤로가기\r\n");
+						+"2. 뒤로가기\r\n");
 		UTIL.printDottedLine();
-	}
-	
-	private void runSearch(int menu) {
-		switch(menu) {
-		case 1 :
-			PSV();
-			break;
-		case 2 :
-			OJY();
-			break;
-		case 3 :
-			System.out.println("이전 메뉴로 돌아갑니다.");
-			break;
-		case 4 :
-			return;
-		default :
-			System.err.println("잘못된 번호 입력입니다.");
-		}
-	}
-
-	private void PCW() {
-		String id = memberController.login();
-		if( id == null) {
-			return;
-		}
-		scheduleServiceImp.selectMovieInfo(id);
-	}
-
-	private void OJY() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void PSV() {
-		// TODO 영화 제목 검색
-		checkTicketList();
 	}
 }

@@ -8,4 +8,6 @@ public interface ScreenDAO {
 
 	boolean insertScreen(@Param("screen")ScreenVO screen);
 
+	ScreenVO selectScreen(@Param("screenName")String screenName);
+
 }

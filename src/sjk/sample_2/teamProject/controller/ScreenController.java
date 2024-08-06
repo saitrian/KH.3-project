@@ -9,7 +9,7 @@ import sjk.sample_2.teamProject.service.ScreenService;
 import sjk.sample_2.teamProject.service.ScreenServiceImp;
 
 public class ScreenController extends BaseController {
-	private ScreenService screenservice = new ScreenServiceImp();
+	private ScreenService screenService = new ScreenServiceImp();
 
 	public ScreenController(Scanner scan) {
 		super(scan);
@@ -19,7 +19,7 @@ public class ScreenController extends BaseController {
 		List<ScreenVO> list = inputScreen();
 		
 		for(ScreenVO sv : list) {
-			screenservice.insertScreen(sv);
+			screenService.insertScreen(sv);
 		}
 	}
 
@@ -39,5 +39,9 @@ public class ScreenController extends BaseController {
 			}
 		}
 		return list;
+	}
+
+	public ScreenVO selectScreen(String screenName) {
+		return screenService.selectScreen(screenName);
 	}
 }
