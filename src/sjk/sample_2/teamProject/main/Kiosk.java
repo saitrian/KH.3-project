@@ -164,7 +164,7 @@ public class Kiosk implements Program {
 	 * 기능 : 영화표 조회 기능
 	 */
 	private void check() {
-
+		UTIL.printDottedLine();
 		printSearchMenu();
 		int checkMenu = inputNumber("번호 선택 : ");
 		runSearch(checkMenu);
