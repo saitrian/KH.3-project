@@ -12,6 +12,7 @@ import sjk.sample_2.teamProject.controller.TicketController;
 import sjk.sample_2.teamProject.database.Database;
 import sjk.sample_2.teamProject.important.Program;
 import sjk.sample_2.teamProject.important.Utility;
+import sjk.sample_2.teamProject.model.tp.NewClass;
 import sjk.sample_2.teamProject.model.vo.MovieVO;
 import sjk.sample_2.teamProject.model.vo.Ticket;
 import sjk.sample_2.teamProject.model.vo.TicketVO;
@@ -40,7 +41,7 @@ public class Kiosk implements Program {
 	public void printMenu() {
 		System.out.print("메뉴\r\n"
 						+"1. 영화 예매(구매)\r\n"
-						+"2. 영화표 환불(미구현)\r\n"
+						+"2. 영화표 환불\r\n"
 						+"3. 영화표 조회\r\n"
 						+"4. 포인트 조회\r\n"
 						+"5. 프로그램 종료\r\n");
@@ -53,6 +54,7 @@ public class Kiosk implements Program {
 			buyTicket();
 			break;
 		case REFUND :
+			refund();
 			break;
 		case CHECK :
 			check();
@@ -67,6 +69,21 @@ public class Kiosk implements Program {
 			System.err.println("잘못된 번호 입력입니다.");
 		}
 	}
+
+	private void refund() {
+		String id = memberController.login();
+		if( id == null) {
+			return;
+		}
+		if(scheduleServiceImp.deleteMovieInfo(id)) {
+			downPoint(id);
+			System.out.println("환불 성공");
+			return;
+		}
+		System.out.println("환불 실패");
+		return;
+	}
+
 
 	private void buyTicket() {
 		// 현재 상영 목록 출력
@@ -125,6 +142,10 @@ public class Kiosk implements Program {
 			}
 		}
 
+	}
+	
+	private void downPoint(String id) {
+		memberController.usePoint(id);
 	}
 	/**
 	 * 기능 : 영화표 조회 기능

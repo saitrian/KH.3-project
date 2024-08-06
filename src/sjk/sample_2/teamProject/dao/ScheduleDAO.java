@@ -13,4 +13,6 @@ public interface ScheduleDAO {
 	boolean insertSchedule(@Param("sd")ScheduleVO schedule);
 	
 	List<NewClass> selectMovieInfo(@Param("id")String id);
+
+	boolean deleteMovieInfo(@Param("ti_num")int tiNum);
 }

@@ -20,9 +20,8 @@
 		    where mo_num = sd_mo_num;
 	     -->
 	</insert>
-	
 	<select id="selectMovieInfo" resultType="NewClass">
-		select mo_title, sc_num, sd_date, sd_time, th_name
+		select mo_title, sc_num, sd_date, sd_time, th_name, ti_num
 		from schedule 
 			join movie on sd_mo_num = mo_num
 			join screen on sd_sc_num = sc_num
@@ -32,6 +31,9 @@
 		where
 			me_id = #{id};
 	</select>
+	<delete id="deleteMovieInfo">
+		DELETE FROM TICKET WHERE TI_NUM = #{ti_num}
+	</delete>
 </mapper>
 
 

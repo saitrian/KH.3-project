@@ -75,6 +75,7 @@ public class MemberController extends BaseController {
 		if(id == null) {
 			return;
 		}
+		
 		memberService.searchPoint(id);
 		
 	}
