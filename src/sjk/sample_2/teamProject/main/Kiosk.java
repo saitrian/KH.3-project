@@ -15,6 +15,7 @@ import sjk.sample_2.teamProject.important.Utility;
 import sjk.sample_2.teamProject.model.vo.MovieVO;
 import sjk.sample_2.teamProject.model.vo.Ticket;
 import sjk.sample_2.teamProject.model.vo.TicketVO;
+import sjk.sample_2.teamProject.service.ScheduleServiceImp;
 
 public class Kiosk implements Program {	
 	private final Utility UTIL = Utility.getInstance();	
@@ -30,6 +31,7 @@ public class Kiosk implements Program {
 	private MovieController movieController = new MovieController(scan);
 	private TicketController ticketController = new TicketController(scan);
 	private MemberController memberController = new MemberController(scan);
+	private ScheduleServiceImp scheduleServiceImp = new ScheduleServiceImp();
 
 	public Kiosk() {
 	}
@@ -40,8 +42,8 @@ public class Kiosk implements Program {
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
-						+"4. 영화 검색\r\n"
-						+"4. 프로그램 종료\r\n");
+						+"4. 포인트 검색\r\n"
+						+"5. 프로그램 종료\r\n");
 	}
 
 	@Override
@@ -247,8 +249,11 @@ public class Kiosk implements Program {
 	}
 
 	private void PCW() {
-		checkIdTicketInfo();
-		
+		String id = memberController.login();
+		if( id == null) {
+			return;
+		}
+		scheduleServiceImp.selectMovieInfo(id);
 	}
 
 	private void OJY() {
