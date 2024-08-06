@@ -55,8 +55,10 @@ public class MemberController extends BaseController {
 		System.out.print("비번 입력 : ");
 		String pw = scan.next();
 		
+		System.out.println("--------------------");
+		
 		if(!memberService.login(id, pw)) {
-			System.err.println("회원 정보가 일치하지 않습니다.");
+			System.out.println("회원 정보가 일치하지 않습니다.");
 			return null;
 		}
 		return id;
@@ -70,5 +72,13 @@ public class MemberController extends BaseController {
 		memberService.updateUsePoint(id);
 	}
 
-
+	public void searchPoint() {
+		String id = login();
+		if(id == null) {
+			return;
+		}
+		
+		memberService.searchPoint(id);
+		
+	}
 }

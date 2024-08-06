@@ -1,16 +1,22 @@
 package sjk.sample_2.teamProject.controller;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
+import com.mysql.cj.util.Util;
+
+import sjk.sample_2.teamProject.dao.ScheduleDAO;
 import sjk.sample_2.teamProject.important.Utility;
+import sjk.sample_2.teamProject.model.tp.NewClass;
 import sjk.sample_2.teamProject.model.vo.TicketVO;
 import sjk.sample_2.teamProject.service.TicketService;
 import sjk.sample_2.teamProject.service.TicketServiceImp;
 
 public class TicketController extends BaseController {
 	private TicketService ticketService = new TicketServiceImp();
-
+	private ScheduleDAO scheduleDao ;
+	
 	public TicketController(Scanner scan) {
 		super(scan);
 	}
@@ -39,4 +45,5 @@ public class TicketController extends BaseController {
 			return Integer.MIN_VALUE; // int의 가장 작은 수를 리턴
 		}
 	}
+
 }
