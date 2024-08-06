@@ -12,5 +12,7 @@ public interface MemberService {
 
 	void updateUsePoint(String id);
 
+	void searchPoint(String id);
+
 		
 }

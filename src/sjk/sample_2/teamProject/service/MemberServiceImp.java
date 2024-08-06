@@ -76,4 +76,11 @@ public class MemberServiceImp implements MemberService {
 		memberDao.updateUsePoint(id);
 		}
 	}
+
+	@Override
+	public void searchPoint(String id) {
+		MemberVO user = memberDao.selectMember(id);
+		System.out.println(id + "님의 보유 포인트");
+		System.out.println("[ " + user.getMe_point() + " 포인트 ]");
+	}
 }

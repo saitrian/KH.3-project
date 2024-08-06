@@ -42,7 +42,7 @@ public class Kiosk implements Program {
 						+"1. 영화 예매(구매)\r\n"
 						+"2. 영화표 환불(미구현)\r\n"
 						+"3. 영화표 조회\r\n"
-						+"4. 포인트 검색\r\n"
+						+"4. 포인트 조회\r\n"
 						+"5. 프로그램 종료\r\n");
 	}
 
@@ -52,13 +52,16 @@ public class Kiosk implements Program {
 		case TICKETING :
 			buyTicket();
 			break;
-			//		case REFUND :
-			//			break;
+		case REFUND :
+			break;
 		case CHECK :
 			check();
 			break;
 		case SEARCH :
 			search();
+			break;
+		case EXIT :
+			System.out.println("프로그램을 종료합니다.");
 			break;
 		default :
 			System.err.println("잘못된 번호 입력입니다.");
@@ -210,16 +213,20 @@ public class Kiosk implements Program {
 	private void search() {
 		int menu;
 		do {
-			printMenu();
+			printCheckMenu();
 			menu = inputNumber("메뉴 선택 : ");
-
-			try {
-				runSearch(menu);
-			} catch (Exception e) {
-				e.printStackTrace();
+			switch(menu) {
+			case 1:
+				memberController.searchPoint();
+				return;
+			case 2:
+				break;
+			default:
+				System.err.println("잘못된 번호 입력입니다.");
+				break;
 			}
+		}while(menu != 2);
 
-		}while(menu != EXIT);
 	}
 
 	private void printSearchMenu() {
