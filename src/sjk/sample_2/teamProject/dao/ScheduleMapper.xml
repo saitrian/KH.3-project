@@ -20,6 +20,18 @@
 		    where mo_num = sd_mo_num;
 	     -->
 	</insert>
+	<select id="selectScheduleList" resultType="scheduleVO">
+		SELECT DISTINCT
+			*
+		FROM
+			moviekiosk.schedule
+		JOIN
+			movie on mo_num = sd_mo_num
+		JOIN
+			screen on sc_num = sd_sc_num
+		LEFT JOIN 
+			theater ON th_num = sc_th_num;
+	</select>
 	
 </mapper>
 

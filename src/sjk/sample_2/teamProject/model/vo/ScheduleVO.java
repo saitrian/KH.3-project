@@ -12,6 +12,10 @@ public class ScheduleVO {
 	private int sd_mo_num; // 영화 번호
 	private int sd_sc_num; // 상영관 번호
 
+	private String mo_title;
+	private String sc_name;
+	private String th_name;
+
 	public ScheduleVO(String sd_time, String sd_date, int sd_mo_num, int sd_sc_num) {
 		this.sd_time = sd_time;
 		this.sd_date = sd_date;
@@ -31,10 +35,11 @@ public class ScheduleVO {
 	}
 	*/
 	
+
 	@Override
 	public String toString() {
-		return "상영 시간 : " + sd_time + " / 상영 날짜 : " + sd_date
-				+ " / 상영관 : " + sd_sc_num;
+		return sd_num +  ". 제목 : " + mo_title + " / 상영일 : " + sd_date + " " + sd_time 
+				+ " / 상영관 : " + sc_name + " / 영화관 : " + th_name;
 	}
 	
 	

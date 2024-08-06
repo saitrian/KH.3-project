@@ -35,13 +35,13 @@
 		SELECT DISTINCT
 			*
 		FROM
-			moviekiosk.movie
+			moviekiosk.schedule
 		JOIN
-			schedule on mo_num = sd_mo_num
+			movie on mo_num = sd_mo_num
 		JOIN
 			screen on sc_num = sd_sc_num
-		JOIN
-			theater on th_num = sc_th_num
+		LEFT JOIN 
+			theater ON th_num = sc_th_num
 		WHERE
 			mo_title LIKE CONCAT('%', #{search}, '%');
 	</select>

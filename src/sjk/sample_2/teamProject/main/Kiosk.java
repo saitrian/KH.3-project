@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import sjk.sample_2.teamProject.controller.MemberController;
 import sjk.sample_2.teamProject.controller.MovieController;
+import sjk.sample_2.teamProject.controller.ScheduleController;
 import sjk.sample_2.teamProject.controller.TicketController;
 // 이거 에러 ...?
 import sjk.sample_2.teamProject.database.Database;
@@ -28,6 +29,7 @@ public class Kiosk implements Program {
 	private Scanner scan = new Scanner(System.in);
 
 	private MovieController movieController = new MovieController(scan);
+	private ScheduleController scheduleController = new ScheduleController(scan);
 	private TicketController ticketController = new TicketController(scan);
 	private MemberController memberController = new MemberController(scan);
 
@@ -69,7 +71,8 @@ public class Kiosk implements Program {
 	private void buyTicket() {
 		// 현재 상영 목록 출력
 		System.out.println("-----현재 상영작 목록-----");
-		movieController.getMovieList();
+		// movieController.getMovieList();
+		scheduleController.getScheduleList();
 		// 상영 영화 번호 입력 추가 << 
 		UTIL.printDottedLine();
 		int movieNum = inputNumber("예매할 영화 번호 선택 : ");
@@ -278,11 +281,7 @@ public class Kiosk implements Program {
 	}
 
 	private void PSV() {
-		// TODO 아이디를 입력 받고???? 영화 제목 검색
-		String id = memberController.login();
-		if(id == null) {
-			return;
-		}
+		// TODO 영화 제목 검색
 		checkTicketList();
 	}
 }

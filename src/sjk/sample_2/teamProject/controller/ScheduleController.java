@@ -1,5 +1,6 @@
 package sjk.sample_2.teamProject.controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import sjk.sample_2.teamProject.model.vo.MovieVO;
@@ -89,5 +90,24 @@ public class ScheduleController extends BaseController {
 		}
 	}
 
+	public void getScheduleList() {
+		List<ScheduleVO> scheduleList = null;
+		try {
+			scheduleList = scheduleService.getScheduleList();
+		}
+		// 예외 발생 시 등록되지 않은 게시글이거나 삭제된 게시글 입니다. 라고 출력
+		catch(Exception e) {
+			System.err.println("없음");
+			return;
+		}
+		
+		for(ScheduleVO scheduleSelectList : scheduleList) {
+			System.out.println(scheduleSelectList);
+		}
+		
+	}
+
+	
+	
 
 }

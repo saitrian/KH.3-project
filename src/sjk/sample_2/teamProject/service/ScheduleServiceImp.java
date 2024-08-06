@@ -46,5 +46,11 @@ public class ScheduleServiceImp implements ScheduleService {
 	}
 
 
+	@Override
+	public List<ScheduleVO> getScheduleList() {
+		return scheduleDao.selectScheduleList();
+	}
+
+
 
 }
