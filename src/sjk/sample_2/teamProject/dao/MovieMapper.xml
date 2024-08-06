@@ -19,6 +19,30 @@
 	<select id="selectMovie_useTitle" resultType="movieVO">
 		select * from movie where mo_title = #{mo_title}
 	</select>
+	
+	
+	<select id="selectSearchMovieList" resultType="movieVO">
+		<!-- 
+		SELECT
+			*
+		FROM
+			moviekiosk.movie
+		JOIN
+			schedule
+		WHERE
+			mo_title LIKE CONCAT('%', #{search}, '%');
+		-->
+		SELECT
+			*
+		FROM
+			moviekiosk.movie
+		join
+			schedule
+		join
+			screen
+		join
+			theater
+		WHERE
+			mo_title LIKE CONCAT('%', #{search}, '%');
+	</select>
 </mapper>
-
-

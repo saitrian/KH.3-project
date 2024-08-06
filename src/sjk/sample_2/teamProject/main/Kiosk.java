@@ -167,9 +167,16 @@ public class Kiosk implements Program {
 	}
 
 	/**
-	 * 기능 : 영화 이름 검색 메소드
+	 * 기능 : 영화 이름으로 검색하는 메소드
 	 */
 	private void checkTicketList() {
+		// 검색할 영화 입력
+		System.out.print("검색할 영화 제목 입력(전체 검색은 엔터) : ");
+		UTIL.scan.nextLine();
+		String search = UTIL.scan.nextLine();
+		
+
+		MovieVO movie = movieController.selectMovie(search);
 	}
 
 	/**
@@ -222,7 +229,7 @@ public class Kiosk implements Program {
 	private void search() {
 		int menu;
 		do {
-			printMenu();
+			printSearchMenu();
 			menu = inputNumber("메뉴 선택 : ");
 
 			try {
@@ -268,7 +275,8 @@ public class Kiosk implements Program {
 	}
 
 	private void PSV() {
-		// TODO Auto-generated method stub
-		
+		// TODO 아이디를 입력 받고???? 영화 제목 검색
+		String id = memberController.login();
+		checkTicketList();
 	}
 }

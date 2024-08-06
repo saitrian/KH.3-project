@@ -56,6 +56,11 @@ public class MovieServiceImp implements MovieService {
 		return movieDao.selectMovie_useTitle(mo_title);
 	}
 
+	@Override
+	public List<MovieVO> getSearchMovieList(String search) {
+		return movieDao.selectSearchMovieList(search);
+	}
+
 	/*
 	@Override
 	public MovieVO selectMovie(String movieName) {
